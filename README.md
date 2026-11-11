@@ -30,6 +30,7 @@ The build keeps a one-time backup called `CGN_Community_Hub.prev.html` so you ca
 |---|---|
 | `CGN_Hub.html` | Internal Hub (hand-edited; also the source of CSS + hero + sidebar-art for the public Hub) |
 | `CGN_Community_Hub.html` | Public Hub — **generated** by `source/build_comm.py` |
+| `content/hub.json` | **Edit this weekly.** Workshops, series, articles, events (calendar). Plain JSON. |
 | `source/comm_tpl.html` | Page shell for the public Hub |
 | `source/comm_extra.css` | Extra CSS layered on top of the internal Hub's styles |
 | `source/comm_content.py` | Info pages (About, Find a Garden, …) + resource list — edit this to add resources or change page copy |
@@ -38,7 +39,14 @@ The build keeps a one-time backup called `CGN_Community_Hub.prev.html` so you ca
 | `assets/` | Workshop posters (W1–W5) referenced by the Hubs |
 | `docs/` | Design notes, setup guides, handover, email drafts |
 
-The **workshop list, events calendar, and articles** currently live inside `CGN_Community_Hub.html` itself in a `const HUB = {…}` block. Moving that out into a plain JSON file is the next planned step.
+### Editing content
+
+| To change… | Edit this file | Then run |
+|---|---|---|
+| A workshop (slides, poster, description, date) | `content/hub.json` | `python3 source/build_comm.py` |
+| The calendar (events, deadlines) | `content/hub.json` (`events` list) | `python3 source/build_comm.py` |
+| Article of the Week | `content/hub.json` (`articles` list) | `python3 source/build_comm.py` |
+| A resource link, or page copy (About, Find a Garden…) | `source/comm_content.py` | `python3 source/comm_content.py && python3 source/build_comm.py` |
 
 ---
 
@@ -58,6 +66,7 @@ Short version — see [docs/HANDOVER_README.md](docs/HANDOVER_README.md) for the
 ## Status (Nov 11, 2026)
 
 - Build runs locally from this folder (no more Cowork sandbox paths).
+- Workshops, series, articles, and events now live in `content/hub.json` (not buried in HTML).
 - Latest rebuild is byte-identical to the previous `CGN_Community_Hub.html`.
 - Engagement tracking: **off** (`BACKEND_URL=''`). Slides placeholders say "Slides coming soon". Articles list is empty.
 - Open questions (ownership, hosting, French reviewer, address 2389 vs 2391, land acknowledgement wording, Kate-approved calendar dates) are listed in [docs/HANDOVER_README.md](docs/HANDOVER_README.md) §6.

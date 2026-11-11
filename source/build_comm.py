@@ -3,17 +3,15 @@
 Run from anywhere:
     python3 "source/build_comm.py"
 
-Inputs (next to this script, unless overridden):
-    comm_tpl.html      - page shell with /*__CSS__*/, /*__HUB__*/, etc. placeholders
-    comm_extra.css     - extra CSS appended after the internal Hub's styles
-    comm_pages.json    - info pages + resources (regenerate with comm_content.py)
-
-Inputs (in the parent folder - the handover folder):
-    CGN_Hub.html              - internal Hub, used to copy CSS + hero + sidebar-art
-    CGN_Community_Hub.html    - previous public build, used only to read its HUB data block
+Inputs:
+    content/hub.json       - workshops, series, articles, events (edit this weekly)
+    source/comm_tpl.html   - page shell with /*__CSS__*/, /*__HUB__*/, etc. placeholders
+    source/comm_extra.css  - extra CSS appended after the internal Hub's styles
+    source/comm_pages.json - info pages + resources (regenerate with comm_content.py)
+    CGN_Hub.html           - internal Hub, used to copy CSS + hero + sidebar-art
 
 Output:
-    CGN_Community_Hub.html    - rewritten in the parent folder
+    CGN_Community_Hub.html - rewritten in the repo root
 
 To regenerate comm_pages.json first: python3 source/comm_content.py
 """
@@ -28,7 +26,7 @@ SRC = Path(__file__).resolve().parent
 ROOT = SRC.parent
 
 HUB_HTML = ROOT / "CGN_Hub.html"
-OLD_COMM_HTML = ROOT / "CGN_Community_Hub.html"
+HUB_JSON = ROOT / "content" / "hub.json"
 OUT_HTML = ROOT / "CGN_Community_Hub.html"
 
 TPL = SRC / "comm_tpl.html"
@@ -47,21 +45,21 @@ def balanced(s: str, start: int) -> int:
 
 
 def main() -> None:
-    for p in (HUB_HTML, OLD_COMM_HTML, TPL, EXTRA_CSS, PAGES_JSON):
+    for p in (HUB_HTML, HUB_JSON, TPL, EXTRA_CSS, PAGES_JSON):
         if not p.exists():
             raise SystemExit(f"missing input: {p}")
 
     hub = HUB_HTML.read_text(encoding="utf-8")
-    old = OLD_COMM_HTML.read_text(encoding="utf-8")
-
-    m = re.search(r"const HUB = (\{.*?\});\s*\n\s*(?:const I18N|const ART_SVG)", old, re.S)
-    if not m:
-        raise SystemExit("HUB data block not found in previous CGN_Community_Hub.html")
-    data = json.loads(m.group(1))
+    data = json.loads(HUB_JSON.read_text(encoding="utf-8"))
     data.setdefault("events", [])
 
     content = json.loads(PAGES_JSON.read_text(encoding="utf-8"))
     data["resources"] = content["resources"]
+
+    # Lock the order of keys in the embedded HUB block (keeps rebuild stable).
+    _order = ["workshops", "series", "resources", "articles", "events"]
+    data = {**{k: data[k] for k in _order if k in data},
+            **{k: v for k, v in data.items() if k not in _order}}
 
     css = hub[hub.index("<style>") + len("<style>"): hub.index("</style>")]
 
