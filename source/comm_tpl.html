@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CGN Community Hub 🌻 Just Food</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>/*__CSS__*/</style>
+</head>
+<body data-font="clean" data-bg="default">
+<div class="topbar">
+  <div class="brand">🌻 <span id="brandTxt"></span> <small id="brandSmall"></small></div>
+  <div class="topbar-actions">
+    <select class="tb-select" id="bgSelect" onchange="setBg(this.value)"></select>
+    <select class="tb-select" id="fontSelect" onchange="setFont(this.value)">
+      <option value="rounded">🎨 Sunny Rounded</option><option value="retro">🎨 Retro Script</option><option value="clean">🎨 Clean &amp; Simple</option>
+    </select>
+    <button class="tb-btn" id="langBtn" onclick="toggleLang()">FR</button>
+    <button class="tb-btn" onclick="window.print()">🖨️</button>
+  </div>
+</div>
+<div class="layout">
+  <nav class="sidebar" id="side"></nav>
+  <main class="main">
+    <section class="page-section visible" id="home"></section>
+    <section class="page-section" id="about"></section>
+    <section class="page-section" id="find"></section>
+    <section class="page-section" id="start"></section>
+    <section class="page-section" id="coordinators"></section>
+    <section class="page-section" id="guides"></section>
+    <section class="page-section" id="faq"></section>
+    <section class="page-section" id="article"></section>
+    <section class="page-section" id="ws-upcoming"></section>
+    <section class="page-section" id="ws-past"></section>
+    <section class="page-section" id="ws-slides"></section>
+    <section class="page-section" id="resources"></section>
+    <section class="page-section" id="contact"></section>
+  </main>
+</div>
+<script>
+/* ============ EDIT HERE ============
+   BACKEND_URL: Apps Script web-app URL for engagement tracking (CGN_Community_Hub_Setup.md). '' = off.
+   HUB: workshops, events (calendar), resources, articles.
+   Calendar event: {"date":"2027-02-27","title":"…","time":"…","where":"…","url":"…","type":"event|deadline|coffee"}
+   ================================== */
+const BACKEND_URL = '';
+const CONTACT_EMAIL = 'communitygardening@justfood.ca';
+const HUB = /*__HUB__*/null;
+const ART_SVG = /*__ART__*/null;
+const HERO_HTML = /*__HERO__*/null;
+const PAGES = /*__PAGES__*/null;   /* info pages: edit text here (English + French side by side) */
+
+const I18N = {
+ en:{brand:"CGN Community Hub",small:"· Just Food",home:'Home',article:'Article of the Week',g_ws:'CGN Workshops',ws_upcoming:'Upcoming workshops',ws_past:'Past workshops',ws_slides:'Slides',resources:'CGN Resources',contact:'Contact the CGN',
+  start:'Start here',other:'More',quote:'"nothing grows best in isolation"',
+  welcome:'Welcome to the CGN Community Hub!',tag:'Slides, resources and good reads from Just Food’s Community Gardening Network 🌱',
+  upcoming:'Coming up',aow:'Article of the week',noart:'The first article of the week is on its way. Check back soon!',noup:'No workshops are scheduled right now — check back soon, or tell us what you’d like to see.',
+  readmore:'Read the article',desc:'Full description',noslides:'Slides coming soon',recording:'Watch recording',register:'Register / waitlist',
+  res_sub:'Guides, templates and links for your garden.',search:'Search…',all:'All',slides_sub:'Download the slides from any past workshop.',
+  art_sub:'One good read a week, from our network and partners.',prev_art:'Earlier articles',cal:'CGN Calendar',cal_sub:'Workshops and dates to remember — click an item for details.',today:'Today',nothing:'Nothing scheduled this month.',thismonth:'This month',
+  c_title:'Contact the CGN',c_sub:'Have a question, a concern, or an idea for a workshop or topic? Write to us — everything goes to the Community Gardening inbox at Just Food.',
+  c_type:'What is this about?',c_t1:'Suggest a topic or workshop',c_t2:'A question',c_t3:'A concern',c_t4:'Feedback',c_t5:'Something else',
+  c_msg:'Your message',c_name:'Name (optional)',c_email:'Your email (so we can reply)',c_send:'Send email to the CGN',c_ok:'Your email app should open with your message ready to send to the Community Gardening inbox. If it didn’t, write to us directly at',
+  thanks:'Thank you for joining us! Find your slides and more below.',welcome_ws:'Welcome',where:'Where',open:'Open',
+  greet_m:'Good morning',greet_a:'Good afternoon',greet_e:'Good evening',its:'It’s',
+  g_gardens:'Gardens',quick:'Where would you like to start?',stay:'Stay connected',stay_sub:'Get workshop news and gardening updates from Just Food.',news:'Just Food newsletter',
+  skip:'Skip to content',fr_note:'Some pages are still being translated. The French version of this topic is on the Just Food French site:',fr_link:'Voir la version française ↗',
+  c_info:'Other ways to reach us',phone:'Phone',addr:'Visit',draft_fr:'French text is a draft pending review.',land:'We garden on the unceded territory of the Algonquin Anishinaabe peoples.',source:'Source'},
+ fr:{brand:"Carrefour communautaire du RJC",small:"· Just Food",home:'Accueil',article:'Article de la semaine',g_ws:'Ateliers du RJC',ws_upcoming:'Ateliers à venir',ws_past:'Ateliers passés',ws_slides:'Diapositives',resources:'Ressources du RJC',contact:'Contacter le RJC',
+  start:'Commencer ici',other:'Plus',quote:'« rien ne pousse mieux dans l’isolement »',
+  welcome:'Bienvenue au Carrefour communautaire du RJC!',tag:'Diapositives, ressources et bonnes lectures du Réseau de jardinage communautaire de Just Food 🌱',
+  upcoming:'À venir',aow:'Article de la semaine',noart:'Le premier article de la semaine arrive bientôt. Revenez nous voir!',noup:'Aucun atelier n’est prévu pour le moment — revenez bientôt, ou dites-nous ce que vous aimeriez voir.',
+  readmore:'Lire l’article',desc:'Description complète',noslides:'Diapositives à venir',recording:'Voir l’enregistrement',register:'S’inscrire / liste d’attente',
+  res_sub:'Guides, modèles et liens pour votre jardin.',search:'Rechercher…',all:'Tout',slides_sub:'Téléchargez les diapositives de n’importe quel atelier passé.',
+  art_sub:'Une bonne lecture par semaine, de notre réseau et de nos partenaires.',prev_art:'Articles précédents',cal:'Calendrier du RJC',cal_sub:'Ateliers et dates à retenir — cliquez sur un élément pour les détails.',today:'Aujourd’hui',nothing:'Rien de prévu ce mois-ci.',thismonth:'Ce mois-ci',
+  c_title:'Contacter le RJC',c_sub:'Une question, une préoccupation, une idée d’atelier ou de sujet? Écrivez-nous — tout est envoyé à la boîte courriel du jardinage communautaire de Just Food.',
+  c_type:'De quoi s’agit-il?',c_t1:'Proposer un sujet ou un atelier',c_t2:'Une question',c_t3:'Une préoccupation',c_t4:'Commentaires',c_t5:'Autre chose',
+  c_msg:'Votre message',c_name:'Nom (facultatif)',c_email:'Votre courriel (pour vous répondre)',c_send:'Envoyer un courriel au RJC',c_ok:'Votre application de courriel devrait s’ouvrir avec votre message prêt à envoyer à la boîte du jardinage communautaire. Sinon, écrivez-nous directement à',
+  thanks:'Merci de vous être joint à nous! Retrouvez vos diapositives et plus encore ci-dessous.',welcome_ws:'Bienvenue',where:'Où',open:'Ouvrir',
+  greet_m:'Bonjour',greet_a:'Bon après-midi',greet_e:'Bonsoir',its:'Nous sommes',
+  g_gardens:'Jardins',quick:'Par où souhaitez-vous commencer?',stay:'Restez en contact',stay_sub:'Recevez les nouvelles des ateliers et du jardinage de Just Food.',news:'Infolettre de Just Food',
+  skip:'Aller au contenu',fr_note:'',fr_link:'Voir la version française ↗',
+  c_info:'Autres façons de nous joindre',phone:'Téléphone',addr:'Visite',draft_fr:'Le texte français est un brouillon en attente de révision.',land:'Nous jardinons sur le territoire non cédé des peuples algonquins anishinabés.',source:'Source'}
+};
+const BGS={default:{en:'🌻 Sunny',fr:'🌻 Ensoleillé'},meadow:{en:'🌿 Meadow',fr:'🌿 Prairie'},sky:{en:'💧 Sky',fr:'💧 Ciel'},sunset:{en:'🍊 Sunset',fr:'🍊 Coucher de soleil'}};
+let lang=(function(){try{return (localStorage.getItem('cgn-comm-lang')||(navigator.language||'en').slice(0,2))==='fr'?'fr':'en'}catch(e){return 'en'}})();
+const t=k=>(I18N[lang][k]||k);
+const SRC=new URLSearchParams(location.search).get('src')||'';
+function track(type,text,section){
+  if(!BACKEND_URL){console.log('[track]',type,text,section);return}
+  try{fetch(BACKEND_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams({author:SRC||'anonymous',type:type,page:section||'',section:SRC,text:text||''})})}catch(e){}
+}
+function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function setFont(v){document.body.dataset.font=v;try{localStorage.setItem('cgn-comm-font',v)}catch(e){}}
+function setBg(v){document.body.dataset.bg=v;try{localStorage.setItem('cgn-comm-bg',v)}catch(e){}}
+function toggleLang(){lang=lang==='en'?'fr':'en';try{localStorage.setItem('cgn-comm-lang',lang)}catch(e){};document.documentElement.lang=lang;render()}
+function go(id){document.querySelectorAll('.page-section').forEach(s=>s.classList.toggle('visible',s.id===id));document.querySelectorAll('#side .nav-item').forEach(n=>n.classList.toggle('active',n.dataset.p===id));window.scrollTo(0,0);track('view',id,id)}
+function dl(id,i){const w=HUB.workshops.find(x=>x.id===id);const s=w.slides[i];track('download',w.id+' · '+s.label,'slides');window.open(s.url,'_blank')}
+const todayD=()=>new Date(new Date().toDateString());
+const isUp=w=>new Date(w.date+'T23:59:59')>=todayD();
+const L=(o,k)=>(lang==='fr'&&o[k+'_fr'])?o[k+'_fr']:o[k];
+function slideBtns(w){return (w.slides||[]).map((s,i)=>`<button class="send-btn" onclick="dl('${w.id}',${i})">⬇ ${esc(L(s,'label'))}</button>`).join('')||`<span class="send-btn btn-off">${t('noslides')}</span>`}
+function wcard(w){
+  const rec=w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank" onclick="track('view','recording ${w.id}','recording')">▶ ${t('recording')}</a>`:'';
+  const reg=w.register?`<a class="send-btn" href="${esc(w.register)}" target="_blank">${t('register')}</a>`:'';
+  return `<div class="poster-card" id="wk-${w.id}"><img src="${w.img}" alt="${esc(w.title)}"><div class="poster-body"><strong>${esc(w.title)}</strong><div class="p-meta">${esc(w.who)}<br>${esc(w.when)}</div>
+  <details onclick="track('view','desc ${w.id}','description')"><summary>${t('desc')}</summary><div class="dd">${w.desc}</div></details>
+  <div class="wk-btns">${isUp(w)?reg:slideBtns(w)+rec}</div></div></div>`}
+function artHtml(a){return `<strong style="font-size:17px">${esc(L(a,'title'))}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(a.author||'')} · ${esc(a.date||'')}</div><p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="${esc(a.url)}" target="_blank" onclick="track('view','article: '+${JSON.stringify(a.title)},'article')">${t('readmore')} ↗</a>`}
+function head(title,sub){return `<h1 class="page-title">${title}</h1><p class="page-sub">${sub||''}</p><div class="tulips">🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷</div>`}
+
+/* ── Calendar ── */
+let calM=new Date(); calM=new Date(calM.getFullYear(),calM.getMonth(),1);
+function allEvents(){
+  const ev=(HUB.events||[]).map((e,i)=>Object.assign({id:'e'+i,type:'event'},e));
+  HUB.workshops.forEach(w=>ev.push({id:'w'+w.id,type:'workshop',date:w.date,title:w.title,time:w.when,where:'',who:w.who,target:w.id}));
+  return ev.sort((a,b)=>a.date.localeCompare(b.date));
+}
+function calMove(d){const n=new Date();calM=d===0?new Date(n.getFullYear(),n.getMonth(),1):new Date(calM.getFullYear(),calM.getMonth()+d,1);document.getElementById('calBox').innerHTML=calHtml()}
+function isoD(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0')}
+function calHtml(){
+  const y=calM.getFullYear(),m=calM.getMonth(),first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate();
+  const ev=allEvents(),tdy=isoD(new Date()),loc=lang==='fr'?'fr-CA':'en-CA';
+  let g=''; for(let i=0;i<7;i++) g+=`<div class="mc-dow">${new Date(2024,0,7+i).toLocaleDateString(loc,{weekday:'short'})}</div>`;
+  const cells=Math.ceil((first+dim)/7)*7;
+  for(let c=0;c<cells;c++){
+    const dt=new Date(y,m,1-first+c),ds=isoD(dt),out=dt.getMonth()!==m;
+    const es=ev.filter(e=>e.date===ds).map(e=>`<span class="mc-ev ${e.type}" onclick="calOpen('${e.id}')" title="${esc(L(e,'title'))}">${esc(L(e,'title'))}</span>`).join('');
+    g+=`<div class="mc-day${out?' out':''}${ds===tdy?' today':''}"><span class="n">${dt.getDate()}</span>${es}</div>`;
+  }
+  const mine=ev.filter(e=>e.date.slice(0,7)===y+'-'+String(m+1).padStart(2,'0'));
+  const fmt=e=>new Date(e.date+'T12:00:00').toLocaleDateString(loc,{weekday:'short',month:'short',day:'numeric'});
+  return `<div class="mc-head"><h4>${calM.toLocaleDateString(loc,{month:'long',year:'numeric'})}</h4><button class="tb-btn" onclick="calMove(-1)">‹</button><button class="tb-btn" onclick="calMove(0)">${t('today')}</button><button class="tb-btn" onclick="calMove(1)">›</button></div>
+   <div class="mc-grid">${g}</div><div class="mc-detail" id="calDetail"></div>
+   <h4 class="block-label" style="margin-top:16px">${t('thismonth')}</h4>
+   <ul class="mc-agenda" style="padding:0">${mine.length?mine.map(e=>`<li onclick="calOpen('${e.id}')"><strong>${fmt(e)}</strong> — ${esc(L(e,'title'))}${e.time?` <span style="color:var(--ink-soft)">· ${esc(e.time)}</span>`:''}</li>`).join(''):`<li style="cursor:default;font-style:italic">${t('nothing')}</li>`}</ul>`;
+}
+function calOpen(id){
+  const e=allEvents().find(x=>x.id===id); if(!e) return;
+  const box=document.getElementById('calDetail'); if(!box) return;
+  const link=e.target?`<a class="send-btn" href="#" onclick="go('ws-upcoming');return false">${t('open')} →</a>`:(e.url?`<a class="send-btn" href="${esc(e.url)}" target="_blank">${t('open')} ↗</a>`:'');
+  box.innerHTML=`<strong style="font-size:15px">${esc(L(e,'title'))}</strong><br>${e.time?esc(e.time)+'<br>':''}${e.who?esc(e.who)+'<br>':''}${e.where?t('where')+': '+esc(e.where)+'<br>':''}<div style="margin-top:8px">${link}</div>`;
+  box.style.display='block'; track('view','calendar: '+e.title,'calendar');
+}
+
+function nav(){
+  const I=(p,ico,l)=>`<a class="nav-item" data-p="${p}" tabindex="0" role="link" onclick="go('${p}')" onkeydown="if(event.key==='Enter')go('${p}')"><span class="ico">${ico}</span> ${l}</a>`;
+  const P=k=>I(k,PAGES[k].ico,esc(T2(PAGES[k].title)));
+  document.getElementById('side').innerHTML=`<div class="nav-label">${t('start')}</div>`+I('home','🏡',t('home'))+P('about')+I('article','📰',t('article'))+
+   `<div class="nav-label">${t('g_gardens')}</div>`+P('find')+P('start')+P('coordinators')+P('guides')+
+   `<div class="nav-label">${t('g_ws')}</div>`+I('ws-upcoming','📅',t('ws_upcoming'))+I('ws-past','🖼️',t('ws_past'))+I('ws-slides','⬇️',t('ws_slides'))+
+   `<div class="nav-label">${t('other')}</div>`+I('resources','📚',t('resources'))+P('faq')+I('contact','💌',t('contact'))+ART_SVG.replace(/<div class="sidebar-note"[^>]*>[\s\S]*?<\/div>/,'')+`<div class="sidebar-note">${t('quote')}</div>`;
+}
+/* ── Generic info-page renderer ── */
+const T2=o=>o?(o[lang]||o.en):'';
+function blockHtml(bk){
+  const X=k=>bk[k]&&typeof bk[k]==='object'&&!Array.isArray(bk[k])?T2(bk[k]):bk[k];
+  if(bk.t==='p') return `<p class="body-text">${esc(bk[lang]||bk.en)}</p>`;
+  if(bk.t==='h') return `<h4 class="block-label" style="margin-top:16px">${esc(bk[lang]||bk.en)}</h4>`;
+  if(bk.t==='note') return `<div class="tk-callout info"><span class="ic">ℹ️</span><span>${esc(bk[lang]||bk.en)}</span></div>`;
+  if(bk.t==='ul') return `<ul class="ec-ul" style="padding-left:20px;font-size:14px">${(bk[lang]||bk.en).map(i=>`<li style="margin:5px 0">${esc(i)}</li>`).join('')}</ul>`;
+  if(bk.t==='steps') return `<div>${bk.items.map((s,i)=>`<div class="tk-step"><div class="tk-num">${i+1}</div><div style="flex:1"><div class="body-text" style="margin:0">${esc(s[lang]||s.en)}</div>${s.url?`<a class="desc-link" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(T2(s.link)||'↗')}</a>`:''}${s.page?`<a class="desc-link" href="#" onclick="go('${s.page}');return false">${esc(T2(s.link))}</a>`:''}</div></div>`).join('')}</div>`;
+  if(bk.t==='links') return `<ul style="padding:0">${bk.items.map(i=>`<li style="list-style:none;margin:7px 0">📎 <a href="${esc(i.url)}" target="_blank" rel="noopener" style="color:var(--jf-green);font-weight:800" onclick="track('download',${JSON.stringify(i.en)},'guide')">${esc(i[lang]||i.en)}</a></li>`).join('')}</ul>`;
+  if(bk.t==='cards') return `<div class="poster-grid">${bk.items.map(c=>`<div class="poster-card"><div class="poster-body"><strong>${esc(T2(c.title))}</strong><div class="p-meta" style="margin:4px 0 6px;color:var(--ink-soft)">${esc(T2(c.body))}</div>${c.status?`<span class="pc-badge pc-tbc">${esc(T2(c.status))}</span>`:''}</div></div>`).join('')}</div>`;
+  if(bk.t==='table') return `<div class="cw-table-wrap"><table class="cw-table"><thead><tr>${bk.head.map(h=>`<th>${esc(T2(h))}</th>`).join('')}</tr></thead><tbody>${bk.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(T2(c))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  if(bk.t==='faq') return bk.items.map(f=>`<details class="desc" style="margin:8px 0"><summary onclick="track('view','faq: '+${JSON.stringify(f.q.en)},'faq')">${esc(T2(f.q))}</summary><div class="desc-body"><p>${esc(T2(f.a))}</p></div></details>`).join('');
+  return '';
+}
+function pageHtml(k){
+  const p=PAGES[k];
+  const fr=(lang==='fr'&&p.fr_url)?`<div class="tk-callout warn"><span class="ic">🇫🇷</span><span>${t('draft_fr')} <a href="${esc(p.fr_url)}" target="_blank" rel="noopener">${t('fr_link')}</a></span></div>`:'';
+  const body=p.blocks.map(blockHtml).join('');
+  return head(p.ico+' '+T2(p.title),T2(p.sub))+fr+`<div class="card">${body}</div>`;
+}
+function render(){
+  const cur=(document.querySelector('.page-section.visible')||{}).id||'home';
+  document.getElementById('brandTxt').textContent=t('brand');document.getElementById('brandSmall').textContent=t('small');
+  document.getElementById('langBtn').textContent=lang==='en'?'FR':'EN';
+  const bs=document.getElementById('bgSelect');bs.innerHTML=Object.keys(BGS).map(k=>`<option value="${k}"${document.body.dataset.bg===k?' selected':''}>${BGS[k][lang]}</option>`).join('');
+  document.getElementById('fontSelect').value=document.body.dataset.font;
+  nav();
+  const upc=HUB.workshops.filter(isUp).sort((a,b)=>a.date.localeCompare(b.date));
+  const past=HUB.workshops.filter(w=>!isUp(w)).sort((a,b)=>b.date.localeCompare(a.date));
+  const art=HUB.articles[0], srcW=HUB.workshops.find(w=>w.id===SRC);
+  const now=new Date(),h=now.getHours(),loc=lang==='fr'?'fr-CA':'en-CA';
+  document.getElementById('home').innerHTML=HERO_HTML+
+   `<div class="card"><span class="corner-tag blue">${t('quick')}</span><h3>🧭 ${t('quick')}</h3><div class="doc-grid">${['find','start','coordinators','guides'].map(k=>`<a class="doc-item" href="#" onclick="go('${k}');return false"><span class="d-ico">${PAGES[k].ico}</span><div><strong>${esc(T2(PAGES[k].title))}</strong><span class="d-note">${esc(T2(PAGES[k].sub))}</span></div></a>`).join('')}<a class="doc-item" href="#" onclick="go('ws-upcoming');return false"><span class="d-ico">📅</span><div><strong>${t('g_ws')}</strong><span class="d-note">${t('ws_upcoming')} · ${t('ws_past')} · ${t('ws_slides')}</span></div></a><a class="doc-item" href="#" onclick="go('resources');return false"><span class="d-ico">📚</span><div><strong>${t('resources')}</strong><span class="d-note">${t('res_sub')}</span></div></a></div></div>
+    <div class="card"><span class="corner-tag yellow">${t('aow')} 📰</span><h3>📰 ${t('aow')}</h3>${art?artHtml(art):`<p class="body-text" style="font-style:italic;color:var(--ink-soft)">${t('noart')}</p>`}</div>
+    <div class="card"><span class="corner-tag">${t('cal')} 📅</span><h3>📅 ${t('cal')}</h3><p class="body-text" style="color:var(--ink-soft)">${t('cal_sub')}</p><div id="calBox">${calHtml()}</div></div>
+    ${srcW?`<div class="card"><span class="corner-tag yellow">${t('welcome_ws')} 🌻</span><h3>🌻 ${t('welcome_ws')}</h3><p class="body-text">${t('thanks')}</p><div class="poster-grid">${wcard(srcW)}</div></div>`:''}
+    ${upc.length?`<div class="card"><span class="corner-tag blue">${t('upcoming')} 🌷</span><h3>🌷 ${t('upcoming')}</h3><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:''}`;
+  document.getElementById('heroTitle').textContent=t('welcome');document.getElementById('heroTag').textContent=t('tag');
+  const dg=document.getElementById('dayGreeting'); if(dg) dg.textContent=(h<12?'☀️ '+t('greet_m'):h<18?'🌤️ '+t('greet_a'):'🌙 '+t('greet_e'))+'! '+t('its')+' '+now.toLocaleDateString(loc,{weekday:'long',month:'long',day:'numeric'});
+  Object.keys(PAGES).forEach(k=>{document.getElementById(k).innerHTML=pageHtml(k)});
+  document.getElementById('article').innerHTML=head(t('article'),t('art_sub'))+(HUB.articles.length?HUB.articles.map((a,i)=>`${i==1?`<h3 class="page-sub" style="font-weight:800">${t('prev_art')}</h3>`:''}<div class="card">${artHtml(a)}</div>`).join(''):`<div class="card"><p class="body-text" style="font-style:italic">${t('noart')}</p></div>`);
+  document.getElementById('ws-upcoming').innerHTML=head(t('ws_upcoming'),'')+(upc.length?`<div class="card"><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:`<div class="card"><p class="body-text" style="font-style:italic">${t('noup')}</p></div>`);
+  document.getElementById('ws-past').innerHTML=head(t('ws_past'),'')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>🖼️ ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
+  document.getElementById('ws-slides').innerHTML=head(t('ws_slides'),t('slides_sub'))+`<div class="card">`+past.map(w=>`<div class="srow"><strong>${esc(w.title)}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(w.who)} · ${esc(w.when)}</div><div class="wk-btns">${slideBtns(w)}${w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank">▶ ${t('recording')}</a>`:''}</div></div>`).join('')+`</div>`;
+  const tags=[...new Set(HUB.resources.flatMap(r=>r.tags||[]))];
+  document.getElementById('resources').innerHTML=head(t('resources'),t('res_sub'))+`<div class="card"><input class="cm-in" id="rs" placeholder="${t('search')}" oninput="resList()"><div id="rt"><span class="deliv-pill" style="cursor:pointer" onclick="resTag('')">${t('all')}</span> ${tags.map(x=>`<span class="deliv-pill" style="cursor:pointer" onclick="resTag('${esc(x)}')">${esc(x)}</span>`).join(' ')}</div><div id="rl" style="margin-top:12px"></div></div>`;
+  resList();
+  document.getElementById('contact').innerHTML=head(t('c_title'),t('c_sub'))+`<div class="card"><span class="corner-tag">💌</span>
+   <label class="cm-lab">${t('c_type')}</label><select class="cm-in" id="ct">${[1,2,3,4,5].map(i=>`<option value="${esc(t('c_t'+i))}">${t('c_t'+i)}</option>`).join('')}</select>
+   <label class="cm-lab">${t('c_msg')}</label><textarea class="cm-in" id="cm" rows="5"></textarea><label class="cm-lab">${t('c_name')}</label><input class="cm-in" id="cn"><label class="cm-lab">${t('c_email')}</label><input class="cm-in" id="ce" type="email">
+   <button class="send-btn" onclick="sendContact()">${t('c_send')}</button>
+   <div class="cm-ok" id="cok">${t('c_ok')} <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.</div></div>
+   <div class="card"><h3>📞 ${t('c_info')}</h3><p class="body-text">✉️ <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a><br>📞 ${t('phone')}: 613-824-7771<br>📍 ${t('addr')}: Just Food Community Farm, 2389 Pépin Court, Ottawa K1B 4Z3</p></div>
+   <div class="card"><span class="corner-tag yellow">📬</span><h3>📬 ${t('stay')}</h3><p class="body-text">${t('stay_sub')}</p><a class="send-btn" href="https://mailchi.mp/justfood/newsletters" target="_blank" rel="noopener">${t('news')} ↗</a></div>`;
+  go(cur);
+}
+let _tag='';
+function resTag(x){_tag=x;resList()}
+function resList(){const s=((document.getElementById('rs')||{}).value||'').toLowerCase();
+  const l=HUB.resources.filter(r=>(!_tag||(r.tags||[]).includes(_tag))&&((r.title+' '+(r.title_fr||'')).toLowerCase().includes(s)));
+  document.getElementById('rl').innerHTML=l.length?l.map(r=>`<p style="margin:6px 0">📎 <a href="${esc(r.url)}" target="_blank" style="color:var(--jf-green);font-weight:800" onclick="track('download',${JSON.stringify(r.title)},'resource')">${esc(L(r,'title'))}</a></p>`).join(''):`<p class="body-text">—</p>`}
+function sendContact(){
+  const m=document.getElementById('cm').value.trim(); if(!m) return;
+  const typ=document.getElementById('ct').value,n=document.getElementById('cn').value,e=document.getElementById('ce').value;
+  track('contact',typ+' | '+m.slice(0,300),'contact');
+  location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('[CGN Community Hub] '+typ)+'&body='+encodeURIComponent(m+'\n\n—\n'+(n?n+'\n':'')+(e?'Reply to: '+e:''));
+  document.getElementById('cok').style.display='block';
+}
+try{const f=localStorage.getItem('cgn-comm-font'),b=localStorage.getItem('cgn-comm-bg');if(f)document.body.dataset.font=f;if(b&&BGS[b])document.body.dataset.bg=b}catch(e){}
+document.documentElement.lang=lang;
+render();go('home');
+</script>
+</body>
+</html>

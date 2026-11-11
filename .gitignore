@@ -1,0 +1,17 @@
+# Build backups (created automatically on rebuild)
+*.prev.html
+
+# Transient files from node --check
+source/.build_check.js
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+._*
+
+# Editor lock files
+.~lock.*
+*.swp

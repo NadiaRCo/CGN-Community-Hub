@@ -1,0 +1,23 @@
+/* Community Hub additions */
+.mc-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+.mc-head h4 { font-family:'Fredoka',sans-serif; font-size:20px; color:var(--jf-red); margin-right:auto; text-transform:capitalize; }
+.mc-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); border:2.5px solid var(--ink); border-radius:14px; overflow:hidden; background:#fff; }
+.mc-dow { background:var(--sun); font:700 11.5px 'Fredoka',sans-serif; text-transform:uppercase; letter-spacing:.06em; text-align:center; padding:6px 0; border-bottom:2.5px solid var(--ink); }
+.mc-day { min-height:84px; border-right:1.5px solid #ece3c0; border-bottom:1.5px solid #ece3c0; padding:4px 5px; font-size:11.5px; position:relative; min-width:0; }
+.mc-day:nth-child(7n) { border-right:0; }
+.mc-day.out { background:#faf7e8; color:#b9b39a; }
+.mc-day .n { font-weight:800; font-size:12px; }
+.mc-day.today { background:#FFF3B8; } .mc-day.today .n { background:var(--tomato); color:#fff; border-radius:50%; padding:0 6px; display:inline-block; }
+.mc-ev { display:block; margin-top:3px; padding:2px 6px; border:1.5px solid var(--ink); border-radius:8px; font-size:10.8px; font-weight:800; line-height:1.25; cursor:pointer; background:var(--pink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.mc-ev.event { background:var(--sky-pale); } .mc-ev.deadline { background:#FFD7C2; } .mc-ev.coffee { background:var(--grape-pale); }
+.mc-detail { margin-top:14px; border:2px dashed var(--ink); border-radius:14px; padding:12px 16px; background:var(--cream-2); font-size:13.5px; display:none; }
+.mc-agenda li { list-style:none; padding:6px 0; border-bottom:1.5px dashed #eee4c3; font-size:13.5px; cursor:pointer; }
+.cm-in { font:600 14px 'Nunito',sans-serif; border:2.5px solid var(--ink); border-radius:10px; padding:8px 10px; width:100%; margin:4px 0 10px; background:#fffef6; }
+.cm-lab { font-weight:800; font-size:13px; }
+.cm-ok { display:none; margin-top:12px; background:#D6F0C8; border:2px solid var(--ink); border-radius:12px; padding:8px 12px; font-weight:800; }
+.wk-btns { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.poster-card details summary { cursor:pointer; font-weight:800; color:var(--jf-green); font-size:12.5px; margin-top:6px; }
+.poster-card .dd { font-size:12.5px; max-height:300px; overflow:auto; margin-top:6px; } .poster-card .dd p { margin:5px 0; } .poster-card .dd ul { padding-left:18px; }
+.btn-off { opacity:.6; cursor:default; }
+.srow { padding:10px 0; border-bottom:1.5px dashed #eee4c3; } .srow:last-child { border:0; }
+@media (max-width:640px) { .mc-day { min-height:62px; } .mc-ev { font-size:9.5px; padding:1px 3px; } }
