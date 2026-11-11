@@ -19,7 +19,7 @@ PAGES = {
    "fr": ["C’est gratuit", "Subventions du FDJC et aide pour la demande", "Aide au démarrage et à la recherche de terrain; analyse du sol", "Infolettre pour les coordonnateurs et accès à FoodChat, notre plateforme de discussion", "Semences, plants, terre et/ou compost", "Soutien pour résoudre les problèmes", "Couverture d’assurance de la Ville d’Ottawa; copeaux de bois de Trail Road selon la disponibilité", "Outils partagés et espace d’entreposage du RJC; compte bancaire communautaire gratuit", "Ateliers de jardinage et liens avec d’autres jardins"]},
   {"t": "note", "en": "Have a community garden and want to join? Email communitygardening@justfood.ca. Content adapted from the Just Food website.", "fr": "Vous avez un jardin communautaire et souhaitez vous joindre au RJC? Écrivez à communitygardening@justfood.ca. Contenu adapté du site de Just Food."}
  ]},
-"find": {"ico": "📍", "title": b("Find a Garden", "Trouver un jardin"),
+"find": {"ico": "📍", "title": b("Find a Community Garden", "Trouver un jardin communautaire"),
  "sub": b("Look for a plot or a donation garden near you", "Cherchez une parcelle ou un jardin de dons près de chez vous"),
  "fr_url": "https://alimentationjuste.ca/reseau-de-jardinage-communautaire/",
  "blocks": [
@@ -38,7 +38,7 @@ PAGES = {
    {"en": "Find a Community Garden (Just Food)", "fr": "Trouver un jardin communautaire (Just Food)", "url": JF + "find-a-community-garden/"}]},
   {"t": "note", "en": "Is a garden’s contact on the map out of date? Let us know through the Contact page and we will update it.", "fr": "Les coordonnées d’un jardin sur la carte sont périmées? Dites-le-nous par la page Contact et nous les mettrons à jour."}
  ]},
-"start": {"ico": "🚜", "title": b("Start a Garden", "Démarrer un jardin"),
+"start": {"ico": "🚜", "title": b("Start a Community Garden", "Démarrer un jardin communautaire"),
  "sub": b("A step-by-step path, with support at every stage", "Un parcours étape par étape, avec du soutien à chaque étape"),
  "fr_url": "https://alimentationjuste.ca/reseau-de-jardinage-communautaire/creer-un-jardin-communautaire/",
  "blocks": [
@@ -107,7 +107,7 @@ PAGES = {
    [b("Nov – Dec", "Nov. – déc."), b("Rest and review: what grew well? Join winter workshops and plan next year.", "Repos et bilan : qu’est-ce qui a bien poussé? Participez aux ateliers d’hiver et planifiez l’an prochain.")]]},
   {"t": "note", "en": "General guidance for Ottawa, based on published frost-date averages (Lawn by Season, The Old Farmer’s Almanac, TDC). The CGN Garden Guide has detailed advice.", "fr": "Conseils généraux pour Ottawa, fondés sur des moyennes publiées de dates de gel. Le guide du jardinier du RJC contient des conseils détaillés."}
  ]},
-"faq": {"ico": "❓", "title": b("FAQ", "FAQ"),
+"faq": {"ico": "❓", "title": b("FAQs", "FAQ"),
  "sub": b("Quick answers to common questions", "Réponses rapides aux questions courantes"),
  "fr_url": "https://alimentationjuste.ca/reseau-de-jardinage-communautaire/",
  "blocks": [

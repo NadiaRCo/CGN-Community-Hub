@@ -16,10 +16,9 @@
 <div class="topbar">
   <div class="brand">🌻 <span id="brandTxt"></span> <small id="brandSmall"></small></div>
   <div class="topbar-actions">
-    <select class="tb-select" id="bgSelect" onchange="setBg(this.value)"></select>
-    <select class="tb-select" id="fontSelect" onchange="setFont(this.value)">
-      <option value="rounded">🎨 Sunny Rounded</option><option value="retro">🎨 Retro Script</option><option value="clean">🎨 Clean &amp; Simple</option>
-    </select>
+    <button class="tb-btn" id="tbResources" onclick="go('resources')"></button>
+    <button class="tb-btn" id="tbFaq" onclick="go('faq')"></button>
+    <button class="tb-btn" id="tbContact" onclick="go('contact')"></button>
     <button class="tb-btn" id="langBtn" onclick="toggleLang()">FR</button>
     <button class="tb-btn" onclick="window.print()">🖨️</button>
   </div>
@@ -56,7 +55,7 @@ const HERO_HTML = /*__HERO__*/null;
 const PAGES = /*__PAGES__*/null;   /* info pages: edit text here (English + French side by side) */
 
 const I18N = {
- en:{brand:"CGN Community Hub",small:"· Just Food",home:'Home',article:'Article of the Week',g_ws:'CGN Workshops',ws_upcoming:'Upcoming workshops',ws_past:'Past workshops',ws_slides:'Slides',resources:'CGN Resources',contact:'Contact the CGN',
+ en:{brand:"CGN Community Hub",small:"· Just Food",home:'Home',article:'Article of the Week',g_ws:'CGN Workshops',ws_upcoming:'Upcoming workshops',ws_past:'Past workshops',ws_slides:'Slides',resources:'CGN Resources Portal',contact:'Contact the CGN',
   start:'Start here',other:'More',quote:'"nothing grows best in isolation"',
   welcome:'Welcome to the CGN Community Hub!',tag:'Slides, resources and good reads from Just Food’s Community Gardening Network 🌱',
   upcoming:'Coming up',aow:'Article of the week',noart:'The first article of the week is on its way. Check back soon!',noup:'No workshops are scheduled right now — check back soon, or tell us what you’d like to see.',
@@ -71,7 +70,7 @@ const I18N = {
   g_gardens:'Gardens',quick:'Where would you like to start?',stay:'Stay connected',stay_sub:'Get workshop news and gardening updates from Just Food.',news:'Just Food newsletter',
   skip:'Skip to content',fr_note:'Some pages are still being translated. The French version of this topic is on the Just Food French site:',fr_link:'Voir la version française ↗',
   c_info:'Other ways to reach us',phone:'Phone',addr:'Visit',draft_fr:'French text is a draft pending review.',land:'We garden on the unceded territory of the Algonquin Anishinaabe peoples.',source:'Source'},
- fr:{brand:"Carrefour communautaire du RJC",small:"· Just Food",home:'Accueil',article:'Article de la semaine',g_ws:'Ateliers du RJC',ws_upcoming:'Ateliers à venir',ws_past:'Ateliers passés',ws_slides:'Diapositives',resources:'Ressources du RJC',contact:'Contacter le RJC',
+ fr:{brand:"Carrefour communautaire du RJC",small:"· Just Food",home:'Accueil',article:'Article de la semaine',g_ws:'Ateliers du RJC',ws_upcoming:'Ateliers à venir',ws_past:'Ateliers passés',ws_slides:'Diapositives',resources:'Portail de ressources du RJC',contact:'Contacter le RJC',
   start:'Commencer ici',other:'Plus',quote:'« rien ne pousse mieux dans l’isolement »',
   welcome:'Bienvenue au Carrefour communautaire du RJC!',tag:'Diapositives, ressources et bonnes lectures du Réseau de jardinage communautaire de Just Food 🌱',
   upcoming:'À venir',aow:'Article de la semaine',noart:'Le premier article de la semaine arrive bientôt. Revenez nous voir!',noup:'Aucun atelier n’est prévu pour le moment — revenez bientôt, ou dites-nous ce que vous aimeriez voir.',
@@ -181,8 +180,9 @@ function render(){
   const cur=(document.querySelector('.page-section.visible')||{}).id||'home';
   document.getElementById('brandTxt').textContent=t('brand');document.getElementById('brandSmall').textContent=t('small');
   document.getElementById('langBtn').textContent=lang==='en'?'FR':'EN';
-  const bs=document.getElementById('bgSelect');bs.innerHTML=Object.keys(BGS).map(k=>`<option value="${k}"${document.body.dataset.bg===k?' selected':''}>${BGS[k][lang]}</option>`).join('');
-  document.getElementById('fontSelect').value=document.body.dataset.font;
+  document.getElementById('tbResources').textContent=t('resources');
+  document.getElementById('tbFaq').textContent=T2(PAGES['faq'].title);
+  document.getElementById('tbContact').textContent=t('contact');
   nav();
   const upc=HUB.workshops.filter(isUp).sort((a,b)=>a.date.localeCompare(b.date));
   const past=HUB.workshops.filter(w=>!isUp(w)).sort((a,b)=>b.date.localeCompare(a.date));
