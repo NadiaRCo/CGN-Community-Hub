@@ -69,5 +69,24 @@ Short version — see [docs/HANDOVER_README.md](docs/HANDOVER_README.md) for the
 - Workshops, series, articles, and events now live in `content/hub.json` (not buried in HTML).
 - Latest rebuild is byte-identical to the previous `CGN_Community_Hub.html`.
 - Engagement tracking: **off** (`BACKEND_URL=''`). Slides placeholders say "Slides coming soon". Articles list is empty.
-- Open questions (ownership, hosting, French reviewer, land acknowledgement wording, Kate-approved calendar dates) are listed in [docs/HANDOVER_README.md](docs/HANDOVER_README.md) §6.
-- **Resolved Nov 11, 2026:** 2389 Pépin Court (farmhouse / JF office) and 2391 Pépin Court (the Barn, catering kitchen, workshop venue) are both correct — different buildings on the same farm site. Use 2391 for in-person workshop venue mentions, 2389 for general contact info. The handover doc's §6 item 1 flag is no longer open.
+
+### Resolved (Nov 11, 2026)
+
+1. **Address 2389 vs 2391 Pépin Court** — both correct. 2389 is the farmhouse, JF's office, and JF's mailing address. 2391 is the Barn (catering kitchen, workshop venue). Use 2389 for contact/mailing; 2391 for in-person workshop venues.
+2. **Hosting for the sandbox** — GitHub (repo on github.com; viewable via GitHub Pages once pushed). Whether the Hub ultimately lives as part of justfood.ca (WordPress or embed) is a separate question for later, when Kate is ready to adopt it.
+3. **Calendar dates** — not needed yet. Nothing goes in `events` until Kate signs off.
+4. **Slides for W1–W4** — Nadia will upload these herself.
+
+### Still open — for Kate / Nadia to answer
+
+- **French reviewer** for public-facing FR text (funding requirement). Workshop descriptions are English only; About / Find a Garden / Start a Garden / FAQ have draft FR that needs review.
+- **Land acknowledgement** wording for the public Hub. Approved W1 wording is "on whose unceded territory we garden" (Algonquin Anishinaabe) but a canonical JF version is not confirmed.
+- **Frost-date table** source — current public averages. Kate to confirm preferred source or wording.
+- **Coordinator "coming soon" tool cards** — placeholders on the For Coordinators page. Nothing promised publicly until Kate approves.
+- **Private Engagement Coordinator space** on the internal Hub — design decision pending.
+- **Google account ownership** — JF already owns the Google account; using it needs Kate's permission (Apps Script, Sheet, Drive folder for slides).
+- **Slides follow-up email + weekly article blast** — drafts in [docs/CGN_Community_Hub_Emails_DRAFT.md](docs/CGN_Community_Hub_Emails_DRAFT.md). Kate to approve wording and sending list before anything is sent.
+
+### Deferred
+
+- **Embedding the Hub into justfood.ca** (WordPress or iframe) — revisit once Kate decides to adopt. Needs John (JF's IT contractor).
