@@ -754,6 +754,9 @@
   #ideasTable td:nth-child(2) { font-size: 13px; line-height: 1.5; }
 
 /* Community Hub additions */
+.test-banner { background:#FFD54A; color:#2a1a00; padding:10px 16px; text-align:center; font:700 13.5px 'Nunito',sans-serif; border-bottom:3px solid #c97b00; letter-spacing:.01em; }
+.test-banner strong { font-weight:900; letter-spacing:.04em; }
+@media print { .test-banner { display:none; } }
 .mc-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
 .mc-head h4 { font-family:'Fredoka',sans-serif; font-size:20px; color:var(--jf-red); margin-right:auto; text-transform:capitalize; }
 .mc-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); border:2.5px solid var(--ink); border-radius:14px; overflow:hidden; background:#fff; }
@@ -779,6 +782,10 @@
 </style>
 </head>
 <body data-font="clean" data-bg="default">
+<div class="test-banner" role="status" aria-live="polite">
+  <strong>TEST BUILD</strong> &mdash; not yet approved by Kate. Nothing here is public or final.
+  <span lang="fr"> / <strong>VERSION TEST</strong> &mdash; non approuv&eacute;e par Kate. Rien ici n&rsquo;est public ou final.</span>
+</div>
 <div class="topbar">
   <div class="brand">🌻 <span id="brandTxt"></span> <small id="brandSmall"></small></div>
   <div class="topbar-actions">
