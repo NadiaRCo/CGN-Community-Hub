@@ -69,4 +69,5 @@ Short version — see [docs/HANDOVER_README.md](docs/HANDOVER_README.md) for the
 - Workshops, series, articles, and events now live in `content/hub.json` (not buried in HTML).
 - Latest rebuild is byte-identical to the previous `CGN_Community_Hub.html`.
 - Engagement tracking: **off** (`BACKEND_URL=''`). Slides placeholders say "Slides coming soon". Articles list is empty.
-- Open questions (ownership, hosting, French reviewer, address 2389 vs 2391, land acknowledgement wording, Kate-approved calendar dates) are listed in [docs/HANDOVER_README.md](docs/HANDOVER_README.md) §6.
+- Open questions (ownership, hosting, French reviewer, land acknowledgement wording, Kate-approved calendar dates) are listed in [docs/HANDOVER_README.md](docs/HANDOVER_README.md) §6.
+- **Resolved Nov 11, 2026:** 2389 Pépin Court (farmhouse / JF office) and 2391 Pépin Court (the Barn, catering kitchen, workshop venue) are both correct — different buildings on the same farm site. Use 2391 for in-person workshop venue mentions, 2389 for general contact info. The handover doc's §6 item 1 flag is no longer open.
