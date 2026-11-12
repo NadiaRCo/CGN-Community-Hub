@@ -31,6 +31,11 @@
 
 /* 4. Hero welcome: drop the ghost double-shadow, use the brand green. */
 .hero .welcome { text-shadow: 2px 2px 0 var(--sun); color: var(--jf-green); -webkit-text-stroke: 0; }
+
+/* 5. Tool cards on the For Coordinators page: icon support + subtle status accents. */
+.tool-card .tool-ico { font-size: 28px; line-height: 1; margin: 2px 0 8px; }
+.tool-card.status-draft---in-review .pc-badge, .tool-card.status-draft-in-review .pc-badge { background: var(--sky-pale); border-color: var(--pond); color: var(--pond); }
+.tool-card.status-coming-soon .pc-badge { background: var(--sun); border-color: #c97b00; }
 .mc-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
 .mc-head h4 { font-family:'Fredoka',sans-serif; font-size:20px; color:var(--jf-red); margin-right:auto; text-transform:capitalize; }
 .mc-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); border:2.5px solid var(--ink); border-radius:14px; overflow:hidden; background:#fff; }
