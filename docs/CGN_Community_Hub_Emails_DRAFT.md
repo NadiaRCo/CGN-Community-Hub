@@ -1,5 +1,7 @@
 # CGN Community Hub — email drafts (for Kate's review — not sent)
 
+> **Ready-to-send Mailchimp templates** matching the CGN Community Hub's look now live in [`newsletter/`](newsletter/) — see [`newsletter/README.md`](newsletter/README.md) for how to paste them into Mailchimp. The copy below is the text-only version, kept here as the source of wording for Kate's review.
+
 ## 1. Slides follow-up to workshop attendees (EN)
 **Subject:** Your slides from "[WORKSHOP TITLE]" + more from the CGN
 

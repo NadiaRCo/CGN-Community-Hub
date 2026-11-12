@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  CGN Community Hub — weekly "Article of the Week" blast (EN)
+  -----------------------------------------------------------
+  Same visual system as slides_followup.html.
+
+  Mailchimp merge tags:
+    *|FNAME|*            — recipient's first name
+    *|ARCHIVE|*          — web version link
+    *|UNSUB|*            — one-click unsubscribe
+    *|UPDATE_PROFILE|*   — subscriber preferences
+    *|LIST:COMPANY|*     — "Just Food"
+    *|LIST:ADDRESSLINE|* — mailing address
+
+  Before sending, replace:
+    {{ARTICLE_TITLE}}, {{ARTICLE_AUTHOR}}, {{ARTICLE_BLURB}},
+    {{ARTICLE_URL}}, {{AUDIENCE}} (gardeners | coordinators)
+
+  Audience note: the Coordinators list and the public CGN newsletter
+  list are separate. Pick the right Mailchimp audience before sending.
+
+  Kate must approve wording + list before this goes out.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="x-apple-disable-message-reformatting">
+<title>Article of the week: {{ARTICLE_TITLE}}</title>
+<style type="text/css">
+  @media only screen and (max-width: 600px) {
+    .em-wrap { width: 100% !important; }
+    .em-pad { padding-left: 20px !important; padding-right: 20px !important; }
+    .em-h1 { font-size: 24px !important; line-height: 1.25 !important; }
+    .em-btn a { display: block !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#F6EFD1; font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif; color:#303030; -webkit-text-size-adjust:100%;">
+
+<!-- Preheader -->
+<div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+  This week's read on the CGN Community Hub: {{ARTICLE_TITLE}} by {{ARTICLE_AUTHOR}}.
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F6EFD1;">
+  <tr><td align="center" style="padding:24px 12px;">
+
+    <table role="presentation" class="em-wrap em-body" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background:#FFFBE0; border:2.5px solid #303030; border-radius:14px; box-shadow:4px 4px 0 #303030;">
+
+      <!-- Header -->
+      <tr>
+        <td class="em-pad" style="padding:22px 30px 14px 30px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td width="58" valign="middle" style="padding-right:12px;">
+                <img src="https://nadiarco.github.io/CGN-Community-Hub/assets/CGN_logo_icon.png"
+                     width="50" height="50" alt="CGN"
+                     style="display:block; width:50px; height:50px; border:2.5px solid #303030; border-radius:12px; background:#FFFBE0;">
+              </td>
+              <td valign="middle">
+                <div style="font-family: 'Nunito', Arial, sans-serif; font-weight:800; font-size:17px; color:#1A6B54; line-height:1.15;">Community Gardening Network</div>
+                <div style="font-family: 'Nunito', Arial, sans-serif; font-weight:700; font-size:13px; color:#5a5a52; line-height:1.3;">of Ottawa &middot; Just Food</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Mustard accent stripe -->
+      <tr><td style="padding:0;">
+        <div style="height:6px; background:#FFD83F; border-top:2.5px solid #303030; border-bottom:2.5px solid #303030;">&nbsp;</div>
+      </td></tr>
+
+      <!-- Little "Article of the Week" eyebrow -->
+      <tr><td class="em-pad" style="padding:22px 42px 0 42px;">
+        <div style="display:inline-block; background:#FFD83F; color:#80220F; font-family:'Nunito', Arial, sans-serif; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase; padding:6px 12px; border:2.5px solid #303030; border-radius:999px; box-shadow:2px 2px 0 #303030;">📰 Article of the week</div>
+      </td></tr>
+
+      <!-- Main content -->
+      <tr>
+        <td class="em-pad" style="padding:16px 42px 10px 42px;">
+          <h1 class="em-h1" style="margin:0 0 6px 0; font-family: 'Nunito', Arial, sans-serif; font-weight:800; font-size:26px; line-height:1.22; color:#1A6B54; text-shadow:2px 2px 0 #FFD83F;">
+            {{ARTICLE_TITLE}}
+          </h1>
+          <p style="margin:0 0 20px 0; font-size:14px; color:#5a5a52; font-style:italic;">by {{ARTICLE_AUTHOR}}</p>
+
+          <p style="margin:0 0 20px 0; font-size:15.5px; line-height:1.55;">Hello *|FNAME|*,</p>
+
+          <p style="margin:0 0 22px 0; font-size:15.5px; line-height:1.55;">
+            This week's read: <strong>{{ARTICLE_BLURB}}</strong>
+          </p>
+
+          <!-- CTA button -->
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" class="em-btn" style="margin:0 0 26px 0;">
+            <tr>
+              <td align="left">
+                <a href="{{ARTICLE_URL}}"
+                   style="display:inline-block; background:#1A6B54; color:#FFFBE0; font-family:'Nunito', Arial, sans-serif; font-weight:800; font-size:16px; line-height:1; padding:16px 26px; border:2.5px solid #303030; border-radius:12px; text-decoration:none; box-shadow:3px 3px 0 #303030;">
+                  Read the article &rarr;
+                </a>
+              </td>
+            </tr>
+          </table>
+
+          <p style="margin:0 0 14px 0; font-size:15.5px; line-height:1.55;">
+            You'll also find workshop slides, gardening guides, and templates on the <a href="https://nadiarco.github.io/CGN-Community-Hub/" style="color:#1A6B54; font-weight:700; text-decoration:underline;">CGN Community Hub</a>. What should we cover next? Use the <strong>Contact the CGN</strong> button on the Hub to tell us.
+          </p>
+
+          <!-- Coordinator-only note; delete this row when sending to the general list -->
+          <p style="margin:18px 0 0 0; padding:10px 14px; font-size:13px; line-height:1.5; color:#5a5a52; background:#FFF1E1; border-left:3px solid #FFD83F;">
+            <em>Coordinators: please share with your gardeners.</em>
+          </p>
+
+          <p style="margin:24px 0 4px 0; font-size:15.5px; line-height:1.55;">Thank you for growing with us,</p>
+          <p style="margin:0 0 10px 0; font-family: 'Fredoka', 'Nunito', Arial, sans-serif; font-weight:700; font-size:18px; color:#80220F;">Nadia &amp; the CGN Team</p>
+          <p style="margin:0 0 6px 0; font-size:14px; color:#5a5a52;"><a href="mailto:communitygardening@justfood.ca" style="color:#1A6B54; text-decoration:underline;">communitygardening@justfood.ca</a></p>
+        </td>
+      </tr>
+
+      <!-- Flower divider -->
+      <tr><td class="em-pad" style="padding:0 42px 20px 42px;">
+        <div style="font-size:15px; letter-spacing:4px; text-align:center; color:#9C8BEF;">🌷 🌼 🌷 🌼 🌷 🌼 🌷 🌼 🌷 🌼 🌷</div>
+      </td></tr>
+
+      <!-- Footer -->
+      <tr>
+        <td class="em-pad" style="padding:14px 42px 26px 42px; background:#FFF1E1; border-top:2.5px dashed #303030; border-radius:0 0 12px 12px;">
+          <p style="margin:0 0 8px 0; font-size:12.5px; line-height:1.5; color:#5a5a52;">
+            You are subscribed to the CGN's {{AUDIENCE}} list from Just Food.
+            <br>
+            *|LIST:COMPANY|* &middot; *|LIST:ADDRESSLINE|*
+          </p>
+          <p style="margin:0; font-size:12.5px; line-height:1.5;">
+            <a href="*|ARCHIVE|*" style="color:#1A6B54; text-decoration:underline;">View in browser</a> &nbsp;&middot;&nbsp;
+            <a href="*|UPDATE_PROFILE|*" style="color:#1A6B54; text-decoration:underline;">Preferences</a> &nbsp;&middot;&nbsp;
+            <a href="*|UNSUB|*" style="color:#80220F; text-decoration:underline;">Unsubscribe</a>
+          </p>
+        </td>
+      </tr>
+
+    </table>
+
+  </td></tr>
+</table>
+
+</body>
+</html>
