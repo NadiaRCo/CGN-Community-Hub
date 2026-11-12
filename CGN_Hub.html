@@ -987,6 +987,56 @@ function pageHtml(k){
   const body=p.blocks.map(blockHtml).join('');
   return head(p.ico+' '+T2(p.title),T2(p.sub))+fr+`<div class="card">${body}</div>`;
 }
+/* ── Side cards: Visit the Farm + Follow the CGN ── */
+function farmCard(){
+  const fr = lang === 'fr';
+  return `<div class="card side-card" id="farmCard">
+    <span class="corner-tag green">${fr?'Visite 🚜':'Visit 🚜'}</span>
+    <h3>🚜 ${fr?'Visiter la ferme communautaire de Just Food':'Visit the Just Food Community Farm'}</h3>
+    <p class="body-text">${fr
+      ?'Une ferme communautaire de 150 acres dans la Ceinture de verdure de la CCN, bordée du ruisseau Green, à Blackburn Hamlet.'
+      :'A 150-acre community farm in the NCC Greenbelt next to Green’s Creek, in Blackburn Hamlet.'}</p>
+    <p class="body-text"><strong>${fr?'Adresse':'Address'}&nbsp;:</strong> 2391 P&eacute;pin Court, Ottawa K1B 4Z3
+      <br><small style="color:var(--ink-soft)"><em>TODO (Nadia): confirm &mdash; the Just Food website footer shows 2389; this page uses 2391 to match the workshop pages.</em></small></p>
+    <p class="body-text"><strong>${fr?'S’y rendre':'Getting there'}&nbsp;:</strong> ${fr?'autobus #25, pistes cyclables, stationnement gratuit sur place':'#25 bus route, bike paths, free parking on site'}.</p>
+    <p class="body-text" style="font-size:13px;font-style:italic;color:var(--ink-soft)">${fr
+      ?'La ferme se trouve sur le territoire traditionnel et non cédé de la Nation anishinaabe algonquine.'
+      :'The farm is on the traditional, unceded territory of the Anishinaabe Algonquin Nation.'}</p>
+    <h4 class="block-label" style="margin-top:10px">${fr?'Ce que vous pouvez faire':'What you can do'}</h4>
+    <ul class="body-text" style="padding-left:18px;margin:4px 0 8px">
+      <li>${fr?'Marcher sur les chemins principaux pendant les heures d’ouverture et voir ce qui pousse':'Walk the main roads during open hours and see what’s growing'}</li>
+      <li>${fr?'Pique-niquer près de la grange':'Picnic by the barn'}</li>
+      <li>${fr?'Participer aux événements et ateliers communautaires':'Join community events and workshops'}</li>
+      <li>${fr?'Faire du bénévolat':'Volunteer'}</li>
+    </ul>
+    <h4 class="block-label">${fr?'Règles pour visiteurs (en bref)':'Visitor rules (short)'}</h4>
+    <ul class="body-text" style="padding-left:18px;margin:4px 0 10px">
+      <li>${fr?'Enfants accompagnés d’un adulte':'Children accompanied by an adult'}</li>
+      <li>${fr?'Rester hors des champs cultivés':'Stay out of fields where food is growing'}</li>
+      <li>${fr?'Stationner dans le stationnement; pas de vélo &mdash; marchez-le':'Park in the lot; walk (don’t ride) bicycles'}</li>
+      <li>${fr?'Chiens bienvenus en laisse, sur les sentiers seulement &mdash; ce n’est pas un parc à chiens':'Dogs welcome on leash and on paths only (it’s not a dog park)'}</li>
+      <li>${fr?'Certains espaces peuvent accueillir des événements privés':'Some areas may have private events'}</li>
+    </ul>
+    <div class="wk-btns" style="margin-top:12px">
+      <a class="send-btn" href="https://justfood.ca/just-food-farm/farmrules/" target="_blank" onclick="track('view','farm rules','farmcard')">${fr?'Planifier votre visite ↗':'Plan your visit ↗'}</a>
+      <span class="send-btn btn-off" title="${fr?'Lien du kiosque de la ferme à confirmer':'Farm Stand ordering link not yet verified'}">🥕 ${fr?'Commander au kiosque de la ferme &mdash; lien à confirmer (TODO Nadia)':'Order from the Just Food Farm Stand &mdash; link TODO (Nadia)'}</span>
+    </div>
+  </div>`;
+}
+function followCard(){
+  const fr = lang === 'fr';
+  return `<div class="card side-card" id="followCard">
+    <span class="corner-tag blue">${fr?'Suivre 💌':'Follow 💌'}</span>
+    <h3>💌 ${fr?'Suivre le RJC':'Follow the CGN'}</h3>
+    <p class="body-text" style="margin:0 0 10px">${fr?'Nouvelles, ateliers et appels à l’action du réseau et de Just Food.':'News, workshops and calls-to-action from the network and Just Food.'}</p>
+    <div class="wk-btns">
+      <a class="send-btn" href="https://www.facebook.com/JustfoodOttawa" target="_blank" onclick="track('view','facebook','followcard')">📘 Facebook</a>
+      <a class="send-btn" href="https://www.instagram.com/justfoodottawa/" target="_blank" onclick="track('view','instagram','followcard')">📸 Instagram</a>
+      <a class="send-btn" href="https://justfood.ca/community-gardening-network/" target="_blank" onclick="track('view','cgn on jf','followcard')">${fr?'RJC sur justfood.ca ↗':'CGN on justfood.ca ↗'}</a>
+      <a class="send-btn" href="https://mailchi.mp/justfood/newsletters" target="_blank" onclick="track('view','jf newsletter','followcard')">📬 ${fr?'Infolettre de Just Food':'Just Food newsletter'}</a>
+    </div>
+  </div>`;
+}
 function render(){
   const cur=(document.querySelector('.page-section.visible')||{}).id||'home';
   document.getElementById('brandTxt').textContent=t('brand');document.getElementById('brandSmall').textContent=t('small');
@@ -1004,7 +1054,9 @@ function render(){
     <div class="card"><span class="corner-tag yellow">${t('aow')} 📰</span><h3>📰 ${t('aow')}</h3>${art?artHtml(art):`<p class="body-text" style="font-style:italic;color:var(--ink-soft)">${t('noart')}</p>`}</div>
     <div class="card"><span class="corner-tag">${t('cal')} 📅</span><h3>📅 ${t('cal')}</h3><p class="body-text" style="color:var(--ink-soft)">${t('cal_sub')}</p><div id="calBox">${calHtml()}</div></div>
     ${srcW?`<div class="card"><span class="corner-tag yellow">${t('welcome_ws')} 🌻</span><h3>🌻 ${t('welcome_ws')}</h3><p class="body-text">${t('thanks')}</p><div class="poster-grid">${wcard(srcW)}</div></div>`:''}
-    ${upc.length?`<div class="card"><span class="corner-tag blue">${t('upcoming')} 🌷</span><h3>🌷 ${t('upcoming')}</h3><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:''}`;
+    ${upc.length?`<div class="card"><span class="corner-tag blue">${t('upcoming')} 🌷</span><h3>🌷 ${t('upcoming')}</h3><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:''}
+    ${farmCard()}
+    ${followCard()}`;
   document.getElementById('heroTitle').textContent=t('welcome');document.getElementById('heroTag').textContent=t('tag');
   const dg=document.getElementById('dayGreeting'); if(dg) dg.textContent=(h<12?'☀️ '+t('greet_m'):h<18?'🌤️ '+t('greet_a'):'🌙 '+t('greet_e'))+'! '+t('its')+' '+now.toLocaleDateString(loc,{weekday:'long',month:'long',day:'numeric'});
   Object.keys(PAGES).forEach(k=>{document.getElementById(k).innerHTML=pageHtml(k)});
