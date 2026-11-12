@@ -1,6 +1,18 @@
 {
   "workshops": [
     {
+      "id": "W0",
+      "series": "summer2026",
+      "title": "Connecting to Indigenous Plants and Traditional Food Systems",
+      "who": "Harmony Eshkawkogan — Assembly of 7 Generations (a7g.ca)",
+      "date": "2026-06-07",
+      "when": "Sun, June 7, 2026 · 2:00–3:30 PM · Just Food Community Farm (in person)",
+      "desc": "<p><em>TODO (Nadia): replace this paraphrase with the verbatim description from the <strong>Previous Workshops</strong> section of <a href=\"https://justfood.ca/upcoming-workshops/\" target=\"_blank\">justfood.ca/upcoming-workshops/</a>. WebFetch couldn&rsquo;t return the full text verbatim due to a quote-length limit.</em></p><p>Join Harmony Eshkawkogan of the Assembly of 7 Generations (A7G) to learn how urban Indigenous youth are connecting to the land through community gardens. The session covers plant identification &mdash; including Anishinaabemowin names and uses for plants like sweetgrass, sage and berries &mdash; how colonial policies cut Indigenous Peoples off from their lands and food traditions, and ways to support Indigenous food sovereignty, followed by Q&amp;A. The workshop closes with a Heart Garden activity where participants write or draw messages honouring children lost to residential schools, Survivors, and the Truth and Reconciliation Commission&rsquo;s legacy.</p>",
+      "desc_fr": "<p><em>TODO Nadia&nbsp;: version FR à faire traduire et réviser.</em></p>",
+      "img": "",
+      "slides": []
+    },
+    {
       "id": "W1",
       "series": "summer2026",
       "title": "Growing with the Land: Native Plants & Your Food Garden",

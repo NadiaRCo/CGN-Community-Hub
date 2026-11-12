@@ -32,6 +32,9 @@
 /* 4. Hero welcome: drop the ghost double-shadow, use the brand green. */
 .hero .welcome { text-shadow: 2px 2px 0 var(--sun); color: var(--jf-green); -webkit-text-stroke: 0; }
 
+/* No-poster placeholder for workshops without an image (sprout glyph on a cream block). */
+.poster-noimg { background: var(--cream); border-bottom: 2.5px dashed var(--ink); aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+
 /* 5. Tool cards on the For Coordinators page: icon support + subtle status accents. */
 .tool-card .tool-ico { font-size: 28px; line-height: 1; margin: 2px 0 8px; }
 .tool-card.status-draft---in-review .pc-badge, .tool-card.status-draft-in-review .pc-badge { background: var(--sky-pale); border-color: var(--pond); color: var(--pond); }

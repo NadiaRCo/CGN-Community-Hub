@@ -107,7 +107,8 @@ function slideBtns(w){return (w.slides||[]).map((s,i)=>`<button class="send-btn"
 function wcard(w){
   const rec=w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank" onclick="track('view','recording ${w.id}','recording')">▶ ${t('recording')}</a>`:'';
   const reg=w.register?`<a class="send-btn" href="${esc(w.register)}" target="_blank">${t('register')}</a>`:'';
-  return `<div class="poster-card" id="wk-${w.id}"><img src="${w.img}" alt="${esc(w.title)}"><div class="poster-body"><strong>${esc(w.title)}</strong><div class="p-meta">${esc(w.who)}<br>${esc(w.when)}</div>
+  const imgHtml = w.img ? `<img src="${w.img}" alt="${esc(w.title)}">` : '<div class="poster-noimg" aria-hidden="true">🌱</div>';
+  return `<div class="poster-card" id="wk-${w.id}">${imgHtml}<div class="poster-body"><strong>${esc(w.title)}</strong><div class="p-meta">${esc(w.who)}<br>${esc(w.when)}</div>
   <details onclick="track('view','desc ${w.id}','description')"><summary>${t('desc')}</summary><div class="dd">${w.desc}</div></details>
   <div class="wk-btns">${isUp(w)?reg:slideBtns(w)+rec}</div></div></div>`}
 function artHtml(a){return `<strong style="font-size:17px">${esc(L(a,'title'))}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(a.author||'')} · ${esc(a.date||'')}</div><p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="${esc(a.url)}" target="_blank" onclick="track('view','article: '+${JSON.stringify(a.title)},'article')">${t('readmore')} ↗</a>`}
