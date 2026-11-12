@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CGN Community Hub 🌻 Just Food</title>
+<title>CGN Hub 🌻 Just Food</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>/*__CSS__*/</style>
@@ -55,9 +55,9 @@ const HERO_HTML = /*__HERO__*/null;
 const PAGES = /*__PAGES__*/null;   /* info pages: edit text here (English + French side by side) */
 
 const I18N = {
- en:{brand:"CGN Community Hub",small:"· Just Food",home:'Home',article:'Article of the Week',g_ws:'CGN Workshops',ws_upcoming:'Upcoming workshops',ws_past:'Past workshops',ws_slides:'Slides',resources:'CGN Resources Portal',contact:'Contact the CGN',
+ en:{brand:"CGN Hub",small:"for the Community Gardening Network",home:'Home',article:'Article of the Week',g_ws:'CGN Workshops',ws_upcoming:'Upcoming workshops',ws_past:'Past workshops',ws_slides:'Slides',resources:'CGN Resources Portal',contact:'Contact the CGN',
   start:'Start here',other:'More',quote:'"nothing grows best in isolation"',
-  welcome:'Welcome to the CGN Community Hub!',tag:'Slides, resources and good reads from Just Food’s Community Gardening Network 🌱',
+  welcome:'Welcome to the CGN Hub!',tag:'Slides, resources and good reads from Just Food’s Community Gardening Network 🌱',
   upcoming:'Coming up',aow:'Article of the week',noart:'The first article of the week is on its way. Check back soon!',noup:'No workshops are scheduled right now — check back soon, or tell us what you’d like to see.',
   readmore:'Read the article',desc:'Full description',noslides:'Slides coming soon',recording:'Watch recording',register:'Register / waitlist',
   res_sub:'Guides, templates and links for your garden.',search:'Search…',all:'All',slides_sub:'Download the slides from any past workshop.',
@@ -70,9 +70,9 @@ const I18N = {
   g_gardens:'Gardens',quick:'Where would you like to start?',stay:'Stay connected',stay_sub:'Get workshop news and gardening updates from Just Food.',news:'Just Food newsletter',
   skip:'Skip to content',fr_note:'Some pages are still being translated. The French version of this topic is on the Just Food French site:',fr_link:'Voir la version française ↗',
   c_info:'Other ways to reach us',phone:'Phone',addr:'Visit',draft_fr:'French text is a draft pending review.',land:'We garden on the unceded territory of the Algonquin Anishinaabe peoples.',source:'Source'},
- fr:{brand:"Carrefour communautaire du RJC",small:"· Just Food",home:'Accueil',article:'Article de la semaine',g_ws:'Ateliers du RJC',ws_upcoming:'Ateliers à venir',ws_past:'Ateliers passés',ws_slides:'Diapositives',resources:'Portail de ressources du RJC',contact:'Contacter le RJC',
+ fr:{brand:"Carrefour du RJC",small:"pour le Réseau de jardins communautaires",home:'Accueil',article:'Article de la semaine',g_ws:'Ateliers du RJC',ws_upcoming:'Ateliers à venir',ws_past:'Ateliers passés',ws_slides:'Diapositives',resources:'Portail de ressources du RJC',contact:'Contacter le RJC',
   start:'Commencer ici',other:'Plus',quote:'« rien ne pousse mieux dans l’isolement »',
-  welcome:'Bienvenue au Carrefour communautaire du RJC!',tag:'Diapositives, ressources et bonnes lectures du Réseau de jardinage communautaire de Just Food 🌱',
+  welcome:'Bienvenue au Carrefour du RJC!',tag:'Diapositives, ressources et bonnes lectures du Réseau de jardinage communautaire de Just Food 🌱',
   upcoming:'À venir',aow:'Article de la semaine',noart:'Le premier article de la semaine arrive bientôt. Revenez nous voir!',noup:'Aucun atelier n’est prévu pour le moment — revenez bientôt, ou dites-nous ce que vous aimeriez voir.',
   readmore:'Lire l’article',desc:'Description complète',noslides:'Diapositives à venir',recording:'Voir l’enregistrement',register:'S’inscrire / liste d’attente',
   res_sub:'Guides, modèles et liens pour votre jardin.',search:'Rechercher…',all:'Tout',slides_sub:'Téléchargez les diapositives de n’importe quel atelier passé.',
@@ -222,7 +222,7 @@ function sendContact(){
   const m=document.getElementById('cm').value.trim(); if(!m) return;
   const typ=document.getElementById('ct').value,n=document.getElementById('cn').value,e=document.getElementById('ce').value;
   track('contact',typ+' | '+m.slice(0,300),'contact');
-  location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('[CGN Community Hub] '+typ)+'&body='+encodeURIComponent(m+'\n\n—\n'+(n?n+'\n':'')+(e?'Reply to: '+e:''));
+  location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('[CGN Hub] '+typ)+'&body='+encodeURIComponent(m+'\n\n—\n'+(n?n+'\n':'')+(e?'Reply to: '+e:''));
   document.getElementById('cok').style.display='block';
 }
 try{const f=localStorage.getItem('cgn-comm-font'),b=localStorage.getItem('cgn-comm-bg');if(f)document.body.dataset.font=f;if(b&&BGS[b])document.body.dataset.bg=b}catch(e){}

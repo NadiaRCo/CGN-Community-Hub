@@ -1,6 +1,6 @@
-# CGN Community Hub — email drafts (for Kate's review — not sent)
+# CGN Hub — email drafts (for Kate's review — not sent)
 
-> **Ready-to-send Mailchimp templates** matching the CGN Community Hub's look now live in [`newsletter/`](newsletter/) — see [`newsletter/README.md`](newsletter/README.md) for how to paste them into Mailchimp. The copy below is the text-only version, kept here as the source of wording for Kate's review.
+> **Ready-to-send Mailchimp templates** matching the CGN Hub's look now live in [`newsletter/`](newsletter/) — see [`newsletter/README.md`](newsletter/README.md) for how to paste them into Mailchimp. The copy below is the text-only version, kept here as the source of wording for Kate's review.
 
 ## 1. Slides follow-up to workshop attendees (EN)
 **Subject:** Your slides from "[WORKSHOP TITLE]" + more from the CGN
@@ -11,7 +11,7 @@ Thank you for joining us for **[WORKSHOP TITLE]** with [FACILITATOR]. We are sor
 
 You can find the slides (and download them) here: **https://[HUB LINK]?src=[W1–W4]**
 
-The CGN Community Hub is also home to slides from our other workshops, guides and an article of the week. If there is a topic you would like us to cover next, you can tell us on the Hub in a minute.
+The CGN Hub is also home to slides from our other workshops, guides and an article of the week. If there is a topic you would like us to cover next, you can tell us on the Hub in a minute.
 
 Thank you for growing with us,
 Nadia & the CGN Team
@@ -37,7 +37,7 @@ Nadia et l’équipe du RJC
 Hello [coordinators / gardeners],
 
 This week's read: **[ARTICLE TITLE]** by [AUTHOR] — [one line on why it is useful for your garden].
-→ Read it on the CGN Community Hub: [LINK]
+→ Read it on the CGN Hub: [LINK]
 
 Also on the Hub: workshop slides, guides and templates.
 **What should we cover next?** Tell us here: [SUGGEST A TOPIC LINK]

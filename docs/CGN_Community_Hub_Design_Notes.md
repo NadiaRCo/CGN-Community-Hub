@@ -1,4 +1,4 @@
-# CGN Community Hub — what I built, why, and what you still need to do
+# CGN Hub — what I built, why, and what you still need to do
 
 *Test build for Kate's review. Nothing here has been published or sent.*
 

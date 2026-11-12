@@ -1,4 +1,4 @@
-# Handover to Claude Code — CGN Hubs (Nadia's CGN Hub + CGN Community Hub)
+# Handover to Claude Code — CGN Hubs (Nadia's CGN Hub + CGN Hub)
 
 **From:** Claude (Cowork) · **For:** Claude Code, in the Just Food (JF) project · **Date:** Nov 11, 2026
 **Owner / user:** Nadia Rangira, CGN Engagement Coordinator, Just Food Ottawa. **Supervisor:** Kate Veinot. **ED:** Moe Garahan.
@@ -8,7 +8,7 @@
 ---
 
 ## 0. Ground rules (non-negotiable)
-1. **Nothing external goes out without Kate's review.** Just Food is an NGO; public-facing content (the Community Hub, emails, social posts) is drafted, reviewed by Kate, then published. Never send emails, post, or publish a site live yourself. Produce drafts and test builds.
+1. **Nothing external goes out without Kate's review.** Just Food is an NGO; public-facing content (the CGN Hub, emails, social posts) is drafted, reviewed by Kate, then published. Never send emails, post, or publish a site live yourself. Produce drafts and test builds.
 2. **Don't invent facts.** If something is unknown (dates, URLs, names, French wording), flag it. Every JF link in this note was fetched from justfood.ca on Nov 11, 2026; re-verify before relying on them.
 3. **Bilingual EN/FR is a funding requirement** for the public Hub. French text so far is a *draft* needing a French speaker's review.
 4. **Continuity.** Nadia may not hold this role long (contract/funding through 2027; she may leave ~Nov 2027 or earlier). The site must be maintainable by a non-developer: one data file to edit, a beginner-friendly maintenance guide, owned by a Just Food Google account — not Nadia's personal one.
@@ -37,7 +37,7 @@ The **Community Gardening Network (CGN)** (est. 1997; at Just Food since 2006) s
 **Known quirks:** content restore from `localStorage` is disabled on purpose (the master HTML is the source of truth); several links are local files (`CGN_W1_Poster.png`, newsletter HTML) that 404 on the hosted version until swapped for Drive links or embedded; status/touchpoint data lives in each browser's `localStorage`, not shared.
 **What we want it to become (private):** Nadia wants a **private** Engagement Coordinator space (role, brainstorms, tips) that Kate does *not* automatically see, while Kate keeps Kate's Corner and shared pages. → Needs a real split: shared vs private pages (auth or two builds). Also wants server-backed (shared) state instead of per-browser `localStorage`.
 
-### 2B. CGN Community Hub — PUBLIC (`CGN_Community_Hub.html`, ~670 KB, single file, test build)
+### 2B. CGN Hub — PUBLIC (`CGN_Community_Hub.html`, ~670 KB, single file, test build)
 **What it is now:** a bilingual public site, same retro-farm look as 2A (CSS is copied from it), built from a template + data via `source/build_comm.py`. All content is data-driven (`HUB` and `PAGES` JSON blocks inside the file). Posters are embedded as base64 JPEGs so it is self-contained.
 **Pages:** Home (hero, quick-start tiles, Article of the Week, month **calendar** of events/workshops, upcoming workshops) · About the CGN · Article of the Week · Gardens: Find a Garden, Start a Garden (7-step path), For Coordinators (offer + "coming soon" tool cards) · Gardening Guides (Garden Guide in 5 languages, recorded workshops, Ottawa season table) · CGN Workshops: Upcoming / Past (by series) / **Slides** (download buttons + tracking) · CGN Resources (29 tagged, searchable links) · FAQ · Contact the CGN (mailto form + phone/address + newsletter signup).
 **Features that exist:** EN/FR toggle (persisted); colour + font themes; month calendar (workshops auto-added from data; extra `events` supported); per-workshop slide buttons; resource search/tag filter; engagement tracking hooks (`track()` → Apps Script POST: views, downloads, topic/contact); `?src=W3` links from follow-up emails greet visitors with that workshop's slides; skip/keyboard-friendly nav.
@@ -119,13 +119,13 @@ The Hub **complements** justfood.ca (WordPress/Elementor, EN site + French site 
 
 ## 7. Suggested first session for Code (order of work)
 1. Read this note, `CGN_Community_Hub_Design_Notes.md` and `CGN_Community_Hub_Setup.md`. Open both HTML files in a browser to see current behaviour.
-2. Create the repo; port the Community Hub to a data-driven structure (JSON/MD content, shared CSS tokens), reproducing the current look. Add tests: link checker, HTML validation, a11y check (axe), build reproducibility.
+2. Create the repo; port the CGN Hub to a data-driven structure (JSON/MD content, shared CSS tokens), reproducing the current look. Add tests: link checker, HTML validation, a11y check (axe), build reproducibility.
 3. Implement the build outputs and the tracking backend; keep tracking off by default via config.
 4. Wire slides (placeholder until Nadia uploads), calendar `.ics`, workshop detail pages, Article of the Week archive + feed.
 5. Then tackle the internal Hub items (shared/private, shared state).
 6. Write the beginner-friendly maintenance guide as you go. Report back to Nadia with a short plain-language summary and a list of questions from Section 6.
 
-**Acceptance for the Community Hub v1:** bilingual, mobile-friendly, WCAG-AA clean, all JF links verified, no console errors, tracking optional, content editable from one data file, builds to a single deployable bundle, and a Kate-reviewable preview link/zip. Nothing published without Kate.
+**Acceptance for the CGN Hub v1:** bilingual, mobile-friendly, WCAG-AA clean, all JF links verified, no console errors, tracking optional, content editable from one data file, builds to a single deployable bundle, and a Kate-reviewable preview link/zip. Nothing published without Kate.
 
 ## 8. Working with Nadia
 Nadia is new to the role and to web development; she is learning JavaScript. Explain decisions in plain language, show screenshots, ask one short question at a time, and prefer small reviewable steps. She keeps a worklog per day in the JF project (Cowork); Code should leave a short summary she can paste there.

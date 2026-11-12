@@ -1,6 +1,6 @@
-# CGN Community Hub — setup, updating and hand-over guide
+# CGN Hub — setup, updating and hand-over guide
 
-The public CGN Community Hub is **one HTML file**: `CGN_Community_Hub.html`. It works by double-clicking it (test), and can be published through Google Apps Script the same way as the internal Hub. This is a **test build** — nothing here has been shared outside, and Kate should see it before any link goes to attendees.
+The public CGN Hub is **one HTML file**: `CGN_Community_Hub.html`. It works by double-clicking it (test), and can be published through Google Apps Script the same way as the internal Hub. This is a **test build** — nothing here has been shared outside, and Kate should see it before any link goes to attendees.
 
 ## What it does
 - Workshops page: posters, full approved descriptions, **Download slides** buttons, recording link; upcoming workshops show Register / waitlist instead.
@@ -16,7 +16,7 @@ The public CGN Community Hub is **one HTML file**: `CGN_Community_Hub.html`. It 
 4. Save, republish (step 3 below).
 
 ## 2. Turn on engagement tracking (10 minutes)
-1. Create a Google Sheet **CGN Community Hub — Engagement** (in the CGN drive).
+1. Create a Google Sheet **CGN Hub — Engagement** (in the CGN drive).
 2. Extensions → Apps Script → paste the code below → save → Deploy → New deployment → Web app → Execute as **Me**, access **Anyone** → copy the URL.
 3. Paste the URL into `const BACKEND_URL = '';` at the top of the script in the HTML.
 

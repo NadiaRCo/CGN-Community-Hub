@@ -1,17 +1,17 @@
-"""Build CGN_Community_Hub.html from the template + data + content.
+"""Build CGN_Hub.html (the public CGN Hub) from the template + data + content.
 
 Run from anywhere:
     python3 "source/build_comm.py"
 
 Inputs:
-    content/hub.json       - workshops, series, articles, events (edit this weekly)
-    source/comm_tpl.html   - page shell with /*__CSS__*/, /*__HUB__*/, etc. placeholders
-    source/comm_extra.css  - extra CSS appended after the internal Hub's styles
-    source/comm_pages.json - info pages + resources (regenerate with comm_content.py)
-    CGN_Hub.html           - internal Hub, used to copy CSS + hero + sidebar-art
+    content/hub.json         - workshops, series, articles, events (edit this weekly)
+    source/comm_tpl.html     - page shell with /*__CSS__*/, /*__HUB__*/, etc. placeholders
+    source/comm_extra.css    - extra CSS appended after the internal Hub's styles
+    source/comm_pages.json   - info pages + resources (regenerate with comm_content.py)
+    CGN_Internal_Hub.html    - Nadia's internal Hub, used to copy CSS + hero + sidebar-art
 
 Output:
-    CGN_Community_Hub.html - rewritten in the repo root
+    CGN_Hub.html             - rewritten in the repo root (public CGN Hub test build)
 
 To regenerate comm_pages.json first: python3 source/comm_content.py
 """
@@ -26,9 +26,9 @@ from pathlib import Path
 SRC = Path(__file__).resolve().parent
 ROOT = SRC.parent
 
-HUB_HTML = ROOT / "CGN_Hub.html"
+HUB_HTML = ROOT / "CGN_Internal_Hub.html"  # Nadia's internal Hub; source of CSS + hero + sidebar-art
 HUB_JSON = ROOT / "content" / "hub.json"
-OUT_HTML = ROOT / "CGN_Community_Hub.html"
+OUT_HTML = ROOT / "CGN_Hub.html"  # Public CGN Hub (test build)
 CGN_LOGO_PNG = ROOT / "assets" / "CGN_logo_icon.png"
 
 TPL = SRC / "comm_tpl.html"

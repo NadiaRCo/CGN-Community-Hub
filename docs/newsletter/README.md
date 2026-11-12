@@ -1,6 +1,6 @@
-# CGN Community Hub — Mailchimp newsletter templates
+# CGN Hub — Mailchimp newsletter templates
 
-Two ready-to-paste HTML emails that match the look of the CGN Community Hub. Both must be reviewed and approved by Kate before sending.
+Two ready-to-paste HTML emails that match the look of the CGN Hub. Both must be reviewed and approved by Kate before sending.
 
 | File | For | Audience |
 |---|---|---|
