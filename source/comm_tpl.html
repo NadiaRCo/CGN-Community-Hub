@@ -39,6 +39,16 @@
     <section class="page-section" id="ws-slides"></section>
     <section class="page-section" id="resources"></section>
     <section class="page-section" id="contact"></section>
+    <footer class="hub-foot" aria-label="site footer">
+      <div class="hub-foot-left">
+        <strong>CGN Hub</strong> &middot; <span id="footTag">for the Community Gardening Network</span>
+      </div>
+      <div class="hub-foot-right">
+        <a href="mailto:communitygardening@justfood.ca">communitygardening@justfood.ca</a>
+        &middot; 613-824-7771
+        &middot; <a href="https://justfood.ca/community-gardening-network/" target="_blank" rel="noopener">Just Food &rarr;</a>
+      </div>
+    </footer>
   </main>
 </div>
 <script>
@@ -239,6 +249,7 @@ function followCard(){
 function render(){
   const cur=(document.querySelector('.page-section.visible')||{}).id||'home';
   document.getElementById('brandTxt').textContent=t('brand');document.getElementById('brandSmall').textContent=t('small');
+  const ftTag=document.getElementById('footTag'); if(ftTag) ftTag.textContent=t('small');
   document.getElementById('langBtn').textContent=lang==='en'?'FR':'EN';
   document.getElementById('tbResources').textContent=t('resources');
   document.getElementById('tbFaq').textContent=T2(PAGES['faq'].title);

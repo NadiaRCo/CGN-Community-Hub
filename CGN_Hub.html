@@ -787,6 +787,13 @@
 /* 4. Hero welcome: drop the ghost double-shadow, use the brand green. */
 .hero .welcome { text-shadow: 2px 2px 0 var(--sun); color: var(--jf-green); -webkit-text-stroke: 0; }
 
+/* Persistent footer across every page. */
+.hub-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin: 24px 0 8px; padding: 14px 18px; background: var(--cream-2); border: 2px dashed var(--ink); border-radius: 12px; font: 600 13px 'Nunito', sans-serif; color: var(--ink-soft); }
+.hub-foot a { color: var(--jf-green); text-decoration: none; border-bottom: 1.5px solid var(--jf-green); }
+.hub-foot a:hover { color: var(--jf-red); border-bottom-color: var(--jf-red); }
+.hub-foot-left strong { color: var(--jf-green); font-weight: 900; }
+@media (max-width: 720px) { .hub-foot { flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; } }
+
 /* Admin reminder banner (red, high-contrast) shown above the Slides page. Delete when work is done. */
 .admin-note { background: #FBE9E7; color: #80220F; border: 2.5px solid #80220F; border-radius: 12px; padding: 12px 16px; margin: 0 0 16px; font-size: 14px; line-height: 1.5; box-shadow: 3px 3px 0 #80220F; }
 .admin-note strong { color: #80220F; }
@@ -871,6 +878,16 @@
     <section class="page-section" id="ws-slides"></section>
     <section class="page-section" id="resources"></section>
     <section class="page-section" id="contact"></section>
+    <footer class="hub-foot" aria-label="site footer">
+      <div class="hub-foot-left">
+        <strong>CGN Hub</strong> &middot; <span id="footTag">for the Community Gardening Network</span>
+      </div>
+      <div class="hub-foot-right">
+        <a href="mailto:communitygardening@justfood.ca">communitygardening@justfood.ca</a>
+        &middot; 613-824-7771
+        &middot; <a href="https://justfood.ca/community-gardening-network/" target="_blank" rel="noopener">Just Food &rarr;</a>
+      </div>
+    </footer>
   </main>
 </div>
 <script>
@@ -1071,6 +1088,7 @@ function followCard(){
 function render(){
   const cur=(document.querySelector('.page-section.visible')||{}).id||'home';
   document.getElementById('brandTxt').textContent=t('brand');document.getElementById('brandSmall').textContent=t('small');
+  const ftTag=document.getElementById('footTag'); if(ftTag) ftTag.textContent=t('small');
   document.getElementById('langBtn').textContent=lang==='en'?'FR':'EN';
   document.getElementById('tbResources').textContent=t('resources');
   document.getElementById('tbFaq').textContent=T2(PAGES['faq'].title);
