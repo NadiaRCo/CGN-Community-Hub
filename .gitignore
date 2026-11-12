@@ -1,8 +1,9 @@
 # Build backups (created automatically on rebuild)
 *.prev.html
 
-# Transient files from node --check
+# Transient files from node --check / build scratch
 source/.build_check.js
+source/.cgn_logo_b64.txt
 
 # Python
 __pycache__/
