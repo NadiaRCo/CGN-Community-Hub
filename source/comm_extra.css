@@ -2,6 +2,30 @@
 .test-banner { background:#FFD54A; color:#2a1a00; padding:10px 16px; text-align:center; font:700 13.5px 'Nunito',sans-serif; border-bottom:3px solid #c97b00; letter-spacing:.01em; }
 .test-banner strong { font-weight:900; letter-spacing:.04em; }
 @media print { .test-banner { display:none; } }
+
+/* === Round 1 UX + brand tightening (Nov 11, 2026) === */
+
+/* 1. Tie the colour palette to the Just Food brand green (#1A6B54 per brand guidelines). */
+:root { --jf-green: #1A6B54; }
+
+/* 2. Unstick the top bar so it stops overlapping the TEST BUILD banner, and let it wrap on mobile. */
+.topbar { position: static; height: auto; min-height: 58px; flex-wrap: wrap; }
+.layout { padding-top: 0 !important; }
+.topbar-actions { flex-wrap: wrap; justify-content: flex-end; }
+@media (max-width: 720px) {
+  .topbar { padding: 8px 12px; gap: 6px; }
+  .topbar .brand { font-size: 17px; gap: 8px; }
+  .topbar .brand small { display: none; }
+  .brand-logo { width: 34px; height: 34px; }
+  .tb-btn { padding: 5px 10px; font-size: 11.5px; }
+}
+
+/* 3. CGN logo in the brand mark (replaces the sunflower emoji). */
+.brand-logo { width: 42px; height: 42px; flex-shrink: 0; vertical-align: middle; display: inline-block; }
+.brand-txt-wrap { display: inline-flex; align-items: baseline; gap: 6px; }
+
+/* 4. Hero welcome: drop the ghost double-shadow, use the brand green. */
+.hero .welcome { text-shadow: 2px 2px 0 var(--sun); color: var(--jf-green); -webkit-text-stroke: 0; }
 .mc-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
 .mc-head h4 { font-family:'Fredoka',sans-serif; font-size:20px; color:var(--jf-red); margin-right:auto; text-transform:capitalize; }
 .mc-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); border:2.5px solid var(--ink); border-radius:14px; overflow:hidden; background:#fff; }

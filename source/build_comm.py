@@ -16,6 +16,7 @@ Output:
 To regenerate comm_pages.json first: python3 source/comm_content.py
 """
 
+import base64
 import re
 import json
 import shutil
@@ -28,6 +29,7 @@ ROOT = SRC.parent
 HUB_HTML = ROOT / "CGN_Hub.html"
 HUB_JSON = ROOT / "content" / "hub.json"
 OUT_HTML = ROOT / "CGN_Community_Hub.html"
+CGN_LOGO_PNG = ROOT / "assets" / "CGN_logo_icon.png"
 
 TPL = SRC / "comm_tpl.html"
 EXTRA_CSS = SRC / "comm_extra.css"
@@ -88,12 +90,17 @@ def main() -> None:
     tpl = TPL.read_text(encoding="utf-8")
     extra = EXTRA_CSS.read_text(encoding="utf-8")
 
+    logo_uri = ""
+    if CGN_LOGO_PNG.exists():
+        logo_uri = "data:image/png;base64," + base64.b64encode(CGN_LOGO_PNG.read_bytes()).decode()
+
     html = (
         tpl.replace("/*__CSS__*/", css + "\n" + extra)
            .replace("/*__HUB__*/null", json.dumps(data, ensure_ascii=False))
            .replace("/*__ART__*/null", json.dumps(art))
            .replace("/*__PAGES__*/null", json.dumps(content["pages"], ensure_ascii=False))
            .replace("/*__HERO__*/null", json.dumps(hero))
+           .replace("/*__CGNLOGO__*/", logo_uri)
     )
 
     # Keep a backup of the previous build next to the new one.
