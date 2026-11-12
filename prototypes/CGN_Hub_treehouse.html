@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGN Hub &mdash; garden shed prototype</title>
+<meta name="description" content="A Treehouse-style design preview for the CGN Hub, adapted to a community garden theme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Graduate&family=Grandstander:wght@600;700;800;900&family=VT323&display=swap" rel="stylesheet">
+<style>
+/* ────────────────────────────────────────────────────────────────────────── */
+/*                         DESIGN TOKENS                                      */
+/*  From Nadia's Treehouse brief §2. Adapted lightly for the CGN theme:       */
+/*  --cgn-green replaces one of the section accents; otherwise unchanged.     */
+/* ────────────────────────────────────────────────────────────────────────── */
+:root{
+  /* world */
+  --sky:#B9E0F1; --sky2:#E8F5E4; --cloud:#FFFFFF; --cloud-pink:#FFD7E8;
+  /* ink + paper */
+  --ink:#4A3426; --ink-soft:#7B6352; --card:#FFF8EA; --line:#E7D3B0;
+  /* accent */
+  --pink:#F38DB5; --pink-deep:#D65A8C; --butter:#FCE6A0; --mint-glow:#DDF1CF;
+  /* materials */
+  --wood:#B37B46; --wood-dark:#7A4E2A; --wood-light:#CB955D;
+  --leaf:#5E9E49; --leaf-deep:#3F7A33;
+  --chalk:#2E4A3A; --chalk-ink:#F4F0E3;
+  /* section colours (one colour + its soft bg) */
+  --home:#7B6352; --home-bg:#F4E9DA;     /* neutral brown - Home / About    */
+  --garden:#238F7B; --garden-bg:#D6F1E7; /* teal - Gardens group            */
+  --ws:#3F72D6;   --ws-bg:#DCE7FB;       /* blue - Workshops group          */
+  --res:#9156D2;  --res-bg:#EEE3FB;      /* violet - Resources Portal / FAQ */
+  --comm:#C0612A; --comm-bg:#FCE4D0;     /* rust - Community / Calendar     */
+  --contact:var(--pink); --contact-bg:#FFE6EF; /* pink - Contact the CGN    */
+  /* status / signals */
+  --due:#D9365F; --due-bg:#FFDDE4;       /* deadlines + warnings only       */
+  --done:#3F9A5F;
+  /* type */
+  --f-display:"Grandstander","Trebuchet MS",sans-serif;
+  --f-body:"Fredoka","Nunito",system-ui,sans-serif;
+  --f-hud:"VT323","Courier New",monospace;
+  --f-varsity:"Graduate",Georgia,serif;
+}
+
+/* ─── reset + body ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font:400 15px/1.45 var(--f-body);
+  color:var(--ink);
+  background:linear-gradient(180deg,#A6D8EF 0%,#CDEAF4 38%,#E6F4E6 70%,#D6ECC4 100%) fixed;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px dashed var(--pink-deep); outline-offset:3px; border-radius:6px}
+
+/* ─── TEST BUILD banner (preserved from the live Hub) ─── */
+.test-banner{
+  background:#FFD54A; color:#2a1a00; padding:10px 16px; text-align:center;
+  font:700 13.5px var(--f-body); border-bottom:3px solid #c97b00;
+  position:relative; z-index:10;
+}
+.test-banner strong{font-weight:900; letter-spacing:.04em}
+
+/* ─── scene (fixed meadow + treehouse at the bottom of the viewport) ─── */
+.scene{
+  position:fixed; inset:auto 0 0 0; height:58vh; width:100%;
+  pointer-events:none; z-index:0;
+}
+.scene svg{width:100%; height:100%; display:block}
+
+/* ─── clouds ─── */
+.cloud{
+  position:fixed; z-index:0; pointer-events:none;
+  background:var(--cloud); opacity:.82; border-radius:999px;
+  box-shadow:0 2px 0 rgba(0,0,0,.04);
+}
+.cloud::before, .cloud::after{
+  content:""; position:absolute; background:inherit; border-radius:50%;
+}
+.cloud.c1{width:120px; height:30px; top:7%;  left:-130px; animation:drift 95s linear infinite}
+.cloud.c1::before{width:60px; height:60px; top:-26px; left:18px}
+.cloud.c1::after {width:46px; height:46px; top:-20px; left:66px}
+.cloud.c2{width:160px; height:40px; top:16%; left:-180px; animation:drift 140s linear infinite; animation-delay:-40s; background:var(--cloud-pink); opacity:.65}
+.cloud.c2::before{width:80px; height:80px; top:-34px; left:26px}
+.cloud.c2::after {width:60px; height:60px; top:-24px; left:88px}
+.cloud.c3{width:100px; height:26px; top:22%; left:-100px; animation:drift 110s linear infinite; animation-delay:-70s}
+.cloud.c3::before{width:50px; height:50px; top:-22px; left:14px}
+.cloud.c3::after {width:38px; height:38px; top:-16px; left:56px}
+@keyframes drift{ from{transform:translateX(0)} to{transform:translateX(calc(100vw + 300px))} }
+
+/* ─── main wrap over the scene ─── */
+.wrap{
+  position:relative; z-index:1;
+  max-width:1100px; margin:0 auto;
+  padding:20px 16px 32px;
+  display:grid; gap:20px;
+}
+
+/* ─── header board (wooden signboard + treehouse + bunting + mascot) ─── */
+.header-board{
+  position:relative;
+  background:var(--card);
+  border:5px solid var(--wood);
+  border-radius:22px;
+  padding:26px 24px 20px;
+  box-shadow:
+    inset 0 0 0 2px var(--wood-dark),
+    0 7px 0 var(--wood-dark),
+    0 16px 28px rgba(74,52,38,.22);
+  background-image:
+    radial-gradient(circle at 14px 14px, var(--wood-dark) 2.8px, transparent 3.2px),
+    radial-gradient(circle at calc(100% - 14px) 14px, var(--wood-dark) 2.8px, transparent 3.2px),
+    radial-gradient(circle at 14px calc(100% - 14px), var(--wood-dark) 2.8px, transparent 3.2px),
+    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px), var(--wood-dark) 2.8px, transparent 3.2px);
+}
+.bunting{
+  display:flex; justify-content:center; gap:4px;
+  margin:-14px auto 16px; max-width:460px;
+}
+.bunting .flag{
+  width:22px; height:28px; clip-path:polygon(0 0, 100% 0, 50% 100%);
+  border:2px solid var(--wood-dark);
+}
+.bunting .flag.a{background:var(--pink)}
+.bunting .flag.b{background:var(--butter)}
+.bunting .flag.c{background:var(--garden)}
+.bunting .flag.d{background:var(--ws)}
+.bunting .flag.e{background:var(--comm)}
+.bunting .flag.f{background:var(--leaf)}
+
+.header-grid{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:20px;
+}
+.shed-icon{width:120px; height:140px; flex-shrink:0}
+.brand-txt{
+  font:800 46px/1 var(--f-display);
+  color:var(--ink);
+  letter-spacing:.01em;
+  text-align:center;
+}
+.brand-txt .pink{color:var(--pink-deep)}
+.brand-sub{
+  margin-top:6px;
+  font:700 13.5px var(--f-display);
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-soft);
+  text-align:center;
+}
+.brand-sub-fr{color:var(--ink-soft); opacity:.75; font-weight:600; letter-spacing:.08em}
+
+.mascot-wrap{display:flex; align-items:center; gap:10px}
+.bee-icon{width:84px; height:84px; flex-shrink:0}
+.bubble{
+  position:relative; max-width:180px;
+  background:#fff; border:2.5px solid var(--wood-dark); border-radius:16px;
+  padding:9px 12px;
+  font:600 13px var(--f-body);
+}
+.bubble::before{
+  content:""; position:absolute; right:-10px; top:18px;
+  border:7px solid transparent; border-left-color:var(--wood-dark);
+}
+
+.member-pills{
+  display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+  margin-top:16px;
+}
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--card); border:2.5px solid var(--wood-dark); border-radius:999px;
+  padding:4px 12px 4px 4px;
+  font:700 12.5px var(--f-body);
+  box-shadow:0 3px 0 var(--wood-dark);
+}
+.pill-avatar{
+  width:26px; height:26px; border-radius:50%;
+  display:grid; place-items:center;
+  font:700 12px var(--f-display); color:#fff;
+}
+.pill-role{color:var(--ink-soft); font-weight:600; font-size:11.5px}
+
+/* ─── chalkboard HUD tiles ─── */
+.hud{
+  display:grid; gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+}
+.hud-cell{
+  background:var(--chalk); color:var(--chalk-ink);
+  border:5px solid var(--wood); border-radius:14px;
+  box-shadow:0 5px 0 var(--wood-dark);
+  padding:12px 14px 14px;
+}
+.hud-lbl{
+  font-family:var(--f-display); font-weight:800;
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:#F8C6DA;
+  margin-bottom:6px;
+}
+.hud-val{
+  font-family:var(--f-hud); font-size:34px; line-height:1;
+  font-variant-numeric:tabular-nums;
+  color:var(--chalk-ink);
+}
+.hud-val .unit{font-size:14px; opacity:.72; margin-left:4px}
+.xpbar{
+  height:14px; background:#1F362A; border:2px solid var(--chalk-ink);
+  border-radius:4px; overflow:hidden; margin-top:8px;
+}
+.xpbar b{
+  display:block; height:100%;
+  background:repeating-linear-gradient(90deg, var(--pink) 0 10px, #FFC3DA 10px 20px);
+  transition:width .6s;
+}
+
+/* ─── wood-plank tabs ─── */
+.tabs{
+  display:flex; gap:10px; flex-wrap:wrap;
+  padding:4px 0;
+}
+.tab{
+  font:600 14px var(--f-display);
+  background:repeating-linear-gradient(0deg, var(--wood-light) 0 7px, #C08A53 7px 14px);
+  color:#FFF8EA;
+  border:3px solid var(--wood-dark); border-radius:10px;
+  padding:9px 16px 10px;
+  box-shadow:0 4px 0 var(--wood-dark);
+  text-shadow:1px 1px 0 var(--wood-dark);
+  cursor:pointer;
+  letter-spacing:.04em;
+  display:inline-flex; align-items:center; gap:7px;
+  transition:transform .06s;
+}
+.tab .emoji{font-size:16px; line-height:1}
+.tab:hover{transform:translateY(-1px)}
+.tab:active{transform:translateY(3px); box-shadow:0 1px 0 var(--wood-dark)}
+.tab[aria-selected="true"]{
+  background:var(--leaf);
+  border-color:var(--leaf-deep);
+  box-shadow:0 4px 0 var(--leaf-deep);
+  text-shadow:1px 1px 0 var(--leaf-deep);
+}
+
+/* ─── wooden signboard panel ─── */
+.panel{
+  background:var(--card);
+  border:5px solid var(--wood);
+  border-radius:18px;
+  padding:22px 22px 20px;
+  box-shadow:
+    inset 0 0 0 2px var(--wood-dark),
+    0 6px 0 var(--wood-dark),
+    0 14px 24px rgba(74,52,38,.18);
+  background-image:
+    radial-gradient(circle at 12px 12px, var(--wood-dark) 2.5px, transparent 3px),
+    radial-gradient(circle at calc(100% - 12px) 12px, var(--wood-dark) 2.5px, transparent 3px),
+    radial-gradient(circle at 12px calc(100% - 12px), var(--wood-dark) 2.5px, transparent 3px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), var(--wood-dark) 2.5px, transparent 3px);
+}
+.panel-head{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.panel-head h2{
+  font:800 24px/1.1 var(--f-display);
+  color:var(--ink);
+  letter-spacing:.01em;
+}
+.panel-head .lbl{
+  font:800 10.5px var(--f-display); letter-spacing:.14em; text-transform:uppercase;
+  color:#fff; background:var(--cc, var(--home));
+  padding:4px 10px; border-radius:999px;
+  border:2px solid var(--wood-dark);
+}
+
+h3.block-label{
+  font:800 11.5px var(--f-display); letter-spacing:.14em; text-transform:uppercase;
+  color:var(--cc, var(--home));
+  margin:14px 0 8px;
+}
+
+/* ─── home grid ─── */
+.home-grid{display:grid; gap:18px; grid-template-columns:1.5fr 1fr}
+
+/* ─── task row with heart checkbox ─── */
+.task{
+  display:grid;
+  grid-template-columns:auto 64px 1fr;
+  gap:12px; align-items:center;
+  padding:10px 12px; margin-bottom:8px;
+  border-radius:14px;
+  background:var(--bgc, #fff);
+  border:2px solid rgba(122,78,42,.14);
+}
+.task.next{
+  border-color:var(--leaf);
+  box-shadow:0 0 0 4px var(--mint-glow);
+}
+.task .count{
+  font-family:var(--f-hud); font-size:32px; line-height:.9;
+  text-align:center; color:var(--cc, var(--ink));
+  font-variant-numeric:tabular-nums;
+}
+.task .count .unit{font-size:12px; opacity:.8; display:block; margin-top:2px}
+.task strong{font:700 15px var(--f-body); color:var(--ink); display:block; margin-bottom:2px}
+.task .meta{color:var(--ink-soft); font-size:13px; line-height:1.35}
+
+.check{
+  appearance:none; -webkit-appearance:none;
+  width:28px; height:28px;
+  border:3px solid var(--ink); border-radius:7px; background:#fff;
+  display:grid; place-items:center; cursor:pointer;
+}
+.check:checked{background:var(--pink)}
+.check:checked::after{content:"\2665"; color:#fff; font-size:16px; line-height:1}
+
+.chip{
+  display:inline-block;
+  font:800 10.5px var(--f-display); letter-spacing:.08em; text-transform:uppercase;
+  padding:4px 7px; border-radius:6px;
+  color:#fff; background:var(--cc, var(--home));
+}
+.chip.ghost{background:transparent; color:var(--cc, var(--ink-soft)); border:1.5px solid var(--cc, var(--line))}
+
+/* ─── deadline / countdown tile ─── */
+.dl{
+  display:grid; grid-template-columns:54px 1fr; gap:10px; align-items:center;
+  padding:9px 12px; margin-bottom:8px;
+  background:#FFFDF7; border:2px solid var(--line); border-radius:12px;
+}
+.dl .count{
+  font-family:var(--f-hud); font-size:28px; line-height:.9;
+  text-align:center; font-variant-numeric:tabular-nums;
+}
+.dl.soon{border-color:var(--due); background:var(--due-bg)}
+.dl.soon .count{color:var(--due)}
+
+/* ─── striped progress bar (section-colored) ─── */
+.bar{
+  height:16px; border:2px solid var(--wood-dark);
+  border-radius:7px; background:#F5EBDA; overflow:hidden;
+}
+.bar b{
+  display:block; height:100%;
+  background:repeating-linear-gradient(90deg, var(--cc, var(--leaf)) 0 8px, color-mix(in srgb, var(--cc, var(--leaf)) 70%, #fff) 8px 16px);
+  transition:width .6s;
+}
+
+/* ─── quick-start doc tiles ─── */
+.doc-grid{display:grid; gap:10px; grid-template-columns:1fr}
+.doc-item{
+  display:grid;
+  grid-template-columns:52px 1fr auto;
+  gap:12px; align-items:center;
+  padding:12px 14px; border-radius:14px;
+  background:var(--bgc, var(--home-bg));
+  border:2px solid rgba(122,78,42,.15);
+  transition:transform .08s, box-shadow .08s;
+  cursor:pointer;
+}
+.doc-item:hover{transform:translateY(-1px); box-shadow:0 3px 0 var(--wood-dark)}
+.doc-item .d-ico{
+  font-size:28px; line-height:1;
+  width:52px; height:52px;
+  background:#fff; border:2.5px solid var(--cc, var(--home)); border-radius:12px;
+  display:grid; place-items:center;
+}
+.doc-item strong{font:700 14.5px var(--f-body); color:var(--ink); display:block}
+.doc-item .d-note{color:var(--ink-soft); font-size:12.5px; margin-top:2px; display:block}
+.doc-item .arrow{font:700 18px var(--f-display); color:var(--cc, var(--home))}
+
+/* ─── mini calendar ─── */
+.cal-head{
+  display:flex; align-items:center; gap:10px; justify-content:space-between;
+  margin-bottom:10px;
+}
+.cal-head .m{font:800 18px var(--f-display); color:var(--ink)}
+.cal-nav{display:flex; gap:6px}
+.cal-nav button{
+  background:#fff; border:2px solid var(--wood-dark); border-radius:8px;
+  width:30px; height:30px; cursor:pointer; font-size:14px;
+  box-shadow:0 2px 0 var(--wood-dark);
+}
+.cal-grid{
+  display:grid; grid-template-columns:repeat(7, 1fr); gap:5px;
+}
+.cal-dow{
+  font:800 10.5px var(--f-display); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-soft); text-align:center; padding:4px 0;
+}
+.cal-cell{
+  background:#fff; border:1.5px solid var(--line); border-radius:8px;
+  padding:5px 6px; min-height:58px; font-size:11.5px;
+}
+.cal-cell.out{background:#F8F4E8; color:#B8A98A}
+.cal-cell.today{border:3px solid var(--wood); border-radius:10px; background:#FFFBE8}
+.cal-cell .n{font-family:var(--f-hud); font-size:16px; line-height:1}
+.cal-cell.today .n{color:var(--pink-deep); font-weight:700}
+.cal-cell .mini{
+  display:block; margin-top:4px; padding:2px 5px; border-radius:5px;
+  font:700 9.5px var(--f-body); color:#fff;
+  background:var(--cc, var(--home));
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* ─── two-column: left list, right countdowns ─── */
+.col-left h3.block-label, .col-right h3.block-label{margin-top:0}
+
+/* ─── footer (kept simple; matches the brand) ─── */
+.hub-foot{
+  margin-top:8px; padding:14px 18px;
+  background:var(--card); border:2.5px dashed var(--wood-dark); border-radius:14px;
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
+  font:600 13px var(--f-body); color:var(--ink-soft);
+}
+.hub-foot a{color:var(--garden); border-bottom:1.5px solid var(--garden)}
+.hub-foot strong{color:var(--ink); font-family:var(--f-display); font-weight:800}
+
+/* ─── responsive ─── */
+@media (max-width:860px){
+  .wrap{padding:14px 12px 24px; gap:14px}
+  .header-grid{grid-template-columns:1fr; text-align:center; justify-items:center}
+  .mascot-wrap{justify-content:center}
+  .home-grid{grid-template-columns:1fr}
+  .shed-icon{width:96px; height:112px}
+  .brand-txt{font-size:38px}
+}
+@media (max-width:620px){
+  .brand-txt{font-size:32px}
+  .cal-cell{min-height:48px}
+  .cal-cell .mini{height:4px; width:22px; padding:0; border-radius:4px; font-size:0}
+  .cal-cell .mini::before{content:""}
+}
+@media (prefers-reduced-motion:reduce){
+  *, *::before, *::after{animation:none !important; transition:none !important}
+}
+
+/* ─── preview-only badge (so Nadia knows this is the prototype) ─── */
+.prototype-tag{
+  position:fixed; top:8px; right:8px; z-index:20;
+  background:var(--pink); color:#fff;
+  border:2.5px solid var(--wood-dark); border-radius:999px;
+  padding:4px 12px;
+  font:800 11px var(--f-display); letter-spacing:.14em; text-transform:uppercase;
+  box-shadow:0 3px 0 var(--wood-dark);
+}
+
+/* ─── print ─── */
+@media print{
+  body{background:#fff}
+  .scene, .cloud, .test-banner, .prototype-tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TEST BUILD banner, same message as the live Hub -->
+<div class="test-banner" role="status" aria-live="polite">
+  <strong>TEST BUILD</strong> &mdash; not yet approved by Kate. Nothing here is public or final.
+  <span lang="fr"> / <strong>VERSION TEST</strong> &mdash; non approuv&eacute;e par Kate. Rien ici n&rsquo;est public ou final.</span>
+</div>
+
+<!-- Prototype corner tag -->
+<div class="prototype-tag" aria-hidden="true">Design preview</div>
+
+<!-- ───────────────────────── SCENE: fixed watercolour meadow ───────────────────── -->
+<div class="scene" aria-hidden="true">
+<svg viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Reusable mascot symbols -->
+  <defs>
+    <!-- BEE: friendly bumblebee, chunky outlines, pink scarf -->
+    <symbol id="bee" viewBox="0 0 100 100">
+      <!-- wings behind body -->
+      <ellipse cx="38" cy="36" rx="18" ry="14" fill="#FFFFFF" opacity=".85" stroke="#4A3426" stroke-width="2.2"/>
+      <ellipse cx="62" cy="36" rx="18" ry="14" fill="#FFFFFF" opacity=".85" stroke="#4A3426" stroke-width="2.2"/>
+      <!-- body -->
+      <ellipse cx="50" cy="60" rx="30" ry="22" fill="#F4C430" stroke="#4A3426" stroke-width="2.5"/>
+      <!-- stripes -->
+      <path d="M26 56 Q50 46 74 56" stroke="#4A3426" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M26 66 Q50 58 74 66" stroke="#4A3426" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- scarf (section color) -->
+      <path d="M22 78 Q50 68 78 78 L78 86 Q50 76 22 86 Z" fill="#F38DB5" stroke="#4A3426" stroke-width="2"/>
+      <path d="M72 82 L82 94 L74 92 L76 86 Z" fill="#F38DB5" stroke="#4A3426" stroke-width="2"/>
+      <!-- face dots -->
+      <circle cx="42" cy="58" r="2.2" fill="#4A3426"/>
+      <circle cx="58" cy="58" r="2.2" fill="#4A3426"/>
+      <!-- cheeks -->
+      <circle cx="37" cy="64" r="2.4" fill="#F38DB5" opacity=".7"/>
+      <circle cx="63" cy="64" r="2.4" fill="#F38DB5" opacity=".7"/>
+      <!-- smile -->
+      <path d="M44 68 Q50 72 56 68" stroke="#4A3426" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- antennae -->
+      <path d="M44 32 Q42 20 38 14" stroke="#4A3426" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path d="M56 32 Q58 20 62 14" stroke="#4A3426" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="38" cy="14" r="2.5" fill="#4A3426"/>
+      <circle cx="62" cy="14" r="2.5" fill="#4A3426"/>
+    </symbol>
+
+    <!-- LADYBUG: red dome, teal scarf for the gardens section -->
+    <symbol id="ladybug" viewBox="0 0 100 100">
+      <!-- body -->
+      <path d="M50 30 Q82 30 82 62 Q82 80 50 80 Q18 80 18 62 Q18 30 50 30 Z" fill="#D9365F" stroke="#4A3426" stroke-width="2.5"/>
+      <!-- centre line -->
+      <path d="M50 30 L50 78" stroke="#4A3426" stroke-width="2.5"/>
+      <!-- spots -->
+      <circle cx="34" cy="48" r="4.5" fill="#4A3426"/>
+      <circle cx="66" cy="48" r="4.5" fill="#4A3426"/>
+      <circle cx="30" cy="66" r="4.5" fill="#4A3426"/>
+      <circle cx="70" cy="66" r="4.5" fill="#4A3426"/>
+      <!-- head -->
+      <ellipse cx="50" cy="30" rx="16" ry="12" fill="#4A3426"/>
+      <!-- eyes -->
+      <circle cx="44" cy="28" r="2.5" fill="#fff"/>
+      <circle cx="56" cy="28" r="2.5" fill="#fff"/>
+      <circle cx="44" cy="28" r="1" fill="#4A3426"/>
+      <circle cx="56" cy="28" r="1" fill="#4A3426"/>
+      <!-- scarf (garden teal) -->
+      <path d="M22 80 Q50 72 78 80 L78 88 Q50 80 22 88 Z" fill="#238F7B" stroke="#4A3426" stroke-width="2"/>
+      <!-- antennae -->
+      <path d="M44 20 Q42 10 38 6" stroke="#4A3426" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M56 20 Q58 10 62 6" stroke="#4A3426" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="38" cy="6" r="2.2" fill="#4A3426"/>
+      <circle cx="62" cy="6" r="2.2" fill="#4A3426"/>
+    </symbol>
+
+    <!-- GARDEN SHED: replaces the brief's treehouse, same spirit -->
+    <symbol id="shed" viewBox="0 0 160 180">
+      <!-- grass tuft under the shed -->
+      <ellipse cx="80" cy="172" rx="60" ry="8" fill="#5E9E49" opacity=".35"/>
+      <!-- shed base walls (wood plank) -->
+      <rect x="28" y="70" width="104" height="90" fill="#CB955D" stroke="#4A3426" stroke-width="3"/>
+      <path d="M28 85 L132 85 M28 102 L132 102 M28 119 L132 119 M28 136 L132 136 M28 153 L132 153"
+            stroke="#A26E40" stroke-width="1.5"/>
+      <!-- roof (pink gable) -->
+      <path d="M22 72 L80 20 L138 72 Z" fill="#F38DB5" stroke="#4A3426" stroke-width="3" stroke-linejoin="round"/>
+      <!-- roof shingles -->
+      <path d="M38 62 L80 30 L122 62" stroke="#D65A8C" stroke-width="2" fill="none"/>
+      <!-- CGN sign -->
+      <rect x="54" y="42" width="52" height="18" fill="#FFF8EA" stroke="#4A3426" stroke-width="2" rx="3"/>
+      <text x="80" y="56" font-family="Grandstander, sans-serif" font-weight="800" font-size="12"
+            text-anchor="middle" fill="#4A3426">CGN HUB</text>
+      <!-- door -->
+      <rect x="66" y="105" width="28" height="55" fill="#7A4E2A" stroke="#4A3426" stroke-width="2.5" rx="2"/>
+      <circle cx="88" cy="134" r="2" fill="#F4C430"/>
+      <!-- round window -->
+      <circle cx="46" cy="98" r="10" fill="#B9E0F1" stroke="#4A3426" stroke-width="2.5"/>
+      <path d="M36 98 L56 98 M46 88 L46 108" stroke="#4A3426" stroke-width="1.5"/>
+      <!-- flower box under the window -->
+      <rect x="32" y="112" width="28" height="10" fill="#7A4E2A" stroke="#4A3426" stroke-width="2"/>
+      <circle cx="38" cy="108" r="3" fill="#F38DB5"/>
+      <circle cx="46" cy="106" r="3" fill="#FCE6A0"/>
+      <circle cx="54" cy="108" r="3" fill="#9156D2"/>
+      <!-- flag on the roof -->
+      <path d="M80 20 L80 6" stroke="#4A3426" stroke-width="2"/>
+      <path d="M80 8 L96 12 L80 16 Z" fill="#5E9E49" stroke="#4A3426" stroke-width="1.5"/>
+    </symbol>
+
+    <!-- Round-canopy tree -->
+    <symbol id="tree" viewBox="0 0 100 130">
+      <rect x="44" y="70" width="12" height="55" fill="#7A4E2A" stroke="#4A3426" stroke-width="2"/>
+      <circle cx="50" cy="55" r="42" fill="#86C568" stroke="#5E9E49" stroke-width="1.5"/>
+      <circle cx="32" cy="46" r="20" fill="#9ED47A" opacity=".7"/>
+      <circle cx="66" cy="42" r="18" fill="#9ED47A" opacity=".7"/>
+    </symbol>
+
+    <!-- Birch -->
+    <symbol id="birch" viewBox="0 0 40 120">
+      <rect x="16" y="20" width="8" height="100" fill="#FFF8EA" stroke="#4A3426" stroke-width="1.5"/>
+      <path d="M17 32 L23 32 M17 48 L23 48 M17 68 L23 68 M17 88 L23 88" stroke="#4A3426" stroke-width="1.2"/>
+      <ellipse cx="20" cy="16" rx="18" ry="22" fill="#9ED47A" stroke="#5E9E49" stroke-width="1.5"/>
+    </symbol>
+  </defs>
+
+  <!-- Layer 1: far hills -->
+  <path d="M0 340 Q180 300 360 320 T720 310 T1080 320 T1440 310 L1440 500 L0 500 Z" fill="#C3E2A8"/>
+  <!-- rounded bush clusters on far hills -->
+  <g fill="#B5D898">
+    <circle cx="200" cy="312" r="22"/><circle cx="232" cy="318" r="18"/><circle cx="250" cy="312" r="14"/>
+    <circle cx="880" cy="302" r="20"/><circle cx="906" cy="308" r="16"/>
+  </g>
+
+  <!-- Layer 2: middle hills -->
+  <path d="M0 380 Q240 340 480 360 T960 356 T1440 362 L1440 500 L0 500 Z" fill="#A6D888"/>
+
+  <!-- Layer 3: landmarks -->
+  <!-- Pond -->
+  <ellipse cx="420" cy="430" rx="110" ry="22" fill="#5CAEE0" opacity=".88"/>
+  <ellipse cx="420" cy="428" rx="105" ry="18" fill="#7BC7F2" opacity=".6"/>
+  <!-- lily pads -->
+  <ellipse cx="380" cy="432" rx="12" ry="5" fill="#5E9E49"/>
+  <ellipse cx="420" cy="438" rx="14" ry="5" fill="#5E9E49"/>
+  <ellipse cx="458" cy="434" rx="10" ry="4" fill="#5E9E49"/>
+  <!-- lily flower -->
+  <circle cx="420" cy="436" r="3" fill="#FFF8EA"/>
+  <!-- bulrushes -->
+  <g stroke="#4A3426" stroke-width="2">
+    <line x1="340" y1="430" x2="340" y2="402"/>
+    <line x1="500" y1="432" x2="500" y2="404"/>
+  </g>
+  <ellipse cx="340" cy="398" rx="4" ry="9" fill="#7A4E2A"/>
+  <ellipse cx="500" cy="400" rx="4" ry="9" fill="#7A4E2A"/>
+
+  <!-- Trees -->
+  <use href="#tree" x="80"   y="290" width="130" height="170"/>
+  <use href="#tree" x="1120" y="280" width="140" height="180"/>
+  <!-- Birches -->
+  <use href="#birch" x="620" y="320" width="48" height="140"/>
+  <use href="#birch" x="650" y="326" width="42" height="130"/>
+  <use href="#birch" x="684" y="322" width="46" height="138"/>
+
+  <!-- Garden shed (on the middle hill, right side) -->
+  <use href="#shed" x="1020" y="296" width="150" height="170"/>
+
+  <!-- Layer 4: near hill -->
+  <path d="M0 440 Q320 410 640 430 T1280 436 T1440 430 L1440 500 L0 500 Z" fill="#86C568"/>
+
+  <!-- Flowers and butterflies on the near hill -->
+  <g>
+    <!-- pink flowers -->
+    <g fill="#F38DB5" stroke="#4A3426" stroke-width="1.2">
+      <circle cx="140" cy="446" r="4"/>
+      <circle cx="220" cy="454" r="4"/>
+      <circle cx="300" cy="462" r="4"/>
+      <circle cx="580" cy="452" r="4"/>
+      <circle cx="760" cy="458" r="4"/>
+      <circle cx="950" cy="454" r="4"/>
+      <circle cx="1240" cy="462" r="4"/>
+    </g>
+    <!-- yellow flowers -->
+    <g fill="#FCE6A0" stroke="#4A3426" stroke-width="1.2">
+      <circle cx="180" cy="458" r="4"/>
+      <circle cx="400" cy="460" r="4"/>
+      <circle cx="540" cy="464" r="4"/>
+      <circle cx="820" cy="452" r="4"/>
+      <circle cx="1080" cy="458" r="4"/>
+    </g>
+    <!-- purple flowers -->
+    <g fill="#C7A1F1" stroke="#4A3426" stroke-width="1.2">
+      <circle cx="260" cy="470" r="3.5"/>
+      <circle cx="600" cy="472" r="3.5"/>
+      <circle cx="900" cy="470" r="3.5"/>
+      <circle cx="1180" cy="472" r="3.5"/>
+    </g>
+  </g>
+
+  <!-- A butterfly fluttering nearby (decorative) -->
+  <g transform="translate(720, 400)">
+    <ellipse cx="-5" cy="-3" rx="6" ry="4" fill="#F38DB5" stroke="#4A3426" stroke-width="1.5"/>
+    <ellipse cx="5"  cy="-3" rx="6" ry="4" fill="#F38DB5" stroke="#4A3426" stroke-width="1.5"/>
+    <ellipse cx="-5" cy="4"  rx="4" ry="3" fill="#F38DB5" stroke="#4A3426" stroke-width="1.5"/>
+    <ellipse cx="5"  cy="4"  rx="4" ry="3" fill="#F38DB5" stroke="#4A3426" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="1.5" ry="7" fill="#4A3426"/>
+  </g>
+
+</svg>
+</div>
+
+<!-- Clouds (static CSS layers over the scene) -->
+<div class="cloud c1" aria-hidden="true"></div>
+<div class="cloud c2" aria-hidden="true"></div>
+<div class="cloud c3" aria-hidden="true"></div>
+
+<!-- ─────────────────────────────── MAIN WRAP ──────────────────────────────── -->
+<div class="wrap">
+
+  <!-- Header board: shed + title + bunting + mascot + members -->
+  <header class="header-board">
+    <div class="bunting" aria-hidden="true">
+      <span class="flag a"></span><span class="flag b"></span><span class="flag c"></span>
+      <span class="flag d"></span><span class="flag e"></span><span class="flag f"></span>
+      <span class="flag a"></span><span class="flag b"></span><span class="flag c"></span>
+      <span class="flag d"></span><span class="flag e"></span><span class="flag f"></span>
+    </div>
+
+    <div class="header-grid">
+      <!-- Left: shed icon -->
+      <svg class="shed-icon" aria-hidden="true"><use href="#shed"/></svg>
+
+      <!-- Middle: brand title -->
+      <div>
+        <div class="brand-txt">CGN <span class="pink">Hub</span></div>
+        <div class="brand-sub">For the Community Gardening Network</div>
+        <div class="brand-sub brand-sub-fr" lang="fr">pour le Réseau de jardins communautaires</div>
+      </div>
+
+      <!-- Right: bee mascot + speech bubble -->
+      <div class="mascot-wrap">
+        <div class="bubble">Good evening! Ready to grow?</div>
+        <svg class="bee-icon" aria-label="bee mascot"><use href="#bee"/></svg>
+      </div>
+    </div>
+
+    <!-- Member pills (team) -->
+    <div class="member-pills" aria-label="team">
+      <span class="pill">
+        <span class="pill-avatar" style="background:var(--garden)">N</span>
+        Nadia <span class="pill-role">· Engagement</span>
+      </span>
+      <span class="pill">
+        <span class="pill-avatar" style="background:var(--comm)">K</span>
+        Kate <span class="pill-role">· Director</span>
+      </span>
+      <span class="pill">
+        <span class="pill-avatar" style="background:var(--res)">M</span>
+        Moe <span class="pill-role">· ED</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- Chalkboard HUD: counts and a "season progress" XP bar -->
+  <section class="hud" aria-label="CGN at a glance">
+    <div class="hud-cell">
+      <div class="hud-lbl">Workshops so far</div>
+      <div class="hud-val">6</div>
+    </div>
+    <div class="hud-cell">
+      <div class="hud-lbl">Events this season</div>
+      <div class="hud-val">12</div>
+    </div>
+    <div class="hud-cell">
+      <div class="hud-lbl">Resources</div>
+      <div class="hud-val">29</div>
+    </div>
+    <div class="hud-cell">
+      <div class="hud-lbl">Season progress</div>
+      <div class="hud-val">72<span class="unit">%</span></div>
+      <div class="xpbar" aria-label="season progress 72%"><b style="width:72%"></b></div>
+    </div>
+  </section>
+
+  <!-- Wood-plank tabs -->
+  <nav class="tabs" role="tablist" aria-label="sections">
+    <button class="tab" role="tab" aria-selected="true"><span class="emoji">🏡</span> Home</button>
+    <button class="tab" role="tab" aria-selected="false"><span class="emoji">🌱</span> Gardens</button>
+    <button class="tab" role="tab" aria-selected="false"><span class="emoji">📅</span> Workshops</button>
+    <button class="tab" role="tab" aria-selected="false"><span class="emoji">📚</span> Resources</button>
+    <button class="tab" role="tab" aria-selected="false"><span class="emoji">❓</span> FAQs</button>
+    <button class="tab" role="tab" aria-selected="false"><span class="emoji">💌</span> Contact</button>
+  </nav>
+
+  <!-- Today / Home panel -->
+  <section class="panel" style="--cc:var(--home); --bgc:var(--home-bg)">
+    <div class="panel-head">
+      <span class="lbl">Today</span>
+      <h2>What&rsquo;s on at the CGN Hub</h2>
+    </div>
+
+    <div class="home-grid">
+      <!-- Left column: today + next tasks -->
+      <div class="col-left">
+        <h3 class="block-label">Next up</h3>
+        <div class="task next" style="--cc:var(--ws); --bgc:var(--ws-bg)">
+          <input class="check" type="checkbox" aria-label="attend workshop">
+          <div class="count">2<span class="unit">days</span></div>
+          <div>
+            <strong>Dry Fermentation workshop <span class="chip" style="--cc:var(--due)">full · waitlist</span></strong>
+            <div class="meta">Sat, Nov 14 &middot; 1:00&ndash;2:30 PM &middot; Barn catering kitchen (2391 P&eacute;pin Court) &middot; <em>Free &mdash; City of Ottawa</em></div>
+          </div>
+        </div>
+
+        <h3 class="block-label">Your next tasks</h3>
+        <div class="task" style="--cc:var(--comm); --bgc:var(--comm-bg)">
+          <input class="check" type="checkbox" aria-label="send slides">
+          <div class="count">3<span class="unit">days</span></div>
+          <div>
+            <strong>Send W1&ndash;W4 slides follow-up</strong>
+            <div class="meta">Draft is in <code>docs/newsletter/slides_followup.html</code> &middot; Kate to approve wording</div>
+          </div>
+        </div>
+        <div class="task" style="--cc:var(--res); --bgc:var(--res-bg)">
+          <input class="check" type="checkbox" aria-label="pick article">
+          <div class="count">5<span class="unit">days</span></div>
+          <div>
+            <strong>Pick the first Article of the Week</strong>
+            <div class="meta">Seasonal: seed saving, next-garden planning, winter sowing</div>
+          </div>
+        </div>
+        <div class="task" style="--cc:var(--garden); --bgc:var(--garden-bg)">
+          <input class="check" type="checkbox" aria-label="drive folder">
+          <div class="count">7<span class="unit">days</span></div>
+          <div>
+            <strong>Create the &ldquo;CGN Hub &mdash; Public Slides&rdquo; Drive folder</strong>
+            <div class="meta">Needs Kate&rsquo;s OK; then swap the local PDFs on the Slides page for Drive links</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: countdowns + quest progress -->
+      <div class="col-right">
+        <h3 class="block-label">Upcoming bosses 🐝</h3>
+        <div class="dl soon">
+          <div class="count">2</div>
+          <div><strong>Dry Fermentation</strong><div class="meta">in-person, waitlist open</div></div>
+        </div>
+        <div class="dl">
+          <div class="count">3</div>
+          <div><strong>Mer Bleue Bog guided tour</strong><div class="meta">OWSL &middot; Fri Nov 14</div></div>
+        </div>
+        <div class="dl">
+          <div class="count">7</div>
+          <div><strong>Pollinator garden planning</strong><div class="meta">Elmvale Acres library</div></div>
+        </div>
+        <div class="dl">
+          <div class="count">10</div>
+          <div><strong>Native seed giveaway &mdash; Hintonburg</strong><div class="meta">OWSL</div></div>
+        </div>
+
+        <h3 class="block-label" style="margin-top:14px">Quests</h3>
+        <div style="--cc:var(--ws)">
+          <div class="meta" style="font-weight:700; margin-bottom:4px">Share slides with 4 past workshops &middot; <span style="font-family:var(--f-hud); font-size:16px">3/4</span></div>
+          <div class="bar"><b style="width:75%"></b></div>
+        </div>
+        <div style="--cc:var(--comm); margin-top:10px">
+          <div class="meta" style="font-weight:700; margin-bottom:4px">Fill the calendar with 20 events &middot; <span style="font-family:var(--f-hud); font-size:16px">12/20</span></div>
+          <div class="bar"><b style="width:60%"></b></div>
+        </div>
+        <div style="--cc:var(--garden); margin-top:10px">
+          <div class="meta" style="font-weight:700; margin-bottom:4px">Launch 3 coordinator tools &middot; <span style="font-family:var(--f-hud); font-size:16px">0/3</span></div>
+          <div class="bar"><b style="width:0%"></b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where to start (quick-start doc tiles, section-coloured) -->
+  <section class="panel">
+    <div class="panel-head">
+      <span class="lbl" style="--cc:var(--garden)">Start here</span>
+      <h2>Where would you like to start?</h2>
+    </div>
+    <div class="doc-grid">
+      <a class="doc-item" style="--cc:var(--garden); --bgc:var(--garden-bg)" href="#">
+        <span class="d-ico" role="img" aria-label="pin">📍</span>
+        <div>
+          <strong>Find a Community Garden</strong>
+          <span class="d-note">Look for a plot or a donation garden near you.</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--garden); --bgc:var(--garden-bg)" href="#">
+        <span class="d-ico" role="img" aria-label="tractor">🚜</span>
+        <div>
+          <strong>Start a Community Garden</strong>
+          <span class="d-note">A seven-step path, with support at every stage.</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--garden); --bgc:var(--garden-bg)" href="#">
+        <span class="d-ico" role="img" aria-label="coordinator">🧑‍🌾</span>
+        <div>
+          <strong>For Coordinators</strong>
+          <span class="d-note">Tools, support and a place to learn from each other.</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--ws); --bgc:var(--ws-bg)" href="#">
+        <span class="d-ico" role="img" aria-label="workshops">📅</span>
+        <div>
+          <strong>CGN Workshops</strong>
+          <span class="d-note">Upcoming &middot; Past &middot; Slides.</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--res); --bgc:var(--res-bg)" href="#">
+        <span class="d-ico" role="img" aria-label="books">📚</span>
+        <div>
+          <strong>CGN Resources Portal</strong>
+          <span class="d-note">Guides, templates and links for your garden.</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Mini calendar (overview of the month) -->
+  <section class="panel" style="--cc:var(--comm); --bgc:var(--comm-bg)">
+    <div class="panel-head">
+      <span class="lbl">Calendar</span>
+      <h2>November 2026</h2>
+    </div>
+
+    <div class="cal-head">
+      <div class="m">November 2026</div>
+      <div class="cal-nav" aria-label="change month">
+        <button aria-label="previous month">&lsaquo;</button>
+        <button>Today</button>
+        <button aria-label="next month">&rsaquo;</button>
+      </div>
+    </div>
+
+    <div class="cal-grid" role="grid" aria-label="November 2026">
+      <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div>
+      <div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div>
+      <div class="cal-dow">Sat</div>
+
+      <div class="cal-cell"><span class="n">1</span></div>
+      <div class="cal-cell"><span class="n">2</span></div>
+      <div class="cal-cell"><span class="n">3</span></div>
+      <div class="cal-cell"><span class="n">4</span></div>
+      <div class="cal-cell"><span class="n">5</span></div>
+      <div class="cal-cell"><span class="n">6</span></div>
+      <div class="cal-cell"><span class="n">7</span></div>
+
+      <div class="cal-cell"><span class="n">8</span></div>
+      <div class="cal-cell"><span class="n">9</span></div>
+      <div class="cal-cell"><span class="n">10</span></div>
+      <div class="cal-cell"><span class="n">11</span></div>
+      <div class="cal-cell today"><span class="n">12</span></div>
+      <div class="cal-cell"><span class="n">13</span></div>
+      <div class="cal-cell">
+        <span class="n">14</span>
+        <span class="mini" style="--cc:var(--ws)">Dry Ferment.</span>
+        <span class="mini" style="--cc:var(--comm)">Mer Bleue</span>
+        <span class="mini" style="--cc:var(--garden)">Seed Orl&eacute;ans</span>
+      </div>
+
+      <div class="cal-cell"><span class="n">15</span></div>
+      <div class="cal-cell"><span class="n">16</span></div>
+      <div class="cal-cell"><span class="n">17</span></div>
+      <div class="cal-cell">
+        <span class="n">18</span>
+        <span class="mini" style="--cc:var(--ws)">Pollinator</span>
+      </div>
+      <div class="cal-cell"><span class="n">19</span></div>
+      <div class="cal-cell"><span class="n">20</span></div>
+      <div class="cal-cell">
+        <span class="n">21</span>
+        <span class="mini" style="--cc:var(--garden)">Seed Hintonburg</span>
+      </div>
+
+      <div class="cal-cell"><span class="n">22</span></div>
+      <div class="cal-cell">
+        <span class="n">23</span>
+        <span class="mini" style="--cc:var(--ws)">Winter sow talk</span>
+      </div>
+      <div class="cal-cell"><span class="n">24</span></div>
+      <div class="cal-cell"><span class="n">25</span></div>
+      <div class="cal-cell"><span class="n">26</span></div>
+      <div class="cal-cell"><span class="n">27</span></div>
+      <div class="cal-cell">
+        <span class="n">28</span>
+        <span class="mini" style="--cc:var(--garden)">Seed Touraine</span>
+      </div>
+
+      <div class="cal-cell"><span class="n">29</span></div>
+      <div class="cal-cell"><span class="n">30</span></div>
+      <div class="cal-cell out"><span class="n">1</span></div>
+      <div class="cal-cell out">
+        <span class="n">2</span>
+        <span class="mini" style="--cc:var(--comm)">Doors Open</span>
+      </div>
+      <div class="cal-cell out"><span class="n">3</span></div>
+      <div class="cal-cell out"><span class="n">4</span></div>
+      <div class="cal-cell out"><span class="n">5</span></div>
+    </div>
+  </section>
+
+  <!-- Side-by-side: Visit the Farm + Follow -->
+  <section class="panel" style="--cc:var(--contact); --bgc:var(--contact-bg)">
+    <div class="panel-head">
+      <span class="lbl">Keep in touch</span>
+      <h2>Visit &middot; Follow &middot; Write to us</h2>
+    </div>
+    <div class="doc-grid" style="grid-template-columns:1fr 1fr">
+      <a class="doc-item" style="--cc:var(--home); --bgc:var(--home-bg)" href="https://justfood.ca/just-food-farm/farmrules/" target="_blank" rel="noopener">
+        <span class="d-ico" role="img" aria-label="shed">🚜</span>
+        <div>
+          <strong>Visit the Just Food Community Farm</strong>
+          <span class="d-note">2391 P&eacute;pin Court &middot; #25 bus, bike paths, free parking</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--ws); --bgc:var(--ws-bg)" href="https://www.instagram.com/justfoodottawa/" target="_blank" rel="noopener">
+        <span class="d-ico" role="img" aria-label="instagram">📸</span>
+        <div>
+          <strong>Follow the CGN</strong>
+          <span class="d-note">Instagram, Facebook, newsletter</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--contact); --bgc:var(--contact-bg)" href="mailto:communitygardening@justfood.ca">
+        <span class="d-ico" role="img" aria-label="mail">💌</span>
+        <div>
+          <strong>Contact the CGN</strong>
+          <span class="d-note">communitygardening@justfood.ca &middot; 613-824-7771</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="doc-item" style="--cc:var(--garden); --bgc:var(--garden-bg)" href="https://mailchi.mp/justfood/newsletters" target="_blank" rel="noopener">
+        <span class="d-ico" role="img" aria-label="newsletter">📬</span>
+        <div>
+          <strong>Just Food newsletter</strong>
+          <span class="d-note">Monthly news from Just Food Ottawa</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="hub-foot">
+    <div><strong>CGN Hub</strong> &middot; for the Community Gardening Network</div>
+    <div>
+      <a href="mailto:communitygardening@justfood.ca">communitygardening@justfood.ca</a>
+      &middot; 613-824-7771
+      &middot; <a href="https://justfood.ca/community-gardening-network/" target="_blank" rel="noopener">Just Food &rarr;</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Light interaction: pick a tab, show a heart burst on check.
+  document.querySelectorAll('.tab[role="tab"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab[role="tab"]').forEach(b => b.setAttribute('aria-selected', 'false'));
+      btn.setAttribute('aria-selected', 'true');
+    });
+  });
+  // Heart burst (small, respects reduced-motion)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.check').forEach(c => {
+      c.addEventListener('change', e => {
+        if (!e.target.checked) return;
+        const r = e.target.getBoundingClientRect();
+        for (let i = 0; i < 6; i++) {
+          const s = document.createElement('span');
+          s.textContent = '♥';
+          s.style.cssText = `position:fixed; left:${r.left + 10}px; top:${r.top}px; color:#F38DB5; font-size:14px; pointer-events:none; z-index:50; transition:all 700ms ease-out`;
+          document.body.appendChild(s);
+          requestAnimationFrame(() => {
+            s.style.transform = `translate(${(Math.random() * 60) - 30}px, -${60 + Math.random() * 30}px) rotate(${(Math.random() * 60) - 30}deg)`;
+            s.style.opacity = '0';
+          });
+          setTimeout(() => s.remove(), 760);
+        }
+      });
+    });
+  }
+</script>
+</body>
+</html>
