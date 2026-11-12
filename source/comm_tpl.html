@@ -116,16 +116,22 @@ function head(title,sub){return `<h1 class="page-title">${title}</h1><p class="p
 
 /* ── Calendar ── */
 let calM=new Date(); calM=new Date(calM.getFullYear(),calM.getMonth(),1);
+const CAL_CATS = ['Workshop','Seeds','Market','Community','Social'];
+let calFilter = 'All'; // 'All' or one of CAL_CATS; workshops are always shown.
 function allEvents(){
-  const ev=(HUB.events||[]).map((e,i)=>Object.assign({id:'e'+i,type:'event'},e));
-  HUB.workshops.forEach(w=>ev.push({id:'w'+w.id,type:'workshop',date:w.date,title:w.title,time:w.when,where:'',who:w.who,target:w.id}));
+  const ev=(HUB.events||[]).map((e,i)=>Object.assign({id:'e'+i,type:e.type||'event'},e));
+  HUB.workshops.forEach(w=>ev.push({id:'w'+w.id,type:'workshop',category:'Workshop',date:w.date,title:w.title,time:w.when,where:'',who:w.who,host:w.who,target:w.id,url:w.register||''}));
   return ev.sort((a,b)=>a.date.localeCompare(b.date));
 }
+function filteredEvents(){ return allEvents().filter(e=>calFilter==='All'||e.category===calFilter||(calFilter==='Workshop'&&!e.category&&e.type==='workshop')); }
+function setCalFilter(c){ calFilter=c; document.getElementById('calBox').innerHTML=calHtml(); }
 function calMove(d){const n=new Date();calM=d===0?new Date(n.getFullYear(),n.getMonth(),1):new Date(calM.getFullYear(),calM.getMonth()+d,1);document.getElementById('calBox').innerHTML=calHtml()}
 function isoD(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0')}
+function catLabel(c){ const fr=lang==='fr'; const m={All:fr?'Tous':'All',Workshop:fr?'Ateliers':'Workshops',Seeds:fr?'Semences':'Seeds',Market:fr?'Marchés':'Markets',Community:fr?'Communauté':'Community',Social:fr?'Social':'Social'}; return m[c]||c; }
 function calHtml(){
   const y=calM.getFullYear(),m=calM.getMonth(),first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate();
-  const ev=allEvents(),tdy=isoD(new Date()),loc=lang==='fr'?'fr-CA':'en-CA';
+  const ev=filteredEvents(),tdy=isoD(new Date()),loc=lang==='fr'?'fr-CA':'en-CA';
+  const filter=`<div class="cal-filter">${['All',...CAL_CATS].map(c=>`<button class="cal-chip${calFilter===c?' active':''} cat-${c.toLowerCase()}" onclick="setCalFilter('${c}')">${catLabel(c)}</button>`).join('')}</div>`;
   let g=''; for(let i=0;i<7;i++) g+=`<div class="mc-dow">${new Date(2024,0,7+i).toLocaleDateString(loc,{weekday:'short'})}</div>`;
   const cells=Math.ceil((first+dim)/7)*7;
   for(let c=0;c<cells;c++){
@@ -135,16 +141,19 @@ function calHtml(){
   }
   const mine=ev.filter(e=>e.date.slice(0,7)===y+'-'+String(m+1).padStart(2,'0'));
   const fmt=e=>new Date(e.date+'T12:00:00').toLocaleDateString(loc,{weekday:'short',month:'short',day:'numeric'});
-  return `<div class="mc-head"><h4>${calM.toLocaleDateString(loc,{month:'long',year:'numeric'})}</h4><button class="tb-btn" onclick="calMove(-1)">‹</button><button class="tb-btn" onclick="calMove(0)">${t('today')}</button><button class="tb-btn" onclick="calMove(1)">›</button></div>
+  return `${filter}<div class="mc-head"><h4>${calM.toLocaleDateString(loc,{month:'long',year:'numeric'})}</h4><button class="tb-btn" onclick="calMove(-1)">‹</button><button class="tb-btn" onclick="calMove(0)">${t('today')}</button><button class="tb-btn" onclick="calMove(1)">›</button></div>
    <div class="mc-grid">${g}</div><div class="mc-detail" id="calDetail"></div>
    <h4 class="block-label" style="margin-top:16px">${t('thismonth')}</h4>
-   <ul class="mc-agenda" style="padding:0">${mine.length?mine.map(e=>`<li onclick="calOpen('${e.id}')"><strong>${fmt(e)}</strong> — ${esc(L(e,'title'))}${e.time?` <span style="color:var(--ink-soft)">· ${esc(e.time)}</span>`:''}</li>`).join(''):`<li style="cursor:default;font-style:italic">${t('nothing')}</li>`}</ul>`;
+   <ul class="mc-agenda" style="padding:0">${mine.length?mine.map(e=>`<li onclick="calOpen('${e.id}')"><strong>${fmt(e)}</strong> — ${esc(L(e,'title'))}${e.category?` <span class="cat-dot cat-${e.category.toLowerCase()}" title="${esc(catLabel(e.category))}"></span>`:''}${e.time?` <span style="color:var(--ink-soft)">· ${esc(e.time)}</span>`:''}</li>`).join(''):`<li style="cursor:default;font-style:italic">${t('nothing')}</li>`}</ul>`;
 }
 function calOpen(id){
   const e=allEvents().find(x=>x.id===id); if(!e) return;
   const box=document.getElementById('calDetail'); if(!box) return;
-  const link=e.target?`<a class="send-btn" href="#" onclick="go('ws-upcoming');return false">${t('open')} →</a>`:(e.url?`<a class="send-btn" href="${esc(e.url)}" target="_blank">${t('open')} ↗</a>`:'');
-  box.innerHTML=`<strong style="font-size:15px">${esc(L(e,'title'))}</strong><br>${e.time?esc(e.time)+'<br>':''}${e.who?esc(e.who)+'<br>':''}${e.where?t('where')+': '+esc(e.where)+'<br>':''}<div style="margin-top:8px">${link}</div>`;
+  const fr=lang==='fr';
+  const link=e.target?`<a class="send-btn" href="#" onclick="go('ws-upcoming');return false">${t('open')} →</a>`:(e.url?`<a class="send-btn" href="${esc(e.url)}" target="_blank" onclick="track('view','event: '+${JSON.stringify(e.title)},'calendar')">${fr?'Plus d’info':'More info'} ↗</a>`:'');
+  const hostLine=e.host?`<div style="margin-top:4px;color:var(--ink-soft);font-size:13px">${fr?'Organisé par':'Hosted by'}: ${esc(e.host)}</div>`:'';
+  const catBadge=e.category?`<span class="cat-badge cat-${e.category.toLowerCase()}">${esc(catLabel(e.category))}</span>`:'';
+  box.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px;align-items:start"><strong style="font-size:15px">${esc(L(e,'title'))}</strong>${catBadge}</div>${e.time?'<div>'+esc(e.time)+'</div>':''}${e.where?'<div>'+t('where')+': '+esc(e.where)+'</div>':''}${hostLine}<div style="margin-top:8px">${link}</div>`;
   box.style.display='block'; track('view','calendar: '+e.title,'calendar');
 }
 

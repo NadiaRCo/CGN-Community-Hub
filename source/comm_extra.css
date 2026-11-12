@@ -35,6 +35,23 @@
 /* No-poster placeholder for workshops without an image (sprout glyph on a cream block). */
 .poster-noimg { background: var(--cream); border-bottom: 2.5px dashed var(--ink); aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; font-size: 48px; }
 
+/* Calendar category filter + per-category event colors. */
+.cal-filter { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.cal-chip { font: 700 11.5px 'Nunito',sans-serif; text-transform: uppercase; letter-spacing: .06em; padding: 5px 10px; border: 2px solid var(--ink); border-radius: 999px; background: #fff; cursor: pointer; }
+.cal-chip.active { background: var(--jf-green); color: #fff; }
+.mc-ev.workshop { background: var(--sky-pale); }
+.mc-ev.seeds { background: #D6F0C8; }
+.mc-ev.market { background: var(--sun); }
+.mc-ev.community { background: var(--grape-pale); }
+.mc-ev.social { background: var(--pink); }
+.cat-badge { font: 700 10.5px 'Nunito',sans-serif; text-transform: uppercase; letter-spacing: .06em; padding: 2px 8px; border: 1.5px solid var(--ink); border-radius: 999px; background: #fff; white-space: nowrap; }
+.cat-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 2px 0 4px; vertical-align: middle; border: 1.5px solid var(--ink); }
+.cat-workshop { background: var(--sky-pale); }
+.cat-seeds { background: #D6F0C8; }
+.cat-market { background: var(--sun); }
+.cat-community { background: var(--grape-pale); }
+.cat-social { background: var(--pink); }
+
 /* 5. Tool cards on the For Coordinators page: icon support + subtle status accents. */
 .tool-card .tool-ico { font-size: 28px; line-height: 1; margin: 2px 0 8px; }
 .tool-card.status-draft---in-review .pc-badge, .tool-card.status-draft-in-review .pc-badge { background: var(--sky-pale); border-color: var(--pond); color: var(--pond); }

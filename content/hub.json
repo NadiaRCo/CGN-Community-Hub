@@ -86,5 +86,138 @@
     }
   },
   "articles": [],
-  "events": []
+  "events": [
+    {
+      "date": "2026-11-14",
+      "time": "11:00 AM",
+      "title": "Mer Bleue Bog Guided Tour",
+      "where": "Venue TODO (not listed on source)",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Community",
+      "type": "event",
+      "url": "https://gardeningcalendar.ca/event/mer-bleue-bog-guided-tour/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "2:30 PM",
+      "title": "Native seed giveaway — Orléans",
+      "where": "Venue TODO (not listed on source)",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Seeds",
+      "type": "seeds",
+      "url": "https://gardeningcalendar.ca/event/native-seed-giveaway-orleans/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-11-18",
+      "time": "7:00 PM",
+      "title": "Planning your pollinator & habitat garden",
+      "where": "Ottawa Public Library — Elmvale Acres branch, Meeting Room",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Workshop",
+      "type": "workshop",
+      "url": "https://gardeningcalendar.ca/event/planning-your-pollinator-habitat-garden/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-11-21",
+      "time": "2:00 PM",
+      "title": "Native seed giveaway — Hintonburg",
+      "where": "Venue TODO (not listed on source)",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Seeds",
+      "type": "seeds",
+      "url": "https://gardeningcalendar.ca/event/native-seed-giveaway-hintonburg/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-11-23",
+      "time": "8:30 PM",
+      "title": "Presentation: How to winter sow",
+      "where": "Venue TODO — check source",
+      "host": "Gatineau Valley Gardeners / Les Jardiniers des Collines (presenter: OWSL founder)",
+      "category": "Workshop",
+      "type": "workshop",
+      "url": "https://gardeningcalendar.ca/event/presentation-how-to-winter-sow-2/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-11-28",
+      "time": "2:00 PM",
+      "title": "Native seed giveaway — Touraine, Gatineau",
+      "where": "Centre communautaire Riviera, 12 rue de Picardie, Gatineau",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Seeds",
+      "type": "seeds",
+      "url": "https://gardeningcalendar.ca/event/native-seed-giveaway-touraine-district-gatineau/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-12-02",
+      "time": "8:00 PM",
+      "title": "Doors Open series: Cities for pollinators (virtual)",
+      "where": "Online",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Community",
+      "type": "event",
+      "url": "https://gardeningcalendar.ca/event/doors-open-series-cities-for-pollinators-exploring-how-characteristics-of-gardens-and-their-neighborhoods-affect-insect-communities/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2026-12-13",
+      "time": "2:00 PM",
+      "title": "Native seed giveaway — Alta Vista",
+      "where": "Venue TODO (not listed on source)",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Seeds",
+      "type": "seeds",
+      "url": "https://gardeningcalendar.ca/event/native-seed-giveaway-alta-vista/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2027-01-20",
+      "time": "7:00 PM",
+      "title": "Winter seed sowing workshop",
+      "where": "Ottawa Public Library — Elmvale Acres branch, Meeting Room",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Workshop",
+      "type": "workshop",
+      "url": "https://gardeningcalendar.ca/event/winter-seed-sowing-workshop-for-your-pollinator-wildlife-garden/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2027-02-20",
+      "time": "10:00 AM — 3:00 PM",
+      "title": "Seedy Saturday Ottawa West",
+      "where": "Ron Kolbus Centre, 102 Greenview Ave, Ottawa K2B 8J8 — admission & parking free",
+      "host": "Just Food, Seeds of Diversity & partners",
+      "category": "Seeds",
+      "type": "seeds",
+      "url": "https://justfood.ca/2022/02/22/seedysaturdayottawa",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2027-04-21",
+      "time": "6:00 PM",
+      "title": "Spring gently into gardening",
+      "where": "Ottawa Public Library — Elmvale Acres branch, Meeting Room",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Workshop",
+      "type": "workshop",
+      "url": "https://gardeningcalendar.ca/event/spring-gently-into-gardening/",
+      "added": "2026-11-11"
+    },
+    {
+      "date": "2027-09-22",
+      "time": "6:00 PM",
+      "title": "Harvesting & storing your native plant seeds",
+      "where": "Ottawa Public Library — Elmvale Acres branch, Meeting Room",
+      "host": "Ottawa Wildflower Seed Library",
+      "category": "Workshop",
+      "type": "workshop",
+      "url": "https://gardeningcalendar.ca/event/harvesting-and-storing-your-native-plant-seeds/",
+      "added": "2026-11-11"
+    }
+  ]
 }
