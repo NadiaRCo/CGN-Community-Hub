@@ -253,5 +253,299 @@
       "url": "https://gardeningcalendar.ca/event/harvesting-and-storing-your-native-plant-seeds/",
       "added": "2026-11-11"
     }
-  ]
+  ],
+  "almanac": {
+    "source_note": {
+      "en": "Garden jobs adapted from the CGN Garden Guide (2015).",
+      "fr": "Travaux adaptés du Guide du jardinier du RJC (2015)."
+    },
+    "frost": {
+      "en": "Typical last spring frost in Ottawa: about May 6–13. Typical first fall frost: early October. These are averages — always check the forecast.",
+      "fr": "Dernier gel printanier typique à Ottawa : vers le 6 au 13 mai. Premier gel d’automne typique : début octobre. Ce sont des moyennes — consultez toujours les prévisions."
+    },
+    "months": {
+      "1": {
+        "jobs": {
+          "en": [
+            "Plan your garden and order your seeds.",
+            "Go to a seed swap — Seedy Saturday is a good place to start.",
+            "Check your stored vegetables regularly and remove any that are starting to spoil."
+          ],
+          "fr": [
+            "Planifiez votre jardin et commandez vos semences.",
+            "Participez à un échange de semences — Seedy Saturday est un bon point de départ.",
+            "Vérifiez régulièrement vos légumes entreposés et retirez ceux qui commencent à se gâter."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Potatoes, turnips, beets, carrots, onions, garlic, pumpkin and winter squash keep best: cool, dark and not too damp."
+          ],
+          "fr": [
+            "Pommes de terre, navets, betteraves, carottes, oignons, ail, citrouilles et courges d’hiver se conservent le mieux : au frais, à l’obscurité et pas trop à l’humidité."
+          ]
+        }
+      },
+      "2": {
+        "jobs": {
+          "en": [
+            "Finish your garden plan: what goes where, and which plants grow well side by side.",
+            "Order or swap seeds if you haven’t yet.",
+            "Gather pots and soil: seed starting begins next month."
+          ],
+          "fr": [
+            "Terminez votre plan de jardin : quoi planter où, et quelles plantes poussent bien côte à côte.",
+            "Commandez ou échangez vos semences si ce n’est pas déjà fait.",
+            "Rassemblez pots et terreau : les semis commencent le mois prochain."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Peppers need about 8 weeks indoors, and cabbages 6–8 weeks, before the last frost. Count back from mid-May."
+          ],
+          "fr": [
+            "Les poivrons ont besoin d’environ 8 semaines à l’intérieur, et les choux de 6 à 8 semaines, avant le dernier gel. Comptez à rebours à partir de la mi-mai."
+          ]
+        }
+      },
+      "3": {
+        "jobs": {
+          "en": [
+            "Start slow crops indoors: peppers about 8 weeks, and cabbages 6–8 weeks, before the last frost.",
+            "Start tomatoes, eggplant and broccoli indoors too.",
+            "Missing some seeds? Try a seed swap or a seed library."
+          ],
+          "fr": [
+            "Semez à l’intérieur les cultures lentes : poivrons environ 8 semaines, et choux 6 à 8 semaines, avant le dernier gel.",
+            "Semez aussi à l’intérieur les tomates, les aubergines et le brocoli.",
+            "Il vous manque des semences? Essayez un échange ou une bibliothèque de semences."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Started indoors this month: peppers, cabbage, broccoli, eggplant and tomatoes."
+          ],
+          "fr": [
+            "À semer à l’intérieur ce mois-ci : poivrons, choux, brocoli, aubergines et tomates."
+          ]
+        }
+      },
+      "4": {
+        "jobs": {
+          "en": [
+            "When the ground is warm and dry enough, dig your garden 8–10 inches deep and break up the clumps.",
+            "Dig in compost before you plant.",
+            "Sow hardy crops outdoors a few weeks before the last frost."
+          ],
+          "fr": [
+            "Quand le sol est assez chaud et sec, bêchez le jardin sur 20 à 25 cm de profondeur et brisez les mottes.",
+            "Incorporez du compost avant de planter.",
+            "Semez les cultures rustiques à l’extérieur quelques semaines avant le dernier gel."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Spinach: 4–5 weeks before the last frost. Garlic: 4 weeks before.",
+            "Peas and radishes: 3 weeks before. Potatoes: 3–4 weeks before.",
+            "Cabbage seedlings can go out up to 3 weeks before the last frost."
+          ],
+          "fr": [
+            "Épinards : 4 à 5 semaines avant le dernier gel. Ail : 4 semaines avant.",
+            "Pois et radis : 3 semaines avant. Pommes de terre : 3 à 4 semaines avant.",
+            "Les plants de chou peuvent sortir jusqu’à 3 semaines avant le dernier gel."
+          ]
+        }
+      },
+      "5": {
+        "jobs": {
+          "en": [
+            "Watch the forecast: Ottawa’s last frost usually comes around mid-May.",
+            "After the last frost, sow beans, corn, cucumbers, lettuce and onions.",
+            "Move tomato, pepper and eggplant seedlings outside once the frost risk has passed."
+          ],
+          "fr": [
+            "Surveillez les prévisions : le dernier gel à Ottawa survient habituellement vers la mi-mai.",
+            "Après le dernier gel, semez haricots, maïs, concombres, laitue et oignons.",
+            "Sortez les plants de tomates, de poivrons et d’aubergines une fois le risque de gel passé."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Carrots do best planted in late May or mid-June.",
+            "Sow a second crop of peas two weeks after the first for a longer harvest."
+          ],
+          "fr": [
+            "Les carottes réussissent mieux semées à la fin mai ou à la mi-juin.",
+            "Semez une deuxième culture de pois deux semaines après la première pour prolonger la récolte."
+          ]
+        }
+      },
+      "6": {
+        "jobs": {
+          "en": [
+            "Once the soil has warmed up, spread compost as mulch to save water.",
+            "Water, weed and keep sowing.",
+            "Sow lettuce every 4 weeks and radishes every 3–4 weeks for a steady harvest."
+          ],
+          "fr": [
+            "Une fois le sol réchauffé, étendez du compost comme paillis pour économiser l’eau.",
+            "Arrosez, désherbez et continuez à semer.",
+            "Semez de la laitue toutes les 4 semaines et des radis toutes les 3 à 4 semaines pour une récolte continue."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Mid-June: sow cabbage and carrots for a fall harvest.",
+            "Radishes are ready in about 4 weeks; lettuce in 4–6."
+          ],
+          "fr": [
+            "Mi-juin : semez choux et carottes pour une récolte d’automne.",
+            "Les radis sont prêts en 4 semaines environ; la laitue en 4 à 6."
+          ]
+        }
+      },
+      "7": {
+        "jobs": {
+          "en": [
+            "Water, mulch, weed and harvest.",
+            "Give lettuce and peppers some shade in the hottest weather.",
+            "Share your extra harvest through Plant-a-Row, Share-a-Row."
+          ],
+          "fr": [
+            "Arrosez, paillez, désherbez et récoltez.",
+            "Donnez un peu d’ombre à la laitue et aux poivrons par grande chaleur.",
+            "Partagez vos surplus avec Plantez une rangée, partagez une rangée."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Cucumbers are ready about 9 weeks after planting; peas and carrots about 10.",
+            "Peppers may drop their flowers if they get too hot."
+          ],
+          "fr": [
+            "Les concombres sont prêts environ 9 semaines après la plantation; les pois et les carottes, environ 10.",
+            "Les poivrons peuvent perdre leurs fleurs s’il fait trop chaud."
+          ]
+        }
+      },
+      "8": {
+        "jobs": {
+          "en": [
+            "Harvest often, and preserve what you can’t eat fresh: freeze, dry or can it.",
+            "Save seeds: take them out of the fruit or pod, wash them, and dry them on a sunny windowsill.",
+            "Share your extra harvest through Plant-a-Row, Share-a-Row."
+          ],
+          "fr": [
+            "Récoltez souvent et conservez ce que vous ne mangez pas frais : congélation, séchage ou mise en conserve.",
+            "Gardez des semences : retirez-les du fruit ou de la gousse, lavez-les et faites-les sécher sur un rebord de fenêtre ensoleillé.",
+            "Partagez vos surplus avec Plantez une rangée, partagez une rangée."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Potatoes are ready 10–12 weeks after planting; onions take about 20 weeks."
+          ],
+          "fr": [
+            "Les pommes de terre sont prêtes 10 à 12 semaines après la plantation; les oignons, environ 20 semaines."
+          ]
+        }
+      },
+      "9": {
+        "jobs": {
+          "en": [
+            "Pick tomatoes, summer squash and peppers before the first frost — it usually comes in early October.",
+            "Plant a cover crop in mid-September: rye grass, white clover, winter wheat or barley.",
+            "Keep harvesting and preserving."
+          ],
+          "fr": [
+            "Cueillez tomates, courges d’été et poivrons avant le premier gel — il survient habituellement début octobre.",
+            "Semez un engrais vert à la mi-septembre : ray-grass, trèfle blanc, blé d’hiver ou orge.",
+            "Continuez à récolter et à conserver."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Parsnips, kale, carrots, turnips, spinach and beets can stay in the garden: they taste better after a frost."
+          ],
+          "fr": [
+            "Panais, chou frisé, carottes, navets, épinards et betteraves peuvent rester au jardin : ils sont meilleurs après un gel."
+          ]
+        }
+      },
+      "10": {
+        "jobs": {
+          "en": [
+            "Plant garlic now for next year.",
+            "After harvest, pull out the dead plants. Compost the healthy ones; put diseased ones in the garbage.",
+            "Dig the garden to loosen the soil, and add compost so it is ready for spring."
+          ],
+          "fr": [
+            "Plantez l’ail maintenant pour l’an prochain.",
+            "Après la récolte, arrachez les plants morts. Compostez ceux qui sont sains; jetez ceux qui sont malades.",
+            "Bêchez le jardin pour ameublir le sol et ajoutez du compost pour le printemps."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Leave carrots in the ground until mid-autumn: a few frosts make them sweeter.",
+            "Spinach, like garlic, can be planted in the fall and left in the garden over winter."
+          ],
+          "fr": [
+            "Laissez les carottes en terre jusqu’à la mi-automne : quelques gels les rendent plus sucrées.",
+            "Les épinards, comme l’ail, peuvent être semés à l’automne et laissés au jardin pendant l’hiver."
+          ]
+        }
+      },
+      "11": {
+        "jobs": {
+          "en": [
+            "Finish the clean-up: take away rotting wood and old plants so pests don’t spend the winter there.",
+            "Add compost so the soil is ready for spring.",
+            "Store your harvest somewhere cool and dark, and check it regularly.",
+            "Rest and review: what grew well this year?"
+          ],
+          "fr": [
+            "Terminez le nettoyage : enlevez le bois pourri et les vieux plants pour que les ravageurs n’y passent pas l’hiver.",
+            "Ajoutez du compost pour que le sol soit prêt au printemps.",
+            "Entreposez votre récolte dans un endroit frais et sombre, et vérifiez-la régulièrement.",
+            "Repos et bilan : qu’est-ce qui a bien poussé cette année?"
+          ]
+        },
+        "veg": {
+          "en": [
+            "Parsnips, kale, carrots, turnips, spinach and beets keep growing after frost, and taste better for it.",
+            "Garlic and spinach can be planted in the fall and left in the garden over winter.",
+            "Saving seed from beets, carrots, cabbage or onions? They make seed in their second year, so mulch them heavily for the winter."
+          ],
+          "fr": [
+            "Panais, chou frisé, carottes, navets, épinards et betteraves continuent de pousser après le gel, et n’en sont que meilleurs.",
+            "L’ail et les épinards peuvent être plantés à l’automne et laissés au jardin pendant l’hiver.",
+            "Vous gardez des semences de betteraves, de carottes, de choux ou d’oignons? Ils produisent leurs graines la deuxième année : paillez-les généreusement pour l’hiver."
+          ]
+        }
+      },
+      "12": {
+        "jobs": {
+          "en": [
+            "Rest and review: what grew well, and what would you change?",
+            "Join a winter workshop and start planning next year.",
+            "Check your stored vegetables and remove any that are starting to spoil."
+          ],
+          "fr": [
+            "Repos et bilan : qu’est-ce qui a bien poussé, et que changeriez-vous?",
+            "Participez à un atelier d’hiver et commencez à planifier l’an prochain.",
+            "Vérifiez vos légumes entreposés et retirez ceux qui commencent à se gâter."
+          ]
+        },
+        "veg": {
+          "en": [
+            "Stored cool and dark, potatoes, carrots, beets, onions, garlic and winter squash can last through the winter."
+          ],
+          "fr": [
+            "Entreposés au frais et à l’obscurité, pommes de terre, carottes, betteraves, oignons, ail et courges d’hiver peuvent se conserver tout l’hiver."
+          ]
+        }
+      }
+    }
+  }
 }

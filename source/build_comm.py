@@ -34,6 +34,8 @@ CGN_LOGO_PNG = ROOT / "assets" / "CGN_logo_icon.png"
 TPL = SRC / "comm_tpl.html"
 EXTRA_CSS = SRC / "comm_extra.css"
 PAGES_JSON = SRC / "comm_pages.json"
+GARDEN_CSS = SRC / "garden_theme.css"  # cozy secret-garden skin, loaded last
+GARDEN_JS = SRC / "garden.js"          # hero, almanac, incident form
 
 
 def balanced(s: str, start: int) -> int:
@@ -89,13 +91,16 @@ def main() -> None:
 
     tpl = TPL.read_text(encoding="utf-8")
     extra = EXTRA_CSS.read_text(encoding="utf-8")
+    garden_css = GARDEN_CSS.read_text(encoding="utf-8") if GARDEN_CSS.exists() else ""
+    garden_js = GARDEN_JS.read_text(encoding="utf-8") if GARDEN_JS.exists() else ""
 
     logo_uri = ""
     if CGN_LOGO_PNG.exists():
         logo_uri = "data:image/png;base64," + base64.b64encode(CGN_LOGO_PNG.read_bytes()).decode()
 
     html = (
-        tpl.replace("/*__CSS__*/", css + "\n" + extra)
+        tpl.replace("/*__CSS__*/", css + "\n" + extra + "\n" + garden_css)
+           .replace("/*__GARDEN_JS__*/", garden_js)
            .replace("/*__HUB__*/null", json.dumps(data, ensure_ascii=False))
            .replace("/*__ART__*/null", json.dumps(art))
            .replace("/*__PAGES__*/null", json.dumps(content["pages"], ensure_ascii=False))

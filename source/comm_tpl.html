@@ -5,24 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CGN Hub 🌻 Just Food</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Grandstander:wght@600;700;800&family=VT323&display=swap" rel="stylesheet">
 <style>/*__CSS__*/</style>
 </head>
-<body data-font="clean" data-bg="default">
+<body data-font="garden" data-bg="garden" data-sky="day">
+<img class="g-cloud c1" src="assets/garden/cloud1.webp" alt="" aria-hidden="true">
+<img class="g-cloud c2" src="assets/garden/cloud3.webp" alt="" aria-hidden="true">
+<img class="g-cloud c3" src="assets/garden/cloud2.webp" alt="" aria-hidden="true">
+<img class="g-cloud c4" src="assets/garden/cloud1.webp" alt="" aria-hidden="true">
+<div class="g-meadow" aria-hidden="true"></div>
+<div class="g-corner" aria-hidden="true"><img src="assets/garden/cottage.webp" alt="" style="display:block;width:100%;height:auto"><img class="rabbit" src="assets/garden/rabbit.webp" alt=""></div>
 <div class="test-banner" role="status" aria-live="polite">
   <strong>TEST BUILD</strong> &mdash; not yet approved by Kate. Nothing here is public or final.
   <span lang="fr"> / <strong>VERSION TEST</strong> &mdash; non approuv&eacute;e par Kate. Rien ici n&rsquo;est public ou final.</span>
 </div>
-<div class="topbar">
-  <div class="brand"><img class="brand-logo" src="/*__CGNLOGO__*/" alt="CGN logo"><span class="brand-txt-wrap"><span id="brandTxt"></span> <small id="brandSmall"></small></span></div>
+<header class="topbar" role="banner">
+  <a class="brand" href="#" onclick="go('home');return false"><img class="brand-logo" src="/*__CGNLOGO__*/" alt="CGN"><span class="brand-txt-wrap"><span id="brandTxt"></span><small id="brandSmall"></small></span></a>
   <div class="topbar-actions">
     <button class="tb-btn" id="tbResources" onclick="go('resources')"></button>
     <button class="tb-btn" id="tbFaq" onclick="go('faq')"></button>
-    <button class="tb-btn" id="tbContact" onclick="go('contact')"></button>
-    <button class="tb-btn" id="langBtn" onclick="toggleLang()">FR</button>
-    <button class="tb-btn" onclick="window.print()">🖨️</button>
+    <button class="tb-btn tb-go" id="tbContact" onclick="go('contact')"></button>
+    <button class="tb-btn tb-alert" id="tbIncident" onclick="go('incident')"></button>
+    <button class="tb-btn" id="langBtn" onclick="toggleLang()" aria-label="Français / English">FR</button>
+    <button class="tb-btn" onclick="window.print()" aria-label="Print">🖨️</button>
   </div>
-</div>
+</header>
 <div class="layout">
   <nav class="sidebar" id="side"></nav>
   <main class="main">
@@ -39,6 +46,7 @@
     <section class="page-section" id="ws-slides"></section>
     <section class="page-section" id="resources"></section>
     <section class="page-section" id="contact"></section>
+    <section class="page-section" id="incident"></section>
     <footer class="hub-foot" aria-label="site footer">
       <div class="hub-foot-left">
         <strong>CGN Hub</strong> &middot; <span id="footTag">for the Community Gardening Network</span>
@@ -122,7 +130,7 @@ function wcard(w){
   <details onclick="track('view','desc ${w.id}','description')"><summary>${t('desc')}</summary><div class="dd">${w.desc}</div></details>
   <div class="wk-btns">${isUp(w)?reg:slideBtns(w)+rec}</div></div></div>`}
 function artHtml(a){return `<strong style="font-size:17px">${esc(L(a,'title'))}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(a.author||'')} · ${esc(a.date||'')}</div><p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="${esc(a.url)}" target="_blank" onclick="track('view','article: '+${JSON.stringify(a.title)},'article')">${t('readmore')} ↗</a>`}
-function head(title,sub){return `<h1 class="page-title">${title}</h1><p class="page-sub">${sub||''}</p><div class="tulips">🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷🌼🌷</div>`}
+/* head() now lives in source/garden.js */
 
 /* ── Calendar ── */
 let calM=new Date(); calM=new Date(calM.getFullYear(),calM.getMonth(),1);
@@ -173,7 +181,7 @@ function nav(){
   document.getElementById('side').innerHTML=`<div class="nav-label">${t('start')}</div>`+I('home','🏡',t('home'))+P('about')+I('article','📰',t('article'))+
    `<div class="nav-label">${t('g_gardens')}</div>`+P('find')+P('start')+P('coordinators')+P('guides')+
    `<div class="nav-label">${t('g_ws')}</div>`+I('ws-upcoming','📅',t('ws_upcoming'))+I('ws-past','🖼️',t('ws_past'))+I('ws-slides','⬇️',t('ws_slides'))+
-   `<div class="nav-label">${t('other')}</div>`+I('resources','📚',t('resources'))+P('faq')+I('contact','💌',t('contact'))+ART_SVG.replace(/<div class="sidebar-note"[^>]*>[\s\S]*?<\/div>/,'')+`<div class="sidebar-note">${t('quote')}</div>`;
+   `<div class="nav-label">${t('other')}</div>`+I('resources','📚',t('resources'))+P('faq')+I('contact','💌',t('contact'))+gardenSideArt()+`<div class="sidebar-note">${t('quote')}</div>`;
 }
 /* ── Generic info-page renderer ── */
 const T2=o=>o?(o[lang]||o.en):'';
@@ -194,7 +202,7 @@ function pageHtml(k){
   const p=PAGES[k];
   const fr=(lang==='fr'&&p.fr_url)?`<div class="tk-callout warn"><span class="ic">🇫🇷</span><span>${t('draft_fr')} <a href="${esc(p.fr_url)}" target="_blank" rel="noopener">${t('fr_link')}</a></span></div>`:'';
   const body=p.blocks.map(blockHtml).join('');
-  return head(p.ico+' '+T2(p.title),T2(p.sub))+fr+`<div class="card">${body}</div>`;
+  return head(p.ico+' '+T2(p.title),T2(p.sub),k)+fr+`<div class="card">${body}</div>`;
 }
 /* ── Side cards: Visit the Farm + Follow the CGN ── */
 function farmCard(){
@@ -246,6 +254,7 @@ function followCard(){
     </div>
   </div>`;
 }
+/*__GARDEN_JS__*/
 function render(){
   const cur=(document.querySelector('.page-section.visible')||{}).id||'home';
   document.getElementById('brandTxt').textContent=t('brand');document.getElementById('brandSmall').textContent=t('small');
@@ -254,12 +263,13 @@ function render(){
   document.getElementById('tbResources').textContent=t('resources');
   document.getElementById('tbFaq').textContent=T2(PAGES['faq'].title);
   document.getElementById('tbContact').textContent=t('contact');
+  document.getElementById('tbIncident').textContent=lang==='fr'?'Signaler un incident':'Report an incident';
   nav();
   const upc=HUB.workshops.filter(isUp).sort((a,b)=>a.date.localeCompare(b.date));
   const past=HUB.workshops.filter(w=>!isUp(w)).sort((a,b)=>b.date.localeCompare(a.date));
   const art=HUB.articles[0], srcW=HUB.workshops.find(w=>w.id===SRC);
   const now=new Date(),h=now.getHours(),loc=lang==='fr'?'fr-CA':'en-CA';
-  document.getElementById('home').innerHTML=HERO_HTML+
+  document.getElementById('home').innerHTML=gardenHero()+gardenAlmanac()+
    `<div class="card"><span class="corner-tag blue">${t('quick')}</span><h3>🧭 ${t('quick')}</h3><div class="doc-grid">${['find','start','coordinators','guides'].map(k=>`<a class="doc-item" href="#" onclick="go('${k}');return false"><span class="d-ico">${PAGES[k].ico}</span><div><strong>${esc(T2(PAGES[k].title))}</strong><span class="d-note">${esc(T2(PAGES[k].sub))}</span></div></a>`).join('')}<a class="doc-item" href="#" onclick="go('ws-upcoming');return false"><span class="d-ico">📅</span><div><strong>${t('g_ws')}</strong><span class="d-note">${t('ws_upcoming')} · ${t('ws_past')} · ${t('ws_slides')}</span></div></a><a class="doc-item" href="#" onclick="go('resources');return false"><span class="d-ico">📚</span><div><strong>${t('resources')}</strong><span class="d-note">${t('res_sub')}</span></div></a></div></div>
     <div class="card"><span class="corner-tag yellow">${t('aow')} 📰</span><h3>📰 ${t('aow')}</h3>${art?artHtml(art):`<p class="body-text" style="font-style:italic;color:var(--ink-soft)">${t('noart')}</p>`}</div>
     <div class="card"><span class="corner-tag">${t('cal')} 📅</span><h3>📅 ${t('cal')}</h3><p class="body-text" style="color:var(--ink-soft)">${t('cal_sub')}</p><div id="calBox">${calHtml()}</div></div>
@@ -270,15 +280,16 @@ function render(){
   document.getElementById('heroTitle').textContent=t('welcome');document.getElementById('heroTag').textContent=t('tag');
   const dg=document.getElementById('dayGreeting'); if(dg) dg.textContent=(h<12?'☀️ '+t('greet_m'):h<18?'🌤️ '+t('greet_a'):'🌙 '+t('greet_e'))+'! '+t('its')+' '+now.toLocaleDateString(loc,{weekday:'long',month:'long',day:'numeric'});
   Object.keys(PAGES).forEach(k=>{document.getElementById(k).innerHTML=pageHtml(k)});
-  document.getElementById('article').innerHTML=head(t('article'),t('art_sub'))+(HUB.articles.length?HUB.articles.map((a,i)=>`${i==1?`<h3 class="page-sub" style="font-weight:800">${t('prev_art')}</h3>`:''}<div class="card">${artHtml(a)}</div>`).join(''):`<div class="card"><p class="body-text" style="font-style:italic">${t('noart')}</p></div>`);
-  document.getElementById('ws-upcoming').innerHTML=head(t('ws_upcoming'),'')+(upc.length?`<div class="card"><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:`<div class="card"><p class="body-text" style="font-style:italic">${t('noup')}</p></div>`);
-  document.getElementById('ws-past').innerHTML=head(t('ws_past'),'')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>🖼️ ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
-  document.getElementById('ws-slides').innerHTML=head(t('ws_slides'),t('slides_sub'))
+  document.getElementById('incident').innerHTML=incidentHtml(); almanacFill();
+  document.getElementById('article').innerHTML=head(t('article'),t('art_sub'),'article')+(HUB.articles.length?HUB.articles.map((a,i)=>`${i==1?`<h3 class="page-sub" style="font-weight:800">${t('prev_art')}</h3>`:''}<div class="card">${artHtml(a)}</div>`).join(''):`<div class="card"><p class="body-text" style="font-style:italic">${t('noart')}</p></div>`);
+  document.getElementById('ws-upcoming').innerHTML=head(t('ws_upcoming'),'','ws-upcoming')+(upc.length?`<div class="card"><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:`<div class="card"><p class="body-text" style="font-style:italic">${t('noup')}</p></div>`);
+  document.getElementById('ws-past').innerHTML=head(t('ws_past'),'','ws-past')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>🖼️ ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
+  document.getElementById('ws-slides').innerHTML=head(t('ws_slides'),t('slides_sub'),'ws-slides')
     +`<div class="card">`+past.map(w=>`<div class="srow"><strong>${esc(w.title)}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(w.who)} · ${esc(w.when)}</div><div class="wk-btns">${slideBtns(w)}${w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank">▶ ${t('recording')}</a>`:''}</div></div>`).join('')+`</div>`;
   const tags=[...new Set(HUB.resources.flatMap(r=>r.tags||[]))];
-  document.getElementById('resources').innerHTML=head(t('resources'),t('res_sub'))+`<div class="card"><input class="cm-in" id="rs" placeholder="${t('search')}" oninput="resList()"><div id="rt"><span class="deliv-pill" style="cursor:pointer" onclick="resTag('')">${t('all')}</span> ${tags.map(x=>`<span class="deliv-pill" style="cursor:pointer" onclick="resTag('${esc(x)}')">${esc(x)}</span>`).join(' ')}</div><div id="rl" style="margin-top:12px"></div></div>`;
+  document.getElementById('resources').innerHTML=head(t('resources'),t('res_sub'),'resources')+`<div class="card"><input class="cm-in" id="rs" placeholder="${t('search')}" oninput="resList()"><div id="rt"><span class="deliv-pill" style="cursor:pointer" onclick="resTag('')">${t('all')}</span> ${tags.map(x=>`<span class="deliv-pill" style="cursor:pointer" onclick="resTag('${esc(x)}')">${esc(x)}</span>`).join(' ')}</div><div id="rl" style="margin-top:12px"></div></div>`;
   resList();
-  document.getElementById('contact').innerHTML=head(t('c_title'),t('c_sub'))+`<div class="card"><span class="corner-tag">💌</span>
+  document.getElementById('contact').innerHTML=head(t('c_title'),t('c_sub'),'contact')+`<div class="card"><span class="corner-tag">💌</span>
    <label class="cm-lab">${t('c_type')}</label><select class="cm-in" id="ct">${[1,2,3,4,5].map(i=>`<option value="${esc(t('c_t'+i))}">${t('c_t'+i)}</option>`).join('')}</select>
    <label class="cm-lab">${t('c_msg')}</label><textarea class="cm-in" id="cm" rows="5"></textarea><label class="cm-lab">${t('c_name')}</label><input class="cm-in" id="cn"><label class="cm-lab">${t('c_email')}</label><input class="cm-in" id="ce" type="email">
    <button class="send-btn" onclick="sendContact()">${t('c_send')}</button>
@@ -299,7 +310,7 @@ function sendContact(){
   location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('[CGN Hub] '+typ)+'&body='+encodeURIComponent(m+'\n\n—\n'+(n?n+'\n':'')+(e?'Reply to: '+e:''));
   document.getElementById('cok').style.display='block';
 }
-try{const f=localStorage.getItem('cgn-comm-font'),b=localStorage.getItem('cgn-comm-bg');if(f)document.body.dataset.font=f;if(b&&BGS[b])document.body.dataset.bg=b}catch(e){}
+gardenInit();
 document.documentElement.lang=lang;
 render();go('home');
 </script>

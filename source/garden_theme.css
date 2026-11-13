@@ -1,0 +1,246 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   CGN Hub · Cozy Secret Garden theme  (loaded last by build_comm.py)
+   Re-skins the existing Hub — sidebar, cards, every page — without changing
+   its structure. Materials: wooden signboards with nail heads, parchment,
+   chalkboard. World: watercolour sky, drifting clouds, a flower border and
+   garden cut-outs from Nadia's inspiration board (assets/garden/).
+   ═══════════════════════════════════════════════════════════════════════════ */
+body{
+  --ink:#4A3426; --ink-soft:#6B5443; --card:#FFF8EA; --cream:#FFF8EA; --cream-2:#FBEFD9; --line:#E7D3B0;
+  --wood:#B37B46; --wood-dark:#7A4E2A; --wood-light:#E3B67F;
+  --jf-green:#1A6B54; --green-dark:#0F4A39; --jf-red:#80220F; --berry:#A83565;
+  --sun:#FCE6A0; --sun-deep:#F2C94C; --pink:#FBD5E3; --tulip:#F38DB5; --sky-pale:#DCEBFA; --grape-pale:#EADFF7; --mint:#DDF1CF; --peach:#FCE0CC;
+  --chalk:#2E4A3A; --chalk-ink:#F4F0E3;
+  --font-display:'Grandstander','Fredoka','Trebuchet MS',sans-serif; --font-accent:'Grandstander','Fredoka',sans-serif;
+  --font-body:'Fredoka','Nunito',system-ui,sans-serif; --f-hud:'VT323','Courier New',monospace; --title-stroke:0px;
+  font-size:16px; line-height:1.55; color:var(--ink); background:#DDEFF5;
+}
+:focus-visible{outline:3px dashed var(--berry); outline-offset:2px; border-radius:6px}
+a{color:var(--jf-green)}
+
+/* ── The world: watercolour sky (changes with the time of day), clouds, flower border ── */
+body::before{content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:linear-gradient(180deg,rgba(234,245,223,0) 42%,#EAF5DF 70%,#D2EABD 100%),url(assets/garden/sky-day.jpg) center top/cover no-repeat}
+body[data-sky="dawn"]::before{background:linear-gradient(180deg,rgba(234,245,223,0) 42%,#EEF5DD 72%,#D2EABD 100%),url(assets/garden/sky-dawn.jpg) center top/cover no-repeat}
+body[data-sky="dusk"]::before{background:linear-gradient(180deg,rgba(226,236,214,0) 46%,#E6EBD3 74%,#C9E0B4 100%),url(assets/garden/sky-dusk.jpg) center top/cover no-repeat}
+body[data-sky="night"]::before{background:linear-gradient(180deg,#2A3663 0%,#41508A 38%,#7284B3 68%,#9DB695 100%)}
+body[data-sky="night"]::after{content:""; position:fixed; inset:0 0 45% 0; z-index:0; pointer-events:none; opacity:.9;
+  background-image:radial-gradient(1.6px 1.6px at 8% 22%,#fff 50%,transparent 52%),radial-gradient(1.4px 1.4px at 21% 9%,#fff 50%,transparent 52%),radial-gradient(1.8px 1.8px at 36% 30%,#FFF3C4 50%,transparent 52%),radial-gradient(1.3px 1.3px at 49% 12%,#fff 50%,transparent 52%),radial-gradient(1.6px 1.6px at 63% 26%,#fff 50%,transparent 52%),radial-gradient(1.4px 1.4px at 74% 8%,#FFF3C4 50%,transparent 52%),radial-gradient(1.7px 1.7px at 86% 20%,#fff 50%,transparent 52%),radial-gradient(1.3px 1.3px at 94% 36%,#fff 50%,transparent 52%)}
+.g-cloud{position:fixed; left:-340px; z-index:0; pointer-events:none; opacity:.92; height:auto; animation:g-drift 130s linear infinite}
+.g-cloud.c1{top:11vh; width:240px; animation-duration:115s; animation-delay:-35s}
+.g-cloud.c2{top:30vh; width:310px; animation-duration:170s; animation-delay:-100s; opacity:.8}
+.g-cloud.c3{top:20vh; width:200px; animation-duration:140s; animation-delay:-70s}
+.g-cloud.c4{top:48vh; width:260px; animation-duration:200s; animation-delay:-150s; opacity:.72}
+/* page change: a small slide, never see-through */
+@keyframes pop{from{transform:translateY(6px)}to{transform:none}}
+@keyframes g-drift{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 700px))}}
+@keyframes g-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+.g-meadow{position:fixed; left:0; right:0; bottom:0; height:132px; z-index:0; pointer-events:none;
+  background:url(assets/garden/flowers.webp) repeat-x left bottom/auto 84px,linear-gradient(180deg,rgba(184,221,152,0) 0%,rgba(184,221,152,.9) 58%,#A5D285 100%)}
+.g-corner{display:none; position:fixed; right:16px; bottom:30px; width:236px; z-index:0; pointer-events:none}
+.g-corner .rabbit{position:absolute; left:-58px; bottom:-4px; width:66px}
+@media (min-width:1480px){.g-corner{display:block}}
+body[data-sky="night"] .g-cloud{opacity:.3}
+body[data-sky="night"] .g-meadow, body[data-sky="night"] .g-corner{filter:brightness(.72) saturate(.85)}
+
+/* ── Header: a wooden beam with bunting ── */
+.topbar{position:relative; z-index:5; height:auto; min-height:0; padding:12px 22px 14px; gap:14px 18px; flex-wrap:wrap;
+  background:repeating-linear-gradient(180deg,#E0B27A 0 23px,#D6A56B 23px 25px,#DDAE75 25px 48px,#D2A066 48px 50px);
+  border:0; border-bottom:5px solid var(--wood-dark); box-shadow:inset 0 3px 0 rgba(255,244,220,.45),0 5px 0 rgba(74,52,38,.16)}
+.topbar::after{content:""; position:absolute; left:0; right:0; top:calc(100% + 4px); height:32px; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='32'%3E%3Cpath d='M0 3H240' stroke='%237A4E2A' stroke-width='2.5'/%3E%3Cg stroke='%237A4E2A' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M6 4h28l-14 24z' fill='%23F6A9C6'/%3E%3Cpath d='M46 4h28l-14 24z' fill='%23FBDF8A'/%3E%3Cpath d='M86 4h28l-14 24z' fill='%23A9D9A0'/%3E%3Cpath d='M126 4h28l-14 24z' fill='%23A9CDEE'/%3E%3Cpath d='M166 4h28l-14 24z' fill='%23CDB6EA'/%3E%3Cpath d='M206 4h28l-14 24z' fill='%23F7BE96'/%3E%3C/g%3E%3C/svg%3E") repeat-x center top}
+.topbar .brand{gap:13px; cursor:pointer; text-decoration:none; white-space:normal; color:#3B2616}
+.brand-logo{width:58px; height:58px; background:#FFFBE6; border:3px solid var(--wood-dark); border-radius:14px; padding:3px; box-shadow:0 4px 0 var(--wood-dark)}
+.brand-txt-wrap{display:flex; flex-direction:column; align-items:flex-start; gap:2px}
+#brandTxt{font:800 30px/1 var(--font-display); color:#3B2616; letter-spacing:.01em; text-shadow:0 2px 0 rgba(255,244,220,.6)}
+.topbar .brand small{font:700 12px/1.2 var(--font-display); letter-spacing:.1em; text-transform:uppercase; color:#553518; padding:0}
+.topbar-actions{gap:9px}
+.tb-btn{background:var(--card); color:var(--ink); border:2.5px solid var(--wood-dark); border-radius:12px; padding:8px 13px; min-height:40px;
+  font:700 13.5px var(--font-display); letter-spacing:.02em; box-shadow:0 4px 0 var(--wood-dark); transition:transform .08s,box-shadow .08s}
+.tb-btn:hover{transform:translateY(-1px); box-shadow:0 5px 0 var(--wood-dark); background:#fff}
+.tb-btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--wood-dark)}
+.tb-btn.tb-go{background:var(--jf-green); color:#FFF8EA; border-color:var(--green-dark); box-shadow:0 4px 0 var(--green-dark)}
+.tb-btn.tb-go:hover{background:#218268}
+.tb-btn.tb-alert{background:#FFE4DE; color:#7A1710}
+.tb-btn.tb-alert:hover{background:#FFD3CA}
+
+/* ── Layout + sidebar signboard with plank buttons ── */
+.layout{position:relative; z-index:1}
+.sidebar{top:0; height:100vh; background:var(--card); border-right:5px solid var(--wood); box-shadow:inset -2px 0 0 var(--wood-dark),5px 0 0 rgba(74,52,38,.1); padding:40px 14px 16px; z-index:2}
+.nav-label{font:800 11.5px var(--font-display); letter-spacing:.14em; color:var(--jf-red); margin:16px 0 8px; padding:0 3px; display:flex; align-items:center; gap:7px}
+.nav-label:first-child{margin-top:0}
+.nav-label::after{content:""; flex:1; border-top:2px dashed var(--line)}
+.nav-item{background:repeating-linear-gradient(180deg,#E6BB86 0 9px,#DFB17A 9px 18px); color:#3B2616; border:2.5px solid var(--wood-dark); border-radius:10px;
+  padding:8px 11px; margin-bottom:7px; font:600 14px/1.25 var(--font-display); letter-spacing:.01em; box-shadow:0 3px 0 var(--wood-dark); transition:transform .08s,box-shadow .08s}
+.nav-item:hover{background:repeating-linear-gradient(180deg,#F0CC9B 0 9px,#EAC28E 9px 18px); border-color:var(--wood-dark); transform:translateY(-1px); box-shadow:0 4px 0 var(--wood-dark)}
+.nav-item:active{transform:translateY(2px); box-shadow:0 1px 0 var(--wood-dark)}
+.nav-item.active{background:var(--jf-green); color:#FFF8EA; border:2.5px solid var(--green-dark); box-shadow:0 3px 0 var(--green-dark)}
+.nav-item .ico{font-size:16px; width:22px}
+.sidebar-art{padding-top:14px}
+.sidebar-art img{width:118px; height:auto}
+.sidebar-note{font:600 12.5px var(--font-display); color:var(--ink-soft)}
+.main{padding:46px 38px 170px; max-width:990px}
+
+/* ── Page header plaque + flower bed underneath ── */
+.page-head{position:relative; background:var(--card); border:5px solid var(--wood); border-radius:18px; padding:18px 24px 16px; margin-bottom:2px;
+  box-shadow:inset 0 0 0 2px var(--wood-dark),0 6px 0 var(--wood-dark),0 12px 20px rgba(74,52,38,.13)}
+.page-head.has-art{padding-right:156px; min-height:104px}
+.page-title, .page-head .page-title{font:800 32px/1.12 var(--font-display); color:var(--ink); text-shadow:none; display:block; margin:0}
+.page-sub, .page-head .page-sub{font:500 16.5px/1.45 var(--font-body); color:var(--ink-soft); margin:7px 0 0}
+.page-critter{position:absolute; right:20px; bottom:8px; height:98px; width:auto; max-width:124px; object-fit:contain; pointer-events:none}
+.tulips{font-size:0; height:62px; margin:0 8px 12px; opacity:1; background:url(assets/garden/flowers.webp) repeat-x left bottom/auto 62px}
+
+/* ── Cards = wooden signboards with nail heads ── */
+.card, .hero, .page-head{background-color:var(--card);
+  background-image:radial-gradient(circle at 12px 12px,var(--wood-dark) 2.4px,transparent 3px),radial-gradient(circle at calc(100% - 12px) 12px,var(--wood-dark) 2.4px,transparent 3px),radial-gradient(circle at 12px calc(100% - 12px),var(--wood-dark) 2.4px,transparent 3px),radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),var(--wood-dark) 2.4px,transparent 3px)}
+.card{border:5px solid var(--wood); border-radius:18px; padding:26px 28px 24px; margin-bottom:28px;
+  box-shadow:inset 0 0 0 2px var(--wood-dark),0 6px 0 var(--wood-dark),0 14px 22px rgba(74,52,38,.14)}
+.card h3{font:800 15.5px var(--font-display); letter-spacing:.1em; color:var(--jf-red)}
+.card h3::after{border-top:2px dashed var(--line)}
+.card h4.block-label, details.desc h4.block-label, h4.block-label{font:800 13px var(--font-display); letter-spacing:.1em; color:var(--jf-green)}
+.card p.body-text, .body-text{font-size:16px; line-height:1.6}
+.card ul.body-text li{margin:4px 0}
+.ec-ul{font-size:16px !important}
+.corner-tag{font:800 12.5px var(--font-display); letter-spacing:.03em; color:var(--ink); background:var(--pink); border:2.5px solid var(--wood-dark); padding:3px 14px; box-shadow:0 3px 0 var(--wood-dark)}
+.corner-tag.green{background:var(--mint)}
+.tk-callout{display:flex; gap:10px; align-items:flex-start; background:#FFF3D6; border:2.5px dashed var(--wood-dark); border-radius:14px; padding:12px 16px; margin:12px 0; font-size:15px}
+.tk-step{display:flex; gap:13px; align-items:flex-start; margin:14px 0}
+.tk-num{flex:0 0 auto; width:36px; height:36px; border-radius:50%; background:var(--sun); border:2.5px solid var(--wood-dark); display:grid; place-items:center; font:400 22px/1 var(--f-hud); color:var(--ink); box-shadow:0 3px 0 var(--wood-dark)}
+.desc-link{display:inline-block; margin-top:4px; color:var(--jf-green); font-weight:600; text-decoration:underline}
+.deliv-pill{display:inline-block; font:700 11.5px var(--font-display); letter-spacing:.06em; text-transform:uppercase; color:var(--ink); background:#fff; border:2px solid var(--wood-dark); border-radius:999px; padding:5px 11px; margin:3px 2px}
+.deliv-pill:hover{background:var(--mint)}
+.cw-table{font-size:15px}
+.cw-table th{font:800 12px var(--font-display); letter-spacing:.08em; background:var(--sun); border-bottom:3px solid var(--wood-dark)}
+.cw-table td{border-bottom:1.5px dashed var(--line); padding:10px}
+.cw-table td:nth-child(1){font-family:var(--font-display); color:var(--jf-red)}
+details.desc{border:2.5px solid var(--wood-dark); box-shadow:0 4px 0 var(--wood-dark); background:#fff}
+details.desc summary{font:700 16px var(--font-display); padding:14px 18px; background:var(--cream-2)}
+details.desc .desc-body{font-size:15.5px; border-top:2px dashed var(--line)}
+
+/* ── Buttons, tiles, posters, forms ── */
+.send-btn{background:var(--jf-green); color:#FFF8EA; border:2.5px solid var(--green-dark); border-radius:12px; padding:9px 17px; min-height:40px;
+  font:700 14px var(--font-display); letter-spacing:.02em; box-shadow:0 4px 0 var(--green-dark); text-decoration:none; transition:transform .08s,box-shadow .08s}
+.send-btn:hover{transform:translateY(-1px); box-shadow:0 5px 0 var(--green-dark); background:#218268}
+.send-btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--green-dark)}
+.send-btn.btn-off, .btn-off{background:#EDE3CF; color:var(--ink-soft); border-color:#B9A583; box-shadow:0 4px 0 #B9A583; opacity:1; cursor:default}
+.send-btn.ghost{background:var(--card); color:var(--ink); border-color:var(--wood-dark); box-shadow:0 4px 0 var(--wood-dark)}
+.wk-btns{gap:9px}
+.doc-grid{gap:14px}
+.doc-item{background:var(--cream-2); border:2.5px solid var(--wood-dark); border-radius:14px; box-shadow:0 4px 0 var(--wood-dark); padding:13px 15px; gap:13px; align-items:center}
+a.doc-item:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark); background:var(--mint)}
+.doc-item .d-ico{font-size:24px; flex:0 0 auto; width:50px; height:50px; display:grid; place-items:center; background:#fff; border:2.5px solid var(--wood); border-radius:12px}
+.doc-item strong{font:700 16px/1.25 var(--font-display)}
+.doc-item span.d-note{font-size:13.5px; line-height:1.35; display:block; margin-top:2px}
+.doc-grid .doc-item:nth-child(6n+2){background:#EAF5E2} .doc-grid .doc-item:nth-child(6n+3){background:#FDEEF3}
+.doc-grid .doc-item:nth-child(6n+4){background:#EAF2FB} .doc-grid .doc-item:nth-child(6n+5){background:#FFF3CF} .doc-grid .doc-item:nth-child(6n){background:#F1EAFA}
+.poster-card{border:3px solid var(--wood-dark); border-radius:16px; box-shadow:0 5px 0 var(--wood-dark); background:#FFFDF6}
+.poster-card img{border-bottom:3px solid var(--wood-dark)}
+.poster-body strong{font:700 16px/1.3 var(--font-display)}
+.poster-body .p-meta{font-size:13.5px}
+.poster-card .dd{font-size:14.5px; max-height:340px} .poster-card details summary{font-size:14px; color:var(--jf-green)}
+.pc-badge{font:800 10.5px var(--font-display); letter-spacing:.06em; border:2px solid var(--wood-dark); padding:2px 9px}
+.tool-card .tool-ico{width:50px; height:50px; display:grid; place-items:center; background:#fff; border:2.5px solid var(--wood); border-radius:12px; font-size:26px; margin:0 0 10px}
+.srow{border-bottom:2px dashed var(--line); padding:14px 0} .srow strong{font:700 16px var(--font-display)}
+.cm-in{font:500 16px var(--font-body); color:var(--ink); background:#fff; border:2.5px solid var(--wood-dark); border-radius:11px; padding:10px 12px}
+.cm-in:focus{outline:3px dashed var(--berry); outline-offset:2px}
+.cm-lab{font:700 14.5px var(--font-display); display:block; margin-top:4px}
+.cm-ok{background:var(--mint); border:2.5px solid var(--wood-dark); font-weight:600}
+.hub-foot{background:var(--card); border:3px dashed var(--wood-dark); border-radius:14px; font:500 14px var(--font-body)}
+.test-banner{position:relative; z-index:6; font-family:var(--font-body)}
+
+/* ── Calendar ── */
+.mc-head h4{font:800 22px var(--font-display); color:var(--ink)}
+.mc-grid{border:3px solid var(--wood-dark); border-radius:14px; background:#FFFDF6}
+.mc-dow{background:var(--sun); border-bottom:3px solid var(--wood-dark); font:800 12px var(--font-display)}
+.mc-day{border-color:var(--line); min-height:88px}
+.mc-day .n{font:400 19px/1 var(--f-hud)}
+.mc-day.out{background:#F7F1E1; color:#AE9D80}
+.mc-day.today{background:#FFF6D6; box-shadow:inset 0 0 0 3px var(--wood)}
+.mc-day.today .n{background:var(--berry); padding:1px 7px}
+.mc-ev{border:1.5px solid var(--wood-dark); font:600 11.5px var(--font-body); color:var(--ink)}
+.mc-detail{border:2.5px dashed var(--wood-dark); background:var(--cream-2); font-size:15px}
+.mc-agenda li{font-size:15px; border-bottom:1.5px dashed var(--line); padding:8px 0}
+.cal-chip{font:700 12px var(--font-display); border:2.5px solid var(--wood-dark); padding:6px 12px; box-shadow:0 3px 0 var(--wood-dark); min-height:34px}
+.cal-chip.active{background:var(--jf-green); color:#FFF8EA; border-color:var(--green-dark); box-shadow:0 3px 0 var(--green-dark)}
+
+/* ── Home: welcome signboard ── */
+.hero{border:5px solid var(--wood); border-radius:22px; padding:0; overflow:hidden; margin-bottom:28px;
+  box-shadow:inset 0 0 0 2px var(--wood-dark),0 7px 0 var(--wood-dark),0 16px 26px rgba(74,52,38,.16)}
+.hero-wisteria{position:absolute; top:-4px; left:-14px; width:31%; max-width:290px; pointer-events:none; z-index:1}
+.hero-text{position:relative; z-index:2; padding:46px 30px 2px}
+.hero-logo{display:block; height:96px; width:auto; margin:0 auto 14px}
+.hero .welcome{font:800 46px/1.1 var(--font-display); color:var(--ink); text-shadow:0 3px 0 var(--sun)}
+.hero p.tag{font:500 18px/1.45 var(--font-body); color:var(--ink-soft); margin:10px auto 0; max-width:620px}
+.hero-scene{position:relative; margin-top:-4px}
+.hero-scene .land{display:block; width:100%; height:auto}
+.hero-bee{position:absolute; left:4.5%; bottom:13%; display:flex; align-items:flex-end; gap:6px; z-index:3}
+.hero-bee .bee{width:82px; height:auto; animation:g-bob 3.4s ease-in-out infinite}
+.hero-fly{position:absolute; right:9%; top:6%; width:46px; height:auto; animation:g-bob 4.6s ease-in-out infinite reverse}
+.g-bubble{position:relative; background:#fff; border:2.5px solid var(--wood-dark); border-radius:16px; padding:9px 14px; margin-bottom:26px; max-width:270px;
+  font:600 14.5px/1.35 var(--font-body); color:var(--ink); text-align:left; box-shadow:0 3px 0 var(--wood-dark)}
+.g-bubble::before{content:""; position:absolute; left:-11px; bottom:12px; border:7px solid transparent; border-right-color:var(--wood-dark)}
+
+/* ── Garden almanac (chalkboard tiles + this month's jobs) ── */
+.almanac h3 .alm-frog{width:34px; height:auto; margin:-8px 0}
+.alm-tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:13px; margin:6px 0 14px}
+.alm-tile{background:var(--chalk); color:var(--chalk-ink); border:5px solid var(--wood); border-radius:14px; box-shadow:0 5px 0 var(--wood-dark); padding:11px 13px 12px; min-height:112px}
+.alm-lbl{font:800 11px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:#F8C6DA}
+.alm-val{font:400 34px/1 var(--f-hud); margin-top:7px; font-variant-numeric:tabular-nums}
+.alm-val.alm-txt{font-size:25px; line-height:1.05}
+.alm-val .unit{font-size:18px; opacity:.85}
+.alm-sub{font:500 12.5px/1.35 var(--font-body); color:#DCE7D8; margin-top:6px}
+.alm-sub a{color:#F8C6DA}
+.alm-week{display:grid; grid-template-columns:repeat(7,1fr); gap:7px; margin:0 0 18px}
+.alm-day{background:#fff; border:2px solid var(--line); border-radius:11px; text-align:center; padding:7px 2px 6px}
+.alm-day.frost{background:#EAF3FC; border-color:#A9CDEE}
+.alm-day .d{font:800 11px var(--font-display); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft)}
+.alm-day .i{font-size:21px; line-height:1.25}
+.alm-day .t{font:400 19px/1 var(--f-hud)} .alm-day .t small{font-size:16px; color:#3F6CA8}
+.alm-cols{display:grid; grid-template-columns:1.15fr 1fr; gap:20px}
+.g-jobs{list-style:none; padding:0; margin:6px 0 0; display:grid; gap:9px}
+.g-jobs label{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; padding:11px 13px; background:#fff; border:2px solid var(--line); border-radius:12px; cursor:pointer; font-size:15.5px; line-height:1.45}
+.g-jobs label:hover{border-color:var(--wood)}
+.g-check{appearance:none; -webkit-appearance:none; width:27px; height:27px; margin:0; border:3px solid var(--ink); border-radius:8px; background:#fff; display:grid; place-items:center; cursor:pointer}
+.g-check:checked{background:var(--tulip)} .g-check:checked::after{content:"\2665"; color:#fff; font-size:16px; line-height:1}
+.g-jobs input:checked + span{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:rgba(74,52,38,.35)}
+.alm-note{background:#FFF3D6; border:2.5px dashed var(--wood-dark); border-radius:14px; padding:4px 16px 12px; align-self:start}
+.alm-note ul{padding-left:19px; margin:4px 0 0; font-size:15px; line-height:1.5} .alm-note li{margin:6px 0}
+.alm-frostline{font-size:13.5px; color:var(--ink-soft); margin-top:10px; padding-top:9px; border-top:1.5px dashed var(--wood)}
+.alm-src{font-size:12.5px; color:var(--ink-soft); margin-top:14px}
+
+/* ── Incident report form ── */
+.g-911{background:#FFE9E4; border:3px solid #A3231A; color:#6E130C; border-radius:14px; padding:12px 16px; font-size:16px; margin:0 0 12px}
+.g-demo{background:var(--sun); border:2.5px dashed var(--wood-dark); border-radius:14px; padding:10px 16px; font-size:15px; margin:0 0 16px}
+.g-form{margin-top:10px; display:grid; gap:16px}
+.g-form .cm-in{margin:6px 0 0}
+.g-form fieldset{border:2.5px solid var(--line); border-radius:14px; padding:10px 14px 14px; background:#FFFDF6}
+.g-form legend{font:700 14.5px var(--font-display); padding:0 6px}
+.g-opts{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6px}
+.g-opts label{display:flex; gap:10px; align-items:flex-start; padding:9px 11px; background:#fff; border:2px solid var(--line); border-radius:11px; font-size:15px; line-height:1.35; cursor:pointer}
+.g-opts input{width:19px; height:19px; margin-top:1px; accent-color:var(--jf-green); flex:0 0 auto}
+.g-opts .other{grid-column:1 / -1} .g-opts .other input[type=text]{flex:1; min-width:0; width:auto; height:auto; border:0; border-bottom:2px solid var(--wood); background:transparent; font:500 15px var(--font-body); padding:2px 4px}
+.req{color:#A3231A; font-weight:800; margin-left:2px}
+.g-err{color:#A3231A; font-weight:600; font-size:14.5px; display:none}
+
+/* ── Small screens: nav becomes a row of planks that stays in reach ── */
+@media (max-width:780px){
+  .layout{flex-direction:column}
+  .sidebar{display:flex !important; flex-direction:row; align-items:center; gap:7px; position:sticky; top:0; z-index:40; width:100%; height:auto; padding:10px 10px 12px; overflow-x:auto; border-right:0; border-bottom:5px solid var(--wood); box-shadow:inset 0 -2px 0 var(--wood-dark)}
+  .nav-label, .sidebar-art, .sidebar-note{display:none}
+  .nav-item{flex:0 0 auto; margin:0; white-space:nowrap; padding:9px 12px}
+  .topbar{padding:10px 12px 12px} .topbar::after{display:none}
+  #brandTxt{font-size:24px} .topbar .brand small{display:none} .brand-logo{width:46px; height:46px}
+  .tb-btn{padding:7px 10px; font-size:12.5px; min-height:38px}
+  .main{padding:22px 13px 170px}
+  .page-head{padding:15px 16px 13px} .page-head.has-art{padding-right:98px; min-height:88px}
+  .page-title, .page-head .page-title{font-size:25px} .page-critter{height:72px; max-width:84px; right:10px}
+  .tulips{height:46px; background-size:auto 46px}
+  .card{padding:22px 16px 18px}
+  .hero-text{padding:38px 16px 2px} .hero-logo{height:66px} .hero .welcome{font-size:31px} .hero p.tag{font-size:16px}
+  .hero-bee .bee{width:58px} .g-bubble{font-size:13px; padding:7px 10px; margin-bottom:14px; max-width:200px} .hero-fly{width:32px}
+  .alm-tiles{grid-template-columns:1fr 1fr; gap:10px} .alm-week{gap:3px} .alm-day .i{font-size:17px} .alm-day .t{font-size:16px} .alm-day .t small{display:block; font-size:14px}
+  .alm-cols{grid-template-columns:1fr} .g-opts{grid-template-columns:1fr}
+  .mc-day{min-height:64px}
+}
+@media (prefers-reduced-motion:reduce){ .g-cloud, .hero-bee .bee, .hero-fly{animation:none !important} .g-cloud{left:auto; right:6vw} .g-cloud.c2{right:38vw} .g-cloud.c3{right:64vw} .g-cloud.c4{display:none} }
+@media print{ body::before, body::after, .g-cloud, .g-meadow, .g-corner, .tulips{display:none !important} .card, .page-head{box-shadow:none} }

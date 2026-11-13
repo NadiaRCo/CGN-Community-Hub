@@ -28,8 +28,8 @@ The build keeps a one-time backup called `CGN_Community_Hub.prev.html` so you ca
 
 | Path | What it is |
 |---|---|
-| `CGN_Hub.html` | Internal Hub (hand-edited; also the source of CSS + hero + sidebar-art for the public Hub) |
-| `CGN_Community_Hub.html` | Public Hub — **generated** by `source/build_comm.py` |
+| `CGN_Internal_Hub.html` | Nadia's internal Hub (hand-edited; also the source of the base CSS for the public Hub) |
+| `CGN_Hub.html` | Public CGN Hub — **generated** by `source/build_comm.py` (`CGN_Community_Hub.html` is only a redirect) |
 | `content/hub.json` | **Edit this weekly.** Workshops, series, articles, events (calendar). Plain JSON. |
 | `source/comm_tpl.html` | Page shell for the public Hub |
 | `source/comm_extra.css` | Extra CSS layered on top of the internal Hub's styles |
@@ -47,6 +47,24 @@ The build keeps a one-time backup called `CGN_Community_Hub.prev.html` so you ca
 | The calendar (events, deadlines) | `content/hub.json` (`events` list) | `python3 source/build_comm.py` |
 | Article of the Week | `content/hub.json` (`articles` list) | `python3 source/build_comm.py` |
 | A resource link, or page copy (About, Find a Garden…) | `source/comm_content.py` | `python3 source/comm_content.py && python3 source/build_comm.py` |
+
+---
+
+## Look and feel: the cozy secret garden
+
+The public Hub wears a "cozy game" skin: wooden signboards, parchment, a chalkboard almanac, a watercolour sky with drifting clouds, and garden cut-outs from Nadia's Canva inspiration board. It is a skin only: pages, sidebar and features are unchanged underneath.
+
+| To change… | Edit | Notes |
+|---|---|---|
+| Colours, fonts, signboard and plank styles | `source/garden_theme.css` | Loaded last, so it wins over older styles |
+| Welcome banner, almanac, incident form | `source/garden.js` | Injected by the build |
+| This month's garden jobs and veggie notes | `content/hub.json` → `"almanac"` | One entry per month, EN + FR; adapted from the CGN Garden Guide |
+| Pictures (bee, barn, clouds, flowers…) | `assets/garden/` | Keep the same file names to swap an image |
+
+- **Garden almanac:** season, frost nights, rain and warmest day come live from [Open-Meteo](https://open-meteo.com/) (free, no account, no visitor data sent beyond a normal web request). If it cannot load, the tiles say so and link to Environment Canada.
+- **Sky:** changes with the visitor's clock (dawn, day, dusk, night). Add `?sky=dusk` (or `dawn`, `day`, `night`) to the address to preview one.
+- **Incident report page:** an example built from Just Food's EN and FR incident templates. It does not send or store anything yet; Kate decides where reports should go before it is switched on.
+- **Before going public:** confirm the Canva elements in `assets/garden/` are covered by Just Food's Canva licence for website use.
 
 ---
 
