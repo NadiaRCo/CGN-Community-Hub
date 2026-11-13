@@ -884,7 +884,7 @@ body[data-sky="night"]::after{content:""; position:fixed; inset:0 0 45% 0; z-ind
 @keyframes g-drift{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 700px))}}
 @keyframes g-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
 .g-meadow{position:fixed; left:0; right:0; bottom:0; height:132px; z-index:0; pointer-events:none;
-  background:url(assets/garden/flowers.webp) repeat-x left bottom/auto 84px,linear-gradient(180deg,rgba(184,221,152,0) 0%,rgba(184,221,152,.9) 58%,#A5D285 100%)}
+  background:url(assets/garden/garden-border.webp) repeat-x left bottom/auto 84px,linear-gradient(180deg,rgba(184,221,152,0) 0%,rgba(184,221,152,.9) 58%,#A5D285 100%)}
 .g-corner{display:none; position:fixed; right:16px; bottom:30px; width:236px; z-index:0; pointer-events:none}
 .g-corner .rabbit{position:absolute; left:-58px; bottom:-4px; width:66px}
 @media (min-width:1480px){.g-corner{display:block}}
@@ -936,7 +936,7 @@ body[data-sky="night"] .g-meadow, body[data-sky="night"] .g-corner{filter:bright
 .page-title, .page-head .page-title{font:800 32px/1.12 var(--font-display); color:var(--ink); text-shadow:none; display:block; margin:0}
 .page-sub, .page-head .page-sub{font:500 16.5px/1.45 var(--font-body); color:var(--ink-soft); margin:7px 0 0}
 .page-critter{position:absolute; right:20px; bottom:8px; height:98px; width:auto; max-width:124px; object-fit:contain; pointer-events:none}
-.tulips{font-size:0; height:62px; margin:0 8px 12px; opacity:1; background:url(assets/garden/flowers.webp) repeat-x left bottom/auto 62px}
+.tulips{font-size:0; height:62px; margin:0 8px 12px; opacity:1; background:url(assets/garden/garden-border.webp) repeat-x left bottom/auto 62px}
 
 /* ── Cards = wooden signboards with nail heads ── */
 .card, .hero, .page-head{background-color:var(--card);
@@ -1114,6 +1114,41 @@ a.doc-item:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark)
 .icon-tile strong{font:700 15.5px/1.25 var(--font-display)}
 .icon-tile span{font-size:13px; line-height:1.35; color:var(--ink-soft)}
 @media (max-width:780px){ .guide-feature{grid-template-columns:1fr; justify-items:center; text-align:center; gap:18px} .guide-cover{max-width:190px} .lang-chips{justify-content:center} .icon-grid{grid-template-columns:1fr 1fr; gap:10px} .icon-tile img{width:60px; height:60px} }
+
+/* ── Garden v2: one composed scene, a fuller border, companions planted in the beds, drawn icons ── */
+.g-meadow{height:196px; background:url(assets/garden/garden-border.webp) repeat-x left bottom/auto 142px,linear-gradient(180deg,rgba(176,216,142,0) 0%,rgba(176,216,142,.92) 62%,#9CCB7C 100%)}
+.g-corner{bottom:64px; right:20px; width:224px}
+.main{padding-bottom:230px}
+.tulips{position:relative; z-index:2; height:96px; margin:-8px 4px 16px; pointer-events:none; background:url(assets/garden/garden-border.webp) repeat-x left bottom/auto 96px}
+.page-head.has-art{padding-right:168px; min-height:108px}
+.page-critter{right:26px; bottom:-62px; height:128px; max-width:150px; z-index:1}
+.sidebar-art{position:relative; padding-bottom:4px}
+.sidebar-art::after{content:""; position:absolute; left:-6px; right:-6px; bottom:0; height:50px; background:url(assets/garden/garden-border.webp) repeat-x 38% bottom/auto 50px; pointer-events:none}
+.sidebar-art img{width:112px; margin-bottom:14px}
+.hero-wisteria.r{left:auto; right:-14px; transform:scaleX(-1)}
+.hero-bee{left:auto; right:4%; top:11%; bottom:auto; flex-direction:row-reverse; align-items:flex-start}
+.hero-bee .bee{width:76px}
+.g-bubble{margin:10px 0 0; max-width:250px}
+.g-bubble::before{left:auto; right:-12px; bottom:auto; top:14px; border-right-color:transparent; border-left-color:var(--wood-dark)}
+.g-ico{width:1.5em; height:1.5em; flex:0 0 auto; vertical-align:-.36em; overflow:visible}
+.nav-item{padding:6px 10px 6px 7px; gap:9px}
+.nav-item .ico{width:30px; height:30px; display:grid; place-items:center; flex:0 0 auto; background:#FFF8EA; border:2px solid var(--wood-dark); border-radius:9px; font-size:15px}
+.nav-item .ico .g-ico{width:22px; height:22px}
+.nav-item.active .ico{border-color:var(--green-dark)}
+.doc-item .d-ico .g-ico{width:36px; height:36px}
+.card h3 .g-ico{width:27px; height:27px; margin:-5px 0}
+.page-title .g-ico{width:42px; height:42px; vertical-align:-10px; margin-right:10px}
+@media (max-width:780px){
+  .g-meadow{height:150px; background-size:auto 108px,auto} .main{padding-bottom:190px}
+  .tulips{height:66px; background-size:auto 66px; margin:-6px 2px 12px}
+  .page-head.has-art{padding-right:104px; min-height:92px} .page-critter{height:92px; max-width:100px; right:10px; bottom:-44px}
+  .page-title .g-ico{width:32px; height:32px; vertical-align:-7px; margin-right:7px}
+  .hero-bee{right:3%; top:9%} .hero-bee .bee{width:46px} .g-bubble{font-size:11.5px; padding:5px 8px; margin-top:4px; max-width:150px; border-radius:12px}
+  .nav-item .ico{width:26px; height:26px} .nav-item .ico .g-ico{width:19px; height:19px}
+}
+
+/* leaf bullet in link lists */
+.info-block li>.g-ico, #rl p>.g-ico, li>.g-ico{width:19px; height:19px; vertical-align:-4px; margin-right:3px}
 </style>
 </head>
 <body data-font="garden" data-bg="garden" data-sky="day">
@@ -1121,8 +1156,8 @@ a.doc-item:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark)
 <img class="g-cloud c2" src="assets/garden/cloud3.webp" alt="" aria-hidden="true">
 <img class="g-cloud c3" src="assets/garden/cloud2.webp" alt="" aria-hidden="true">
 <img class="g-cloud c4" src="assets/garden/cloud1.webp" alt="" aria-hidden="true">
+<div class="g-corner" aria-hidden="true"><img src="assets/garden/cottage.webp" alt="" style="display:block;width:100%;height:auto"></div>
 <div class="g-meadow" aria-hidden="true"></div>
-<div class="g-corner" aria-hidden="true"><img src="assets/garden/cottage.webp" alt="" style="display:block;width:100%;height:auto"><img class="rabbit" src="assets/garden/rabbit.webp" alt=""></div>
 <div class="test-banner" role="status" aria-live="polite">
   <strong>TEST BUILD</strong> &mdash; not yet approved by Kate. Nothing here is public or final.
   <span lang="fr"> / <strong>VERSION TEST</strong> &mdash; non approuv&eacute;e par Kate. Rien ici n&rsquo;est public ou final.</span>
@@ -1288,7 +1323,7 @@ function calOpen(id){
 }
 
 function nav(){
-  const I=(p,ico,l)=>`<a class="nav-item" data-p="${p}" tabindex="0" role="link" onclick="go('${p}')" onkeydown="if(event.key==='Enter')go('${p}')"><span class="ico">${ico}</span> ${l}</a>`;
+  const I=(p,ico,l)=>`<a class="nav-item" data-p="${p}" tabindex="0" role="link" onclick="go('${p}')" onkeydown="if(event.key==='Enter')go('${p}')"><span class="ico">${gIco(p)||ico}</span> ${l}</a>`;
   const P=k=>I(k,PAGES[k].ico,esc(T2(PAGES[k].title)));
   document.getElementById('side').innerHTML=`<div class="nav-label">${t('start')}</div>`+I('home','🏡',t('home'))+P('about')+I('article','📰',t('article'))+
    `<div class="nav-label">${t('g_gardens')}</div>`+P('find')+P('start')+P('coordinators')+P('guides')+
@@ -1305,7 +1340,7 @@ function blockHtml(bk){
   if(bk.t==='note') return `<div class="tk-callout info"><span class="ic">ℹ️</span><span>${esc(bk[lang]||bk.en)}</span></div>`;
   if(bk.t==='ul') return `<ul class="ec-ul" style="padding-left:20px;font-size:14px">${(bk[lang]||bk.en).map(i=>`<li style="margin:5px 0">${esc(i)}</li>`).join('')}</ul>`;
   if(bk.t==='steps') return `<div>${bk.items.map((s,i)=>`<div class="tk-step"><div class="tk-num">${i+1}</div><div style="flex:1"><div class="body-text" style="margin:0">${esc(s[lang]||s.en)}</div>${s.url?`<a class="desc-link" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(T2(s.link)||'↗')}</a>`:''}${s.page?`<a class="desc-link" href="#" onclick="go('${s.page}');return false">${esc(T2(s.link))}</a>`:''}</div></div>`).join('')}</div>`;
-  if(bk.t==='links') return `<ul style="padding:0">${bk.items.map(i=>`<li style="list-style:none;margin:7px 0">📎 <a href="${esc(i.url)}" target="_blank" rel="noopener" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(i.en))},'guide')">${esc(i[lang]||i.en)}</a></li>`).join('')}</ul>`;
+  if(bk.t==='links') return `<ul style="padding:0">${bk.items.map(i=>`<li style="list-style:none;margin:7px 0">${gIco('leaf')} <a href="${esc(i.url)}" target="_blank" rel="noopener" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(i.en))},'guide')">${esc(i[lang]||i.en)}</a></li>`).join('')}</ul>`;
   if(bk.t==='cards') return `<div class="poster-grid">${bk.items.map(c=>`<div class="poster-card tool-card ${c.status?'status-'+(c.status.en||'').toLowerCase().replace(/[^a-z0-9]+/g,'-'):''}"><div class="poster-body">${c.ico?`<div class="tool-ico" aria-hidden="true">${c.ico}</div>`:''}<strong>${esc(T2(c.title))}</strong><div class="p-meta" style="margin:4px 0 6px;color:var(--ink-soft)">${esc(T2(c.body))}</div>${c.status?`<span class="pc-badge pc-tbc">${esc(T2(c.status))}</span>`:''}</div></div>`).join('')}</div>`;
   if(bk.t==='table') return `<div class="cw-table-wrap"><table class="cw-table"><thead><tr>${bk.head.map(h=>`<th>${esc(T2(h))}</th>`).join('')}</tr></thead><tbody>${bk.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(T2(c))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if(bk.t==='feature'){const docs=bk.docs||[],main=docs.find(d=>d.code===lang)||docs[0],rest=docs.filter(d=>d!==main),A=d=>`href="${esc(d.url)}" target="_blank" rel="noopener" data-t="${esc(bk.title.en+' · '+d.label)}" onclick="track('download',this.dataset.t,'guide')"`;
@@ -1320,14 +1355,14 @@ function pageHtml(k){
   const groups=[];let cur={tint:'',blocks:[]};
   p.blocks.forEach(b=>{if(b.t==='section'){if(cur.blocks.length)groups.push(cur);cur={tint:b.tint||'',blocks:[]}}else cur.blocks.push(b)});
   if(cur.blocks.length)groups.push(cur);
-  return head(p.ico+' '+T2(p.title),T2(p.sub),k)+fr+groups.map(g=>`<div class="card${g.tint?' tint-'+g.tint:''}">${g.blocks.map(blockHtml).join('')}</div>`).join('');
+  return head(T2(p.title),T2(p.sub),k)+fr+groups.map(g=>`<div class="card${g.tint?' tint-'+g.tint:''}">${g.blocks.map(blockHtml).join('')}</div>`).join('');
 }
 /* ── Side cards: Visit the Farm + Follow the CGN ── */
 function farmCard(){
   const fr = lang === 'fr';
   return `<div class="card side-card" id="farmCard">
-    <span class="corner-tag green">${fr?'Visite 🚜':'Visit 🚜'}</span>
-    <h3>🚜 ${fr?'Visiter la ferme communautaire de Just Food':'Visit the Just Food Community Farm'}</h3>
+    <span class="corner-tag green">${fr?'Visite 🌻':'Visit 🌻'}</span>
+    <h3>${gIco('barn')} ${fr?'Visiter la ferme communautaire de Just Food':'Visit the Just Food Community Farm'}</h3>
     <p class="body-text">${fr
       ?'Une ferme communautaire de 150 acres dans la Ceinture de verdure de la CCN, bordée du ruisseau Green, à Blackburn Hamlet.'
       :'A 150-acre community farm in the NCC Greenbelt next to Green’s Creek, in Blackburn Hamlet.'}</p>
@@ -1362,7 +1397,7 @@ function followCard(){
   const fr = lang === 'fr';
   return `<div class="card side-card" id="followCard">
     <span class="corner-tag blue">${fr?'Suivre 💌':'Follow 💌'}</span>
-    <h3>💌 ${fr?'Suivre le RJC':'Follow the CGN'}</h3>
+    <h3>${gIco('contact')} ${fr?'Suivre le RJC':'Follow the CGN'}</h3>
     <p class="body-text" style="margin:0 0 10px">${fr?'Nouvelles, ateliers et appels à l’action du réseau et de Just Food.':'News, workshops and calls-to-action from the network and Just Food.'}</p>
     <div class="wk-btns">
       <a class="send-btn" href="https://www.facebook.com/JustfoodOttawa" target="_blank" onclick="track('view','facebook','followcard')">📘 Facebook</a>
@@ -1375,16 +1410,37 @@ function followCard(){
 /* ── Cozy secret-garden layer (injected by build_comm.py at GARDEN_JS) ──
    Welcome banner, page companions, garden almanac (live Ottawa forecast from
    Open-Meteo; monthly jobs from content/hub.json → "almanac"), incident form. */
-const G_ART={about:'bluebird',article:'armchair',find:'rabbit',start:'watering-can',coordinators:'hedgehog',guides:'carrots',faq:'snail','ws-upcoming':'chair-tools','ws-past':'greenhouse','ws-slides':'dragonfly',resources:'plant-shelf',contact:'door',incident:'lighthouse'};
+const G_ART={about:'bluebird',article:'armchair',find:'rabbit',start:'watering-can',coordinators:'hedgehog',guides:'carrots',faq:'snail','ws-upcoming':'chair-tools','ws-past':'greenhouse','ws-slides':'dragonfly',resources:'shed',contact:'door',incident:'lighthouse'};
+/* Hand-drawn icon set in CGN colours (brick bowl, leaf green, straw, wood). Used in the sidebar, page titles and home tiles. */
+const G_ICO={
+ home:`<path d="M4 15 16 5l12 10z" fill="#F38DB5"/><path d="M7 15v12h18V15" fill="#E9C592"/><path d="M13.5 27v-7.5h5V27" fill="#8A5A30"/><circle cx="22" cy="19.5" r="1.9" fill="#CFE6F7"/>`,
+ about:`<path d="M5.5 16.5h21c0 6-4.6 10.5-10.5 10.5S5.5 22.5 5.5 16.5z" fill="#A94A22"/><path d="M16 16.5V8.5"/><path d="M16 12.5c-3.6 0-5.4-2.2-5.4-5 3.4 0 5.4 2 5.4 5z" fill="#5E9E49"/><path d="M16 10.5c3.6 0 5.4-2.2 5.4-5-3.4 0-5.4 2-5.4 5z" fill="#5E9E49"/>`,
+ article:`<path d="M8 5h12.5L25 9.5V27H8z" fill="#FFF8EA"/><path d="M20.5 5v4.5H25"/><path d="M11.5 14h9.5M11.5 18h9.5M11.5 22h5"/><path d="M24.5 25c0-3.4-2.2-5-4.8-5 0 3.4 2 5 4.8 5z" fill="#5E9E49"/>`,
+ find:`<path d="M16 28S7 19.6 7 12.6C7 7.8 11 4 16 4s9 3.8 9 8.6C25 19.6 16 28 16 28z" fill="#D9534A"/><circle cx="16" cy="12.5" r="3.6" fill="#FFF8EA"/>`,
+ start:`<path d="M5 20h22v7.5H5z" fill="#D2A066"/><path d="M5 23.7h22"/><path d="M16 20v-8"/><path d="M16 15.5c-3.4 0-5-2-5-4.6 3.2 0 5 1.8 5 4.6z" fill="#5E9E49"/><path d="M16 13.5c3.4 0 5-2 5-4.6-3.2 0-5 1.8-5 4.6z" fill="#5E9E49"/><path d="M9.5 20v-2.6M22.5 20v-2.6"/>`,
+ coordinators:`<ellipse cx="16" cy="20.5" rx="12" ry="4.6" fill="#F6CE5F"/><path d="M9.6 19.6C9.6 12.5 12 8 16 8s6.4 4.5 6.4 11.6" fill="#F6CE5F"/><path d="M9.8 17.6c2.4 1.6 10 1.6 12.4 0" stroke="#C0477C" stroke-width="2.6"/>`,
+ guides:`<path d="M16 13c-3-2-7-2-11-1v14c4-1 8-1 11 1 3-2 7-2 11-1V12c-4-1-8-1-11 1z" fill="#FFF8EA"/><path d="M16 13v14"/><path d="M16 13V6.5"/><path d="M16 9.5c-2.6 0-3.8-1.5-3.8-3.5 2.5 0 3.8 1.4 3.8 3.5z" fill="#5E9E49"/><path d="M16 8.3c2.6 0 3.8-1.5 3.8-3.5-2.5 0-3.8 1.4-3.8 3.5z" fill="#5E9E49"/>`,
+ 'ws-upcoming':`<rect x="5" y="7" width="22" height="20" rx="3" fill="#FFF8EA"/><path d="M5 12.5V10a3 3 0 0 1 3-3h16a3 3 0 0 1 3 3v2.5z" fill="#5E9E49"/><path d="M11 4.5v5M21 4.5v5"/><g fill="#F38DB5" stroke-width="1.2"><circle cx="16" cy="16.6" r="2.1"/><circle cx="16" cy="23" r="2.1"/><circle cx="12.8" cy="19.8" r="2.1"/><circle cx="19.2" cy="19.8" r="2.1"/></g><circle cx="16" cy="19.8" r="1.7" fill="#F6CE5F" stroke-width="1.2"/>`,
+ 'ws-past':`<rect x="4.5" y="6.5" width="23" height="19" rx="2.5" fill="#D2A066"/><rect x="8" y="10" width="16" height="12" fill="#CFE6F7"/><path d="M8 22l5-6.5 3.8 4 2.8-2.4L24 22z" fill="#5E9E49"/><circle cx="20.4" cy="13.4" r="1.6" fill="#F6CE5F" stroke-width="1.2"/>`,
+ 'ws-slides':`<rect x="5" y="5.5" width="22" height="15.5" rx="2" fill="#FFF8EA"/><path d="M16 21v3.5M10.5 28l5.5-3.5 5.5 3.5"/><path d="M9 10.5h6M9 14h4"/><path d="M23 16.8c0-3.6-2.4-5.2-5-5.2 0 3.6 2.2 5.2 5 5.2z" fill="#5E9E49"/>`,
+ resources:`<rect x="6" y="20.5" width="20" height="5.5" rx="1.3" fill="#1A6B54"/><rect x="8" y="15" width="18" height="5.5" rx="1.3" fill="#F6CE5F"/><rect x="6.5" y="9.5" width="17" height="5.5" rx="1.3" fill="#D9534A"/><path d="M19.5 9.5c0-3 1.9-4.6 4.4-4.6 0 3-1.7 4.6-4.4 4.6z" fill="#5E9E49"/>`,
+ faq:`<path d="M6 8a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-8l-5 5v-5H9a3 3 0 0 1-3-3z" fill="#CFE6F7"/><path d="M13.4 10.8c0-1.5 1.1-2.5 2.6-2.5s2.6 1 2.6 2.4c0 1.9-2.6 2-2.6 4"/><circle cx="16" cy="17.6" r=".7" fill="#4A3426"/>`,
+ contact:`<rect x="5" y="8.5" width="22" height="16" rx="2.5" fill="#FFF8EA"/><path d="M5.5 10l10.5 8 10.5-8"/><path d="M16 23.4c-2.6-1.9-3.2-3.1-2.3-4 .7-.8 1.8-.5 2.3.3.5-.8 1.6-1.1 2.3-.3.9.9.3 2.1-2.3 4z" fill="#F38DB5" stroke-width="1.2"/>`,
+ incident:`<rect x="5" y="10" width="22" height="16.5" rx="3" fill="#FFF8EA"/><path d="M12 10V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M16 14v8.5M11.8 18.2h8.4" stroke="#D9534A" stroke-width="3.2"/>`,
+ signpost:`<path d="M16 4.5V28"/><path d="M8 7.5h14l3 3-3 3H8z" fill="#E9C592"/><path d="M24 16.5H10l-3 3 3 3h14z" fill="#A9D9A0"/>`,
+ barn:`<path d="M5 15l4.5-6.5h13L27 15z" fill="#B37B46"/><path d="M7 15h18v12H7z" fill="#D9534A"/><path d="M12.5 27v-8h7v8" fill="#FFF8EA"/><path d="M12.5 19l7 8M19.5 19l-7 8" stroke-width="1.2"/>`,
+ leaf:`<path d="M6 26C6 13 14 6 27 5c0 13-7 21-21 21z" fill="#A9D9A0"/><path d="M6 26C11 19 17 13 23 9"/><path d="M12.5 19.5V14M17 15h5" stroke-width="1.3"/>`
+};
+const gIco=k=>G_ICO[k]?`<svg class="g-ico" viewBox="0 0 32 32" fill="none" stroke="#4A3426" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${G_ICO[k]}</svg>`:'';
 const gImg=(n,c)=>`<img class="${c}" src="assets/garden/${n}.webp" alt="" aria-hidden="true">`;
-function head(title,sub,key){const a=G_ART[key];return `<div class="page-head${a?' has-art':''}"><h1 class="page-title">${title}</h1>${sub?`<p class="page-sub">${sub}</p>`:''}${a?gImg(a,'page-critter'):''}</div><div class="tulips" aria-hidden="true"></div>`}
+function head(title,sub,key){const a=G_ART[key];return `<div class="page-head${a?' has-art':''}"><h1 class="page-title">${gIco(key)}${title}</h1>${sub?`<p class="page-sub">${sub}</p>`:''}${a?gImg(a,'page-critter'):''}</div><div class="tulips" aria-hidden="true"></div>`}
 function gardenSideArt(){return `<div class="sidebar-art">${gImg('shed','side-shed')}</div>`}
 function gardenHero(){
-  return `<div class="hero">${gImg('wisteria','hero-wisteria')}
+  return `<div class="hero">${gImg('wisteria','hero-wisteria')}${gImg('wisteria','hero-wisteria r')}
     <div class="hero-text"><img class="hero-logo" src="assets/garden/cgn-logo.png" width="842" height="280" alt="Community Gardening Network of Ottawa — Réseau de jardinage communautaire d’Ottawa">
       <span class="welcome" id="heroTitle"></span><p class="tag" id="heroTag"></p></div>
-    <div class="hero-scene">${gImg('barn-landscape','land')}
-      <div class="hero-bee">${gImg('bee','bee')}<div class="g-bubble"><span id="dayGreeting"></span></div></div>${gImg('butterfly','hero-fly')}</div></div>`;
+    <div class="hero-scene">${gImg('garden-scene','land')}
+      <div class="hero-bee">${gImg('bee','bee')}<div class="g-bubble"><span id="dayGreeting"></span></div></div></div></div>`;
 }
 
 /* ── Almanac ── */
@@ -1503,11 +1559,11 @@ function render(){
   const art=HUB.articles[0], srcW=HUB.workshops.find(w=>w.id===SRC);
   const now=new Date(),h=now.getHours(),loc=lang==='fr'?'fr-CA':'en-CA';
   document.getElementById('home').innerHTML=gardenHero()+gardenAlmanac()+
-   `<div class="card"><span class="corner-tag blue">${t('quick')}</span><h3>🧭 ${t('quick')}</h3><div class="doc-grid">${['find','start','coordinators','guides'].map(k=>`<a class="doc-item" href="#" onclick="go('${k}');return false"><span class="d-ico">${PAGES[k].ico}</span><div><strong>${esc(T2(PAGES[k].title))}</strong><span class="d-note">${esc(T2(PAGES[k].sub))}</span></div></a>`).join('')}<a class="doc-item" href="#" onclick="go('ws-upcoming');return false"><span class="d-ico">📅</span><div><strong>${t('g_ws')}</strong><span class="d-note">${t('ws_upcoming')} · ${t('ws_past')} · ${t('ws_slides')}</span></div></a><a class="doc-item" href="#" onclick="go('resources');return false"><span class="d-ico">📚</span><div><strong>${t('resources')}</strong><span class="d-note">${t('res_sub')}</span></div></a></div></div>
-    <div class="card"><span class="corner-tag yellow">${t('aow')} 📰</span><h3>📰 ${t('aow')}</h3>${art?artHtml(art):`<p class="body-text" style="font-style:italic;color:var(--ink-soft)">${t('noart')}</p>`}</div>
-    <div class="card"><span class="corner-tag">${t('cal')} 📅</span><h3>📅 ${t('cal')}</h3><p class="body-text" style="color:var(--ink-soft)">${t('cal_sub')}</p><div id="calBox">${calHtml()}</div></div>
+   `<div class="card"><span class="corner-tag blue">${t('quick')}</span><h3>${gIco('signpost')} ${t('quick')}</h3><div class="doc-grid">${['find','start','coordinators','guides'].map(k=>`<a class="doc-item" href="#" onclick="go('${k}');return false"><span class="d-ico">${gIco(k)}</span><div><strong>${esc(T2(PAGES[k].title))}</strong><span class="d-note">${esc(T2(PAGES[k].sub))}</span></div></a>`).join('')}<a class="doc-item" href="#" onclick="go('ws-upcoming');return false"><span class="d-ico">${gIco('ws-upcoming')}</span><div><strong>${t('g_ws')}</strong><span class="d-note">${t('ws_upcoming')} · ${t('ws_past')} · ${t('ws_slides')}</span></div></a><a class="doc-item" href="#" onclick="go('resources');return false"><span class="d-ico">${gIco('resources')}</span><div><strong>${t('resources')}</strong><span class="d-note">${t('res_sub')}</span></div></a></div></div>
+    <div class="card"><span class="corner-tag yellow">${t('aow')} 📰</span><h3>${gIco('article')} ${t('aow')}</h3>${art?artHtml(art):`<p class="body-text" style="font-style:italic;color:var(--ink-soft)">${t('noart')}</p>`}</div>
+    <div class="card"><span class="corner-tag">${t('cal')} 📅</span><h3>${gIco('ws-upcoming')} ${t('cal')}</h3><p class="body-text" style="color:var(--ink-soft)">${t('cal_sub')}</p><div id="calBox">${calHtml()}</div></div>
     ${srcW?`<div class="card"><span class="corner-tag yellow">${t('welcome_ws')} 🌻</span><h3>🌻 ${t('welcome_ws')}</h3><p class="body-text">${t('thanks')}</p><div class="poster-grid">${wcard(srcW)}</div></div>`:''}
-    ${upc.length?`<div class="card"><span class="corner-tag blue">${t('upcoming')} 🌷</span><h3>🌷 ${t('upcoming')}</h3><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:''}
+    ${upc.length?`<div class="card"><span class="corner-tag blue">${t('upcoming')} 🌷</span><h3>${gIco('start')} ${t('upcoming')}</h3><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:''}
     ${farmCard()}
     ${followCard()}`;
   document.getElementById('heroTitle').textContent=t('welcome');document.getElementById('heroTag').textContent=t('tag');
@@ -1516,7 +1572,7 @@ function render(){
   document.getElementById('incident').innerHTML=incidentHtml(); almanacFill();
   document.getElementById('article').innerHTML=head(t('article'),t('art_sub'),'article')+(HUB.articles.length?HUB.articles.map((a,i)=>`${i==1?`<h3 class="page-sub" style="font-weight:800">${t('prev_art')}</h3>`:''}<div class="card">${artHtml(a)}</div>`).join(''):`<div class="card"><p class="body-text" style="font-style:italic">${t('noart')}</p></div>`);
   document.getElementById('ws-upcoming').innerHTML=head(t('ws_upcoming'),'','ws-upcoming')+(upc.length?`<div class="card"><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:`<div class="card"><p class="body-text" style="font-style:italic">${t('noup')}</p></div>`);
-  document.getElementById('ws-past').innerHTML=head(t('ws_past'),'','ws-past')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>🖼️ ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
+  document.getElementById('ws-past').innerHTML=head(t('ws_past'),'','ws-past')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>${gIco('ws-past')} ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
   document.getElementById('ws-slides').innerHTML=head(t('ws_slides'),t('slides_sub'),'ws-slides')
     +`<div class="card">`+past.map(w=>`<div class="srow"><strong>${esc(w.title)}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(w.who)} · ${esc(w.when)}</div><div class="wk-btns">${slideBtns(w)}${w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank" rel="noopener">▶ ${t('recording')}</a>`:''}</div></div>`).join('')+`</div>`;
   const tags=[...new Set(HUB.resources.flatMap(r=>r.tags||[]))];
@@ -1535,7 +1591,7 @@ let _tag='';
 function resTag(x){_tag=x;resList()}
 function resList(){const s=((document.getElementById('rs')||{}).value||'').toLowerCase();
   const l=HUB.resources.filter(r=>(!_tag||(r.tags||[]).includes(_tag))&&((r.title+' '+(r.title_fr||'')).toLowerCase().includes(s)));
-  document.getElementById('rl').innerHTML=l.length?l.map(r=>`<p style="margin:6px 0">📎 <a href="${esc(r.url)}" target="_blank" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(r.title))},'resource')">${esc(L(r,'title'))}</a></p>`).join(''):`<p class="body-text">—</p>`}
+  document.getElementById('rl').innerHTML=l.length?l.map(r=>`<p style="margin:6px 0">${gIco('leaf')} <a href="${esc(r.url)}" target="_blank" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(r.title))},'resource')">${esc(L(r,'title'))}</a></p>`).join(''):`<p class="body-text">—</p>`}
 function sendContact(){
   const m=document.getElementById('cm').value.trim(); if(!m) return;
   const typ=document.getElementById('ct').value,n=document.getElementById('cn').value,e=document.getElementById('ce').value;

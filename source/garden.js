@@ -1,16 +1,37 @@
 /* ── Cozy secret-garden layer (injected by build_comm.py at GARDEN_JS) ──
    Welcome banner, page companions, garden almanac (live Ottawa forecast from
    Open-Meteo; monthly jobs from content/hub.json → "almanac"), incident form. */
-const G_ART={about:'bluebird',article:'armchair',find:'rabbit',start:'watering-can',coordinators:'hedgehog',guides:'carrots',faq:'snail','ws-upcoming':'chair-tools','ws-past':'greenhouse','ws-slides':'dragonfly',resources:'plant-shelf',contact:'door',incident:'lighthouse'};
+const G_ART={about:'bluebird',article:'armchair',find:'rabbit',start:'watering-can',coordinators:'hedgehog',guides:'carrots',faq:'snail','ws-upcoming':'chair-tools','ws-past':'greenhouse','ws-slides':'dragonfly',resources:'shed',contact:'door',incident:'lighthouse'};
+/* Hand-drawn icon set in CGN colours (brick bowl, leaf green, straw, wood). Used in the sidebar, page titles and home tiles. */
+const G_ICO={
+ home:`<path d="M4 15 16 5l12 10z" fill="#F38DB5"/><path d="M7 15v12h18V15" fill="#E9C592"/><path d="M13.5 27v-7.5h5V27" fill="#8A5A30"/><circle cx="22" cy="19.5" r="1.9" fill="#CFE6F7"/>`,
+ about:`<path d="M5.5 16.5h21c0 6-4.6 10.5-10.5 10.5S5.5 22.5 5.5 16.5z" fill="#A94A22"/><path d="M16 16.5V8.5"/><path d="M16 12.5c-3.6 0-5.4-2.2-5.4-5 3.4 0 5.4 2 5.4 5z" fill="#5E9E49"/><path d="M16 10.5c3.6 0 5.4-2.2 5.4-5-3.4 0-5.4 2-5.4 5z" fill="#5E9E49"/>`,
+ article:`<path d="M8 5h12.5L25 9.5V27H8z" fill="#FFF8EA"/><path d="M20.5 5v4.5H25"/><path d="M11.5 14h9.5M11.5 18h9.5M11.5 22h5"/><path d="M24.5 25c0-3.4-2.2-5-4.8-5 0 3.4 2 5 4.8 5z" fill="#5E9E49"/>`,
+ find:`<path d="M16 28S7 19.6 7 12.6C7 7.8 11 4 16 4s9 3.8 9 8.6C25 19.6 16 28 16 28z" fill="#D9534A"/><circle cx="16" cy="12.5" r="3.6" fill="#FFF8EA"/>`,
+ start:`<path d="M5 20h22v7.5H5z" fill="#D2A066"/><path d="M5 23.7h22"/><path d="M16 20v-8"/><path d="M16 15.5c-3.4 0-5-2-5-4.6 3.2 0 5 1.8 5 4.6z" fill="#5E9E49"/><path d="M16 13.5c3.4 0 5-2 5-4.6-3.2 0-5 1.8-5 4.6z" fill="#5E9E49"/><path d="M9.5 20v-2.6M22.5 20v-2.6"/>`,
+ coordinators:`<ellipse cx="16" cy="20.5" rx="12" ry="4.6" fill="#F6CE5F"/><path d="M9.6 19.6C9.6 12.5 12 8 16 8s6.4 4.5 6.4 11.6" fill="#F6CE5F"/><path d="M9.8 17.6c2.4 1.6 10 1.6 12.4 0" stroke="#C0477C" stroke-width="2.6"/>`,
+ guides:`<path d="M16 13c-3-2-7-2-11-1v14c4-1 8-1 11 1 3-2 7-2 11-1V12c-4-1-8-1-11 1z" fill="#FFF8EA"/><path d="M16 13v14"/><path d="M16 13V6.5"/><path d="M16 9.5c-2.6 0-3.8-1.5-3.8-3.5 2.5 0 3.8 1.4 3.8 3.5z" fill="#5E9E49"/><path d="M16 8.3c2.6 0 3.8-1.5 3.8-3.5-2.5 0-3.8 1.4-3.8 3.5z" fill="#5E9E49"/>`,
+ 'ws-upcoming':`<rect x="5" y="7" width="22" height="20" rx="3" fill="#FFF8EA"/><path d="M5 12.5V10a3 3 0 0 1 3-3h16a3 3 0 0 1 3 3v2.5z" fill="#5E9E49"/><path d="M11 4.5v5M21 4.5v5"/><g fill="#F38DB5" stroke-width="1.2"><circle cx="16" cy="16.6" r="2.1"/><circle cx="16" cy="23" r="2.1"/><circle cx="12.8" cy="19.8" r="2.1"/><circle cx="19.2" cy="19.8" r="2.1"/></g><circle cx="16" cy="19.8" r="1.7" fill="#F6CE5F" stroke-width="1.2"/>`,
+ 'ws-past':`<rect x="4.5" y="6.5" width="23" height="19" rx="2.5" fill="#D2A066"/><rect x="8" y="10" width="16" height="12" fill="#CFE6F7"/><path d="M8 22l5-6.5 3.8 4 2.8-2.4L24 22z" fill="#5E9E49"/><circle cx="20.4" cy="13.4" r="1.6" fill="#F6CE5F" stroke-width="1.2"/>`,
+ 'ws-slides':`<rect x="5" y="5.5" width="22" height="15.5" rx="2" fill="#FFF8EA"/><path d="M16 21v3.5M10.5 28l5.5-3.5 5.5 3.5"/><path d="M9 10.5h6M9 14h4"/><path d="M23 16.8c0-3.6-2.4-5.2-5-5.2 0 3.6 2.2 5.2 5 5.2z" fill="#5E9E49"/>`,
+ resources:`<rect x="6" y="20.5" width="20" height="5.5" rx="1.3" fill="#1A6B54"/><rect x="8" y="15" width="18" height="5.5" rx="1.3" fill="#F6CE5F"/><rect x="6.5" y="9.5" width="17" height="5.5" rx="1.3" fill="#D9534A"/><path d="M19.5 9.5c0-3 1.9-4.6 4.4-4.6 0 3-1.7 4.6-4.4 4.6z" fill="#5E9E49"/>`,
+ faq:`<path d="M6 8a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-8l-5 5v-5H9a3 3 0 0 1-3-3z" fill="#CFE6F7"/><path d="M13.4 10.8c0-1.5 1.1-2.5 2.6-2.5s2.6 1 2.6 2.4c0 1.9-2.6 2-2.6 4"/><circle cx="16" cy="17.6" r=".7" fill="#4A3426"/>`,
+ contact:`<rect x="5" y="8.5" width="22" height="16" rx="2.5" fill="#FFF8EA"/><path d="M5.5 10l10.5 8 10.5-8"/><path d="M16 23.4c-2.6-1.9-3.2-3.1-2.3-4 .7-.8 1.8-.5 2.3.3.5-.8 1.6-1.1 2.3-.3.9.9.3 2.1-2.3 4z" fill="#F38DB5" stroke-width="1.2"/>`,
+ incident:`<rect x="5" y="10" width="22" height="16.5" rx="3" fill="#FFF8EA"/><path d="M12 10V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M16 14v8.5M11.8 18.2h8.4" stroke="#D9534A" stroke-width="3.2"/>`,
+ signpost:`<path d="M16 4.5V28"/><path d="M8 7.5h14l3 3-3 3H8z" fill="#E9C592"/><path d="M24 16.5H10l-3 3 3 3h14z" fill="#A9D9A0"/>`,
+ barn:`<path d="M5 15l4.5-6.5h13L27 15z" fill="#B37B46"/><path d="M7 15h18v12H7z" fill="#D9534A"/><path d="M12.5 27v-8h7v8" fill="#FFF8EA"/><path d="M12.5 19l7 8M19.5 19l-7 8" stroke-width="1.2"/>`,
+ leaf:`<path d="M6 26C6 13 14 6 27 5c0 13-7 21-21 21z" fill="#A9D9A0"/><path d="M6 26C11 19 17 13 23 9"/><path d="M12.5 19.5V14M17 15h5" stroke-width="1.3"/>`
+};
+const gIco=k=>G_ICO[k]?`<svg class="g-ico" viewBox="0 0 32 32" fill="none" stroke="#4A3426" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${G_ICO[k]}</svg>`:'';
 const gImg=(n,c)=>`<img class="${c}" src="assets/garden/${n}.webp" alt="" aria-hidden="true">`;
-function head(title,sub,key){const a=G_ART[key];return `<div class="page-head${a?' has-art':''}"><h1 class="page-title">${title}</h1>${sub?`<p class="page-sub">${sub}</p>`:''}${a?gImg(a,'page-critter'):''}</div><div class="tulips" aria-hidden="true"></div>`}
+function head(title,sub,key){const a=G_ART[key];return `<div class="page-head${a?' has-art':''}"><h1 class="page-title">${gIco(key)}${title}</h1>${sub?`<p class="page-sub">${sub}</p>`:''}${a?gImg(a,'page-critter'):''}</div><div class="tulips" aria-hidden="true"></div>`}
 function gardenSideArt(){return `<div class="sidebar-art">${gImg('shed','side-shed')}</div>`}
 function gardenHero(){
-  return `<div class="hero">${gImg('wisteria','hero-wisteria')}
+  return `<div class="hero">${gImg('wisteria','hero-wisteria')}${gImg('wisteria','hero-wisteria r')}
     <div class="hero-text"><img class="hero-logo" src="assets/garden/cgn-logo.png" width="842" height="280" alt="Community Gardening Network of Ottawa — Réseau de jardinage communautaire d’Ottawa">
       <span class="welcome" id="heroTitle"></span><p class="tag" id="heroTag"></p></div>
-    <div class="hero-scene">${gImg('barn-landscape','land')}
-      <div class="hero-bee">${gImg('bee','bee')}<div class="g-bubble"><span id="dayGreeting"></span></div></div>${gImg('butterfly','hero-fly')}</div></div>`;
+    <div class="hero-scene">${gImg('garden-scene','land')}
+      <div class="hero-bee">${gImg('bee','bee')}<div class="g-bubble"><span id="dayGreeting"></span></div></div></div></div>`;
 }
 
 /* ── Almanac ── */

@@ -59,11 +59,14 @@ The public Hub wears a "cozy game" skin: wooden signboards, parchment, a chalkbo
 | Colours, fonts, signboard and plank styles | `source/garden_theme.css` | Loaded last, so it wins over older styles |
 | Welcome banner, almanac, incident form | `source/garden.js` | Injected by the build |
 | This month's garden jobs and veggie notes | `content/hub.json` → `"almanac"` | One entry per month, EN + FR; adapted from the CGN Garden Guide |
-| Pictures (bee, barn, clouds, flowers…) | `assets/garden/` | Keep the same file names to swap an image |
+| Pictures (bee, clouds, critters…) | `assets/garden/` | Keep the same file names to swap an image |
+| Welcome garden picture and the flower border | `assets/garden/garden-scene.webp`, `assets/garden/garden-border.webp` | Each is one composed illustration (barn, greenhouse, shed, pond, beds, flowers, critters arranged into a single garden), not separate stickers. Replace the file to change it |
+| Sidebar, page-title and home-tile icons | `source/garden.js` → `G_ICO` | A small hand-drawn icon set in CGN colours (replaces emoji). One entry per page |
 
 - **Garden almanac:** season, frost nights, rain and warmest day come live from [Open-Meteo](https://open-meteo.com/) (free, no account, no visitor data sent beyond a normal web request). If it cannot load, the tiles say so and link to Environment Canada.
 - **Sky:** changes with the visitor's clock (dawn, day, dusk, night). Add `?sky=dusk` (or `dawn`, `day`, `night`) to the address to preview one.
 - **Incident report page:** an example built from Just Food's EN and FR incident templates. It does not send or store anything yet; Kate decides where reports should go before it is switched on.
+- **Re-making the garden pictures:** the working files (cut-outs and the `compose.py` script that arranges them) are in `art-source/` on Nadia's computer only. They are deliberately not uploaded to GitHub. To rebuild both pictures: `python3 art-source/compose.py art-source .` (needs the Pillow library).
 - **Before going public:** confirm the Canva elements in `assets/garden/` are covered by Just Food's Canva licence for website use.
 
 ---

@@ -16,3 +16,6 @@ __pycache__/
 # Editor lock files
 .~lock.*
 *.swp
+
+# Working files for the composed garden pictures (raw Canva cut-outs: kept on this computer only, not published)
+art-source/
