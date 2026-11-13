@@ -189,6 +189,7 @@ function nav(){
 }
 /* ── Generic info-page renderer ── */
 const T2=o=>o?(o[lang]||o.en):'';
+const faqLinks=ls=>(ls&&ls.length)?`<div class="faq-links">${ls.map(l=>l.page?`<a href="#" onclick="go('${l.page}');return false">${esc(T2(l))} →</a>`:`<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(T2(l))} ↗</a>`).join('')}</div>`:'';
 function blockHtml(bk){
   const X=k=>bk[k]&&typeof bk[k]==='object'&&!Array.isArray(bk[k])?T2(bk[k]):bk[k];
   if(bk.t==='p') return `<p class="body-text">${esc(bk[lang]||bk.en)}</p>`;
@@ -199,14 +200,19 @@ function blockHtml(bk){
   if(bk.t==='links') return `<ul style="padding:0">${bk.items.map(i=>`<li style="list-style:none;margin:7px 0">📎 <a href="${esc(i.url)}" target="_blank" rel="noopener" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(i.en))},'guide')">${esc(i[lang]||i.en)}</a></li>`).join('')}</ul>`;
   if(bk.t==='cards') return `<div class="poster-grid">${bk.items.map(c=>`<div class="poster-card tool-card ${c.status?'status-'+(c.status.en||'').toLowerCase().replace(/[^a-z0-9]+/g,'-'):''}"><div class="poster-body">${c.ico?`<div class="tool-ico" aria-hidden="true">${c.ico}</div>`:''}<strong>${esc(T2(c.title))}</strong><div class="p-meta" style="margin:4px 0 6px;color:var(--ink-soft)">${esc(T2(c.body))}</div>${c.status?`<span class="pc-badge pc-tbc">${esc(T2(c.status))}</span>`:''}</div></div>`).join('')}</div>`;
   if(bk.t==='table') return `<div class="cw-table-wrap"><table class="cw-table"><thead><tr>${bk.head.map(h=>`<th>${esc(T2(h))}</th>`).join('')}</tr></thead><tbody>${bk.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(T2(c))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-  if(bk.t==='faq') return bk.items.map(f=>`<details class="desc" style="margin:8px 0"><summary onclick="track('view','faq: '+${esc(JSON.stringify(f.q.en))},'faq')">${esc(T2(f.q))}</summary><div class="desc-body"><p>${esc(T2(f.a))}</p></div></details>`).join('');
+  if(bk.t==='feature'){const docs=bk.docs||[],main=docs.find(d=>d.code===lang)||docs[0],rest=docs.filter(d=>d!==main),A=d=>`href="${esc(d.url)}" target="_blank" rel="noopener" data-t="${esc(bk.title.en+' · '+d.label)}" onclick="track('download',this.dataset.t,'guide')"`;
+    return `<div class="guide-feature"><a class="guide-cover" ${A(main)}><img src="${esc(bk.img)}" alt="${esc(T2(bk.alt))}"></a><div><h2 class="guide-title">${esc(T2(bk.title))}</h2><p class="body-text">${esc(T2(bk.body))}</p><a class="send-btn" ${A(main)}>📖 ${esc(T2(bk.cta))} · ${esc(main.label)} (PDF) ↗</a><p class="guide-more">${esc(T2(bk.more))}</p><div class="lang-chips">${rest.map(d=>`<a lang="${esc(d.code)}" ${A(d)}>${esc(d.label)} ↗</a>`).join('')}</div></div></div>`}
+  if(bk.t==='tiles') return `<div class="icon-grid">${bk.items.map(i=>`<a class="icon-tile" href="${esc(i.url)}" target="_blank" rel="noopener" data-t="${esc(i.title.en)}" onclick="track('view',this.dataset.t,'guide')"><img src="assets/garden/${esc(i.img)}.webp" alt="" aria-hidden="true"><strong>${esc(T2(i.title))}</strong>${i.note?`<span>${esc(T2(i.note))}</span>`:''}</a>`).join('')}</div>`;
+  if(bk.t==='faq') return bk.items.map(f=>`<details class="desc" style="margin:8px 0"><summary onclick="track('view','faq: '+${esc(JSON.stringify(f.q.en))},'faq')">${esc(T2(f.q))}</summary><div class="desc-body"><p>${esc(T2(f.a))}</p>${faqLinks(f.links)}</div></details>`).join('');
   return '';
 }
 function pageHtml(k){
   const p=PAGES[k];
   const fr=(lang==='fr'&&p.fr_url)?`<div class="tk-callout warn"><span class="ic">🇫🇷</span><span>${t('draft_fr')} <a href="${esc(p.fr_url)}" target="_blank" rel="noopener">${t('fr_link')}</a></span></div>`:'';
-  const body=p.blocks.map(blockHtml).join('');
-  return head(p.ico+' '+T2(p.title),T2(p.sub),k)+fr+`<div class="card">${body}</div>`;
+  const groups=[];let cur={tint:'',blocks:[]};
+  p.blocks.forEach(b=>{if(b.t==='section'){if(cur.blocks.length)groups.push(cur);cur={tint:b.tint||'',blocks:[]}}else cur.blocks.push(b)});
+  if(cur.blocks.length)groups.push(cur);
+  return head(p.ico+' '+T2(p.title),T2(p.sub),k)+fr+groups.map(g=>`<div class="card${g.tint?' tint-'+g.tint:''}">${g.blocks.map(blockHtml).join('')}</div>`).join('');
 }
 /* ── Side cards: Visit the Farm + Follow the CGN ── */
 function farmCard(){

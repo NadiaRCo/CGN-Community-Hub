@@ -246,3 +246,23 @@ a.doc-item:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark)
 }
 @media (prefers-reduced-motion:reduce){ .g-cloud, .hero-bee .bee, .hero-fly{animation:none !important} .g-cloud{left:auto; right:6vw} .g-cloud.c2{right:38vw} .g-cloud.c3{right:64vw} .g-cloud.c4{display:none} }
 @media print{ body::before, body::after, .g-cloud, .g-meadow, .g-corner, .tulips{display:none !important} .card, .page-head{box-shadow:none} }
+
+/* ── Section boxes in different colours · featured guide · boxed icon tiles · FAQ links ── */
+.card.tint-butter{background-color:#FFF4CF} .card.tint-sky{background-color:#ECF4FC} .card.tint-mint{background-color:#E9F6E1} .card.tint-rose{background-color:#FDEEF3}
+.guide-feature{display:grid; grid-template-columns:200px 1fr; gap:28px; align-items:center; margin-top:10px}
+.guide-cover{display:block; background:#fff; border:3px solid var(--wood-dark); border-radius:8px; overflow:hidden; box-shadow:0 5px 0 var(--wood-dark),0 12px 18px rgba(74,52,38,.18); transform:rotate(-2deg); transition:transform .12s}
+.guide-cover:hover{transform:rotate(0) translateY(-2px)}
+.guide-cover img{display:block; width:100%; height:auto}
+.guide-title{font:800 27px/1.15 var(--font-display); color:var(--ink); margin:0 0 8px}
+.guide-more{font:800 12px var(--font-display); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin:18px 0 8px}
+.lang-chips, .faq-links{display:flex; flex-wrap:wrap; gap:8px}
+.lang-chips a, .faq-links a{display:inline-flex; align-items:center; min-height:36px; font:700 14px var(--font-display); color:var(--jf-green); background:#fff; border:2.5px solid var(--jf-green); border-radius:999px; padding:5px 14px; text-decoration:none}
+.lang-chips a:hover, .faq-links a:hover{background:var(--jf-green); color:#FFF8EA}
+.faq-links{margin-top:10px}
+.icon-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:12px}
+.icon-tile{display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:16px 12px 14px; background:#fff; border:2.5px solid var(--wood-dark); border-radius:16px; box-shadow:0 4px 0 var(--wood-dark); text-decoration:none; color:var(--ink); transition:transform .08s,box-shadow .08s}
+.icon-tile:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark); background:#FFFDF6}
+.icon-tile img{width:76px; height:76px; object-fit:contain}
+.icon-tile strong{font:700 15.5px/1.25 var(--font-display)}
+.icon-tile span{font-size:13px; line-height:1.35; color:var(--ink-soft)}
+@media (max-width:780px){ .guide-feature{grid-template-columns:1fr; justify-items:center; text-align:center; gap:18px} .guide-cover{max-width:190px} .lang-chips{justify-content:center} .icon-grid{grid-template-columns:1fr 1fr; gap:10px} .icon-tile img{width:60px; height:60px} }
