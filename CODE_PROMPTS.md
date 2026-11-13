@@ -51,12 +51,16 @@ Parked until Nadia sees where the Hub is heading.
 Add events to the Hub calendar (HUB.events). Rule from Nadia: add any event that has been publicly announced online or on the Just Food website; Nadia will review afterwards and remove what is not relevant. Relevant means interesting to household growers and coordinators: workshops, seed events and swaps, markets, community and social events.
 For every event store: title, date, time, place, host, category (Workshop | Seeds | Market | Community | Social), a source URL, and "added" date. Show the host and a "More info" link on the event detail.
 Add only what you can verify from the source page. Start with:
-- Seedy Saturday West: Sat Feb 20, 2027, Ron Kolbus Centre, 102 Greenview Ave, free. The Just Food pages disagree on the time (one says TBC, one says 10am-3pm): show "10am-3pm (time to be confirmed)". Source: https://justfood.ca/2022/02/22/seedysaturdayottawa
+- Seedy Saturday West: Sat Feb 20, 2027, Ron Kolbus Centre, 102 Greenview Ave, free. Time confirmed: 10am-3pm (Kate's vendor email, Nov 2026). Address: Ron Kolbus Centre, 102 Greenview Ave, Ottawa K2B 8J8. Source: https://justfood.ca/2022/02/22/seedysaturdayottawa
 - Ottawa Wildflower Seed Library events listed on https://gardeningcalendar.ca/events-ottawa/ : native seed giveaways (Nov 14 Orléans, Nov 21 Hintonburg, Nov 28 Gatineau, Dec 13 Alta Vista), Planning your pollinator/habitat garden (Wed Nov 18, 7pm, Elmvale Acres library), Doors Open virtual (Wed Dec 2, 8pm), Winter seed sowing workshop (Wed Jan 20, 2027, 7pm, Elmvale Acres library). Open each event page and copy the exact time and place.
 - Local holiday/community markets: search Richie's Feed and Seed (Ottawa) and other local garden-centre or sportsplex Christmas markets announced this season; add only if the date, time and place are on a public page.
 Do not add SeedLing Saturday or Fall Farm Fest 2027 (not announced yet).
 Also add a category filter above the calendar, and report which events you could not verify.
 ```
+
+## Prompt 009: Indoor Hydroponics workshop on the Hub  [HOLD until Abbi Slater sends the description]
+
+Date confirmed: Wed, Dec 9, 2026, 7:00-8:30 PM, Zoom, with Abbi Slater (spelled A-b-b-i). Abbi is updating the description and bio and may add a co-presenter. Do not post anything until Nadia pastes the final text; then add it to Upcoming workshops and the calendar (EN/FR).
 
 ## Prompt 006: Mailchimp newsletter to match the Hub  [HOLD]
 

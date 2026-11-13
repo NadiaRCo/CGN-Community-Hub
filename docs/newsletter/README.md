@@ -14,7 +14,7 @@ Two ready-to-paste HTML emails that match the look of the CGN Hub. Both must be 
 3. In Mailchimp: **Create → Email → Classic Builder → "Code your own" → "Paste in code"**.
 4. Paste. Set the subject line (the `<title>` in the file is a good starting point).
 5. Pick the audience — **check twice** that you are using the right list. Coordinators and the public CGN newsletter are separate lists.
-6. Send Kate a test so she can approve it. Only send when she says yes.
+6. Send Kate a test so they can approve it. Only send when she says yes.
 
 ## What's already filled in for you
 

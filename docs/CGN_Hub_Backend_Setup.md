@@ -124,7 +124,7 @@ function doGet() {
 4. Same URL, new content. Kate never does anything.
 
 ### Good to know
-- Visitors on the hosted link land in **review mode automatically** (no role question) — comments and answer boxes work, admin buttons hidden. The 🎨 theme and font selectors stay visible so Kate can pick her own vibe.
+- Visitors on the hosted link land in **review mode automatically** (no role question) — comments and answer boxes work, admin buttons hidden. The 🎨 theme and font selectors stay visible so Kate can pick their own vibe.
 - The 💌 send buttons still deliver to the comments Sheet + your email — both Apps Scripts work together.
 - Nadia keeps editing in the local master file (workspace folder); the hosted site is the published view. Clean frontend/backend split.
 
@@ -136,7 +136,7 @@ function doGet() {
 ### Known quirks on the hosted version (all minor)
 - **Local file links won't work there.** Links that point to files in the workspace folder — the classic Toolkit HTML (Quick Reference page), the final W4 newsletter HTML, the classification .xlsx, the old .md docs — will 404 on the hosted site, because those files live on Nadia's computer. All the Google Sheets / Drive / Canva links work perfectly. **Fix when convenient:** upload those few files to the CGN Drive and swap the links in the master, then republish. Not a blocker for Kate's review.
 - **✉️ Email Nadia / 🔔 buttons:** inside the hosted page these may open a blank tab before the email window, depending on browser — normal for embedded apps.
-- **Edits Kate makes on the hosted page** (answer boxes, comments) live in her browser + flow to the Sheet — but they don't change the published page itself. The Sheet + email is the record; the master file stays yours. (This is the intended design.)
+- **Edits Kate makes on the hosted page** (answer boxes, comments) live in their browser + flow to the Sheet — but they don't change the published page itself. The Sheet + email is the record; the master file stays yours. (This is the intended design.)
 
 ---
 
