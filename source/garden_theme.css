@@ -125,6 +125,8 @@ details.desc .desc-body{font-size:15.5px; border-top:2px dashed var(--line)}
 .send-btn.btn-off, .btn-off{background:#EDE3CF; color:var(--ink-soft); border-color:#B9A583; box-shadow:0 4px 0 #B9A583; opacity:1; cursor:default}
 .send-btn.ghost{background:var(--card); color:var(--ink); border-color:var(--wood-dark); box-shadow:0 4px 0 var(--wood-dark)}
 .wk-btns{gap:9px}
+.wk-btns a.send-btn{line-height:1.3}
+.slides-note{display:block; width:100%; font-size:14px; font-style:italic; color:var(--ink-soft)}
 .doc-grid{gap:14px}
 .doc-item{background:var(--cream-2); border:2.5px solid var(--wood-dark); border-radius:14px; box-shadow:0 4px 0 var(--wood-dark); padding:13px 15px; gap:13px; align-items:center}
 a.doc-item:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark); background:var(--mint)}

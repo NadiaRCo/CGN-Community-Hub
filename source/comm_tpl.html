@@ -117,19 +117,23 @@ function setFont(v){document.body.dataset.font=v;try{localStorage.setItem('cgn-c
 function setBg(v){document.body.dataset.bg=v;try{localStorage.setItem('cgn-comm-bg',v)}catch(e){}}
 function toggleLang(){lang=lang==='en'?'fr':'en';try{localStorage.setItem('cgn-comm-lang',lang)}catch(e){};document.documentElement.lang=lang;render()}
 function go(id){document.querySelectorAll('.page-section').forEach(s=>s.classList.toggle('visible',s.id===id));document.querySelectorAll('#side .nav-item').forEach(n=>n.classList.toggle('active',n.dataset.p===id));window.scrollTo(0,0);track('view',id,id)}
-function dl(id,i){const w=HUB.workshops.find(x=>x.id===id);const s=w.slides[i];track('download',w.id+' · '+s.label,'slides');window.open(s.url,'_blank')}
 const todayD=()=>new Date(new Date().toDateString());
 const isUp=w=>new Date(w.date+'T23:59:59')>=todayD();
 const L=(o,k)=>(lang==='fr'&&o[k+'_fr'])?o[k+'_fr']:o[k];
-function slideBtns(w){return (w.slides||[]).map((s,i)=>`<button class="send-btn" onclick="dl('${w.id}',${i})">⬇ ${esc(L(s,'label'))}</button>`).join('')||`<span class="send-btn btn-off">${t('noslides')}</span>`}
+const extLinks=h=>String(h||'').replace(/<a (?![^>]*target=)/g,'<a target="_blank" rel="noopener" ');
+function slideBtns(w){
+  const note=w.slides_note?`<span class="slides-note">${esc(T2(w.slides_note))}</span>`:'';
+  const btns=(w.slides||[]).map(s=>{const link=s.kind==='link';return `<a class="send-btn${link?' ghost':''}" href="${esc(s.url)}" target="_blank" rel="noopener" data-t="${esc(w.id+' · '+s.label)}" onclick="track('${link?'view':'download'}',this.dataset.t,'slides')">${link?esc(L(s,'label'))+' ↗':'⬇ '+esc(L(s,'label'))}</a>`}).join('');
+  return note+(btns||(note?'':`<span class="send-btn btn-off">${t('noslides')}</span>`));
+}
 function wcard(w){
-  const rec=w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank" onclick="track('view','recording ${w.id}','recording')">▶ ${t('recording')}</a>`:'';
-  const reg=w.register?`<a class="send-btn" href="${esc(w.register)}" target="_blank">${t('register')}</a>`:'';
+  const rec=w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank" rel="noopener" onclick="track('view','recording ${w.id}','recording')">▶ ${t('recording')}</a>`:'';
+  const reg=w.register?`<a class="send-btn" href="${esc(w.register)}" target="_blank" rel="noopener">${t('register')}</a>`:'';
   const imgHtml = w.img ? `<img src="${w.img}" alt="${esc(w.title)}">` : '<div class="poster-noimg" aria-hidden="true">🌱</div>';
   return `<div class="poster-card" id="wk-${w.id}">${imgHtml}<div class="poster-body"><strong>${esc(w.title)}</strong><div class="p-meta">${esc(w.who)}<br>${esc(w.when)}</div>
-  <details onclick="track('view','desc ${w.id}','description')"><summary>${t('desc')}</summary><div class="dd">${w.desc}</div></details>
+  <details onclick="track('view','desc ${w.id}','description')"><summary>${t('desc')}</summary><div class="dd">${extLinks(L(w,'desc'))}</div></details>
   <div class="wk-btns">${isUp(w)?reg:slideBtns(w)+rec}</div></div></div>`}
-function artHtml(a){return `<strong style="font-size:17px">${esc(L(a,'title'))}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(a.author||'')} · ${esc(a.date||'')}</div><p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="${esc(a.url)}" target="_blank" onclick="track('view','article: '+${JSON.stringify(a.title)},'article')">${t('readmore')} ↗</a>`}
+function artHtml(a){return `<strong style="font-size:17px">${esc(L(a,'title'))}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(a.author||'')} · ${esc(a.date||'')}</div><p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="${esc(a.url)}" target="_blank" onclick="track('view','article: '+${esc(JSON.stringify(a.title))},'article')">${t('readmore')} ↗</a>`}
 /* head() now lives in source/garden.js */
 
 /* ── Calendar ── */
@@ -168,7 +172,7 @@ function calOpen(id){
   const e=allEvents().find(x=>x.id===id); if(!e) return;
   const box=document.getElementById('calDetail'); if(!box) return;
   const fr=lang==='fr';
-  const link=e.target?`<a class="send-btn" href="#" onclick="go('ws-upcoming');return false">${t('open')} →</a>`:(e.url?`<a class="send-btn" href="${esc(e.url)}" target="_blank" onclick="track('view','event: '+${JSON.stringify(e.title)},'calendar')">${fr?'Plus d’info':'More info'} ↗</a>`:'');
+  const link=e.target?`<a class="send-btn" href="#" onclick="go('ws-upcoming');return false">${t('open')} →</a>`:(e.url?`<a class="send-btn" href="${esc(e.url)}" target="_blank" onclick="track('view','event: '+${esc(JSON.stringify(e.title))},'calendar')">${fr?'Plus d’info':'More info'} ↗</a>`:'');
   const hostLine=e.host?`<div style="margin-top:4px;color:var(--ink-soft);font-size:13px">${fr?'Organisé par':'Hosted by'}: ${esc(e.host)}</div>`:'';
   const catBadge=e.category?`<span class="cat-badge cat-${e.category.toLowerCase()}">${esc(catLabel(e.category))}</span>`:'';
   box.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px;align-items:start"><strong style="font-size:15px">${esc(L(e,'title'))}</strong>${catBadge}</div>${e.time?'<div>'+esc(e.time)+'</div>':''}${e.where?'<div>'+t('where')+': '+esc(e.where)+'</div>':''}${hostLine}<div style="margin-top:8px">${link}</div>`;
@@ -192,10 +196,10 @@ function blockHtml(bk){
   if(bk.t==='note') return `<div class="tk-callout info"><span class="ic">ℹ️</span><span>${esc(bk[lang]||bk.en)}</span></div>`;
   if(bk.t==='ul') return `<ul class="ec-ul" style="padding-left:20px;font-size:14px">${(bk[lang]||bk.en).map(i=>`<li style="margin:5px 0">${esc(i)}</li>`).join('')}</ul>`;
   if(bk.t==='steps') return `<div>${bk.items.map((s,i)=>`<div class="tk-step"><div class="tk-num">${i+1}</div><div style="flex:1"><div class="body-text" style="margin:0">${esc(s[lang]||s.en)}</div>${s.url?`<a class="desc-link" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(T2(s.link)||'↗')}</a>`:''}${s.page?`<a class="desc-link" href="#" onclick="go('${s.page}');return false">${esc(T2(s.link))}</a>`:''}</div></div>`).join('')}</div>`;
-  if(bk.t==='links') return `<ul style="padding:0">${bk.items.map(i=>`<li style="list-style:none;margin:7px 0">📎 <a href="${esc(i.url)}" target="_blank" rel="noopener" style="color:var(--jf-green);font-weight:800" onclick="track('download',${JSON.stringify(i.en)},'guide')">${esc(i[lang]||i.en)}</a></li>`).join('')}</ul>`;
+  if(bk.t==='links') return `<ul style="padding:0">${bk.items.map(i=>`<li style="list-style:none;margin:7px 0">📎 <a href="${esc(i.url)}" target="_blank" rel="noopener" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(i.en))},'guide')">${esc(i[lang]||i.en)}</a></li>`).join('')}</ul>`;
   if(bk.t==='cards') return `<div class="poster-grid">${bk.items.map(c=>`<div class="poster-card tool-card ${c.status?'status-'+(c.status.en||'').toLowerCase().replace(/[^a-z0-9]+/g,'-'):''}"><div class="poster-body">${c.ico?`<div class="tool-ico" aria-hidden="true">${c.ico}</div>`:''}<strong>${esc(T2(c.title))}</strong><div class="p-meta" style="margin:4px 0 6px;color:var(--ink-soft)">${esc(T2(c.body))}</div>${c.status?`<span class="pc-badge pc-tbc">${esc(T2(c.status))}</span>`:''}</div></div>`).join('')}</div>`;
   if(bk.t==='table') return `<div class="cw-table-wrap"><table class="cw-table"><thead><tr>${bk.head.map(h=>`<th>${esc(T2(h))}</th>`).join('')}</tr></thead><tbody>${bk.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(T2(c))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-  if(bk.t==='faq') return bk.items.map(f=>`<details class="desc" style="margin:8px 0"><summary onclick="track('view','faq: '+${JSON.stringify(f.q.en)},'faq')">${esc(T2(f.q))}</summary><div class="desc-body"><p>${esc(T2(f.a))}</p></div></details>`).join('');
+  if(bk.t==='faq') return bk.items.map(f=>`<details class="desc" style="margin:8px 0"><summary onclick="track('view','faq: '+${esc(JSON.stringify(f.q.en))},'faq')">${esc(T2(f.q))}</summary><div class="desc-body"><p>${esc(T2(f.a))}</p></div></details>`).join('');
   return '';
 }
 function pageHtml(k){
@@ -285,7 +289,7 @@ function render(){
   document.getElementById('ws-upcoming').innerHTML=head(t('ws_upcoming'),'','ws-upcoming')+(upc.length?`<div class="card"><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:`<div class="card"><p class="body-text" style="font-style:italic">${t('noup')}</p></div>`);
   document.getElementById('ws-past').innerHTML=head(t('ws_past'),'','ws-past')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>🖼️ ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
   document.getElementById('ws-slides').innerHTML=head(t('ws_slides'),t('slides_sub'),'ws-slides')
-    +`<div class="card">`+past.map(w=>`<div class="srow"><strong>${esc(w.title)}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(w.who)} · ${esc(w.when)}</div><div class="wk-btns">${slideBtns(w)}${w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank">▶ ${t('recording')}</a>`:''}</div></div>`).join('')+`</div>`;
+    +`<div class="card">`+past.map(w=>`<div class="srow"><strong>${esc(w.title)}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(w.who)} · ${esc(w.when)}</div><div class="wk-btns">${slideBtns(w)}${w.recording?`<a class="send-btn" href="${esc(w.recording)}" target="_blank" rel="noopener">▶ ${t('recording')}</a>`:''}</div></div>`).join('')+`</div>`;
   const tags=[...new Set(HUB.resources.flatMap(r=>r.tags||[]))];
   document.getElementById('resources').innerHTML=head(t('resources'),t('res_sub'),'resources')+`<div class="card"><input class="cm-in" id="rs" placeholder="${t('search')}" oninput="resList()"><div id="rt"><span class="deliv-pill" style="cursor:pointer" onclick="resTag('')">${t('all')}</span> ${tags.map(x=>`<span class="deliv-pill" style="cursor:pointer" onclick="resTag('${esc(x)}')">${esc(x)}</span>`).join(' ')}</div><div id="rl" style="margin-top:12px"></div></div>`;
   resList();
@@ -302,7 +306,7 @@ let _tag='';
 function resTag(x){_tag=x;resList()}
 function resList(){const s=((document.getElementById('rs')||{}).value||'').toLowerCase();
   const l=HUB.resources.filter(r=>(!_tag||(r.tags||[]).includes(_tag))&&((r.title+' '+(r.title_fr||'')).toLowerCase().includes(s)));
-  document.getElementById('rl').innerHTML=l.length?l.map(r=>`<p style="margin:6px 0">📎 <a href="${esc(r.url)}" target="_blank" style="color:var(--jf-green);font-weight:800" onclick="track('download',${JSON.stringify(r.title)},'resource')">${esc(L(r,'title'))}</a></p>`).join(''):`<p class="body-text">—</p>`}
+  document.getElementById('rl').innerHTML=l.length?l.map(r=>`<p style="margin:6px 0">📎 <a href="${esc(r.url)}" target="_blank" style="color:var(--jf-green);font-weight:800" onclick="track('download',${esc(JSON.stringify(r.title))},'resource')">${esc(L(r,'title'))}</a></p>`).join(''):`<p class="body-text">—</p>`}
 function sendContact(){
   const m=document.getElementById('cm').value.trim(); if(!m) return;
   const typ=document.getElementById('ct').value,n=document.getElementById('cn').value,e=document.getElementById('ce').value;
