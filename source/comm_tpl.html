@@ -79,7 +79,7 @@ const I18N = {
   upcoming:'Coming up',aow:'Article of the week',noart:'The first article of the week is on its way. Check back soon!',noup:'No workshops are scheduled right now — check back soon, or tell us what you’d like to see.',
   readmore:'Read the article',desc:'Full description',noslides:'Slides coming soon',recording:'Watch recording',register:'Register / waitlist',
   res_sub:'Guides, templates and links for your garden.',search:'Search…',all:'All',slides_sub:'Download the slides from any past workshop.',
-  art_sub:'One good read a week, from our network and partners.',prev_art:'Earlier articles',cal:'CGN Calendar',cal_sub:'Workshops and dates to remember — click an item for details.',today:'Today',nothing:'Nothing scheduled this month.',thismonth:'This month',
+  art_sub:'One good read a week for Ottawa gardeners, from the CGN and our partners.',weekof:'Week of',src:'From the',openguide:'Open the full Garden Guide (PDF)',signs:'Signs',control:'What to do',colour:'Colour',fr_art:'',prev_art:'Earlier articles',cal:'CGN Calendar',cal_sub:'Workshops and dates to remember — click an item for details.',today:'Today',nothing:'Nothing scheduled this month.',thismonth:'This month',
   c_title:'Contact the CGN',c_sub:'Have a question, a concern, or an idea for a workshop or topic? Write to us — everything goes to the Community Gardening inbox at Just Food.',
   c_type:'What is this about?',c_t1:'Suggest a topic or workshop',c_t2:'A question',c_t3:'A concern',c_t4:'Feedback',c_t5:'Something else',
   c_msg:'Your message',c_name:'Name (optional)',c_email:'Your email (so we can reply)',c_send:'Send email to the CGN',c_ok:'Your email app should open with your message ready to send to the Community Gardening inbox. If it didn’t, write to us directly at',
@@ -94,7 +94,7 @@ const I18N = {
   upcoming:'À venir',aow:'Article de la semaine',noart:'Le premier article de la semaine arrive bientôt. Revenez nous voir!',noup:'Aucun atelier n’est prévu pour le moment — revenez bientôt, ou dites-nous ce que vous aimeriez voir.',
   readmore:'Lire l’article',desc:'Description complète',noslides:'Diapositives à venir',recording:'Voir l’enregistrement',register:'S’inscrire / liste d’attente',
   res_sub:'Guides, modèles et liens pour votre jardin.',search:'Rechercher…',all:'Tout',slides_sub:'Téléchargez les diapositives de n’importe quel atelier passé.',
-  art_sub:'Une bonne lecture par semaine, de notre réseau et de nos partenaires.',prev_art:'Articles précédents',cal:'Calendrier du RJC',cal_sub:'Ateliers et dates à retenir — cliquez sur un élément pour les détails.',today:'Aujourd’hui',nothing:'Rien de prévu ce mois-ci.',thismonth:'Ce mois-ci',
+  art_sub:'Une bonne lecture par semaine pour les jardiniers d’Ottawa, du RJC et de nos partenaires.',weekof:'Semaine du',src:'Tiré du',openguide:'Ouvrir le Guide du jardinier complet (PDF)',signs:'Signes',control:'Que faire',colour:'Couleur',fr_art:'Ce texte est présenté en anglais. La version française se trouve dans le Guide du jardinier du RJC :',prev_art:'Articles précédents',cal:'Calendrier du RJC',cal_sub:'Ateliers et dates à retenir — cliquez sur un élément pour les détails.',today:'Aujourd’hui',nothing:'Rien de prévu ce mois-ci.',thismonth:'Ce mois-ci',
   c_title:'Contacter le RJC',c_sub:'Une question, une préoccupation, une idée d’atelier ou de sujet? Écrivez-nous — tout est envoyé à la boîte courriel du jardinage communautaire de Just Food.',
   c_type:'De quoi s’agit-il?',c_t1:'Proposer un sujet ou un atelier',c_t2:'Une question',c_t3:'Une préoccupation',c_t4:'Commentaires',c_t5:'Autre chose',
   c_msg:'Votre message',c_name:'Nom (facultatif)',c_email:'Votre courriel (pour vous répondre)',c_send:'Envoyer un courriel au RJC',c_ok:'Votre application de courriel devrait s’ouvrir avec votre message prêt à envoyer à la boîte du jardinage communautaire. Sinon, écrivez-nous directement à',
@@ -133,7 +133,13 @@ function wcard(w){
   return `<div class="poster-card" id="wk-${w.id}">${imgHtml}<div class="poster-body"><strong>${esc(w.title)}</strong><div class="p-meta">${esc(w.who)}<br>${esc(w.when)}</div>
   <details onclick="track('view','desc ${w.id}','description')"><summary>${t('desc')}</summary><div class="dd">${extLinks(L(w,'desc'))}</div></details>
   <div class="wk-btns">${isUp(w)?reg:slideBtns(w)+rec}</div></div></div>`}
-function artHtml(a){return `<strong style="font-size:17px">${esc(L(a,'title'))}</strong><div class="p-meta" style="color:var(--ink-soft);font-size:12.5px">${esc(a.author||'')} · ${esc(a.date||'')}</div><p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="${esc(a.url)}" target="_blank" onclick="track('view','article: '+${esc(JSON.stringify(a.title))},'article')">${t('readmore')} ↗</a>`}
+const FR_GUIDE='http://justfood.ca/wp-content/uploads/2015/03/CGN_Garden_Guide_2015_Francais.pdf';
+const artWeek=a=>t('weekof')+' '+new Date(a.week+'T12:00:00').toLocaleDateString(lang==='fr'?'fr-CA':'en-CA',{month:'long',day:'numeric',year:'numeric'});
+const liveArts=()=>{const today=new Date().toISOString().slice(0,10);return (HUB.articles||[]).filter(a=>!a.week||a.week<=today).sort((a,b)=>(b.week||'').localeCompare(a.week||''))};
+function artMeta(a){return `<div class="art-meta"><span class="art-week">${esc(artWeek(a))}</span>${a.source?`<span>${t('src')} ${esc(L(a,'source').replace(/^(From the|Tiré du) /,''))}</span>`:''}</div>`}
+function artHtml(a){return `<div class="art-teaser">${a.cover?`<img class="art-cover" src="${esc(a.cover)}" alt="" aria-hidden="true">`:''}<div><strong class="art-title">${esc(L(a,'title'))}</strong>${artMeta(a)}<p class="body-text" style="margin:8px 0">${esc(L(a,'blurb'))}</p><a class="send-btn" href="#" data-t="${esc(a.title)}" onclick="track('view','article: '+this.dataset.t,'article');go('article');return false">${t('readmore')} →</a></div></div>`}
+function artFull(a){const fr=lang==='fr'?`<div class="tk-callout warn"><span class="ic">🇫🇷</span><span>${t('fr_art')} <a href="${FR_GUIDE}" target="_blank" rel="noopener">Le guide du jardinier (PDF) ↗</a></span></div>`:'';
+ return `<h2 class="art-title big">${esc(L(a,'title'))}</h2>${artMeta(a)}<p class="body-text art-lede">${esc(L(a,'blurb'))}</p>${fr}${(a.blocks||[]).map(blockHtml).join('')}${a.url?`<p style="margin-top:18px"><a class="send-btn" href="${esc(a.url)}" target="_blank" rel="noopener" data-t="${esc(a.title)}" onclick="track('download','article source: '+this.dataset.t,'article')">${t('openguide')} ↗</a></p>`:''}`}
 /* head() now lives in source/garden.js */
 
 /* ── Calendar ── */
@@ -188,7 +194,7 @@ function nav(){
    `<div class="nav-label">${t('other')}</div>`+I('resources','📚',t('resources'))+P('faq')+I('contact','💌',t('contact'))+gardenSideArt()+`<div class="sidebar-note">${t('quote')}</div>`;
 }
 /* ── Generic info-page renderer ── */
-const T2=o=>o?(o[lang]||o.en):'';
+const T2=o=>o?(typeof o==='string'?o:(o[lang]||o.en)):'';
 const faqLinks=ls=>(ls&&ls.length)?`<div class="faq-links">${ls.map(l=>l.page?`<a href="#" onclick="go('${l.page}');return false">${esc(T2(l))} →</a>`:`<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(T2(l))} ↗</a>`).join('')}</div>`:'';
 function blockHtml(bk){
   const X=k=>bk[k]&&typeof bk[k]==='object'&&!Array.isArray(bk[k])?T2(bk[k]):bk[k];
@@ -203,6 +209,11 @@ function blockHtml(bk){
   if(bk.t==='feature'){const docs=bk.docs||[],main=docs.find(d=>d.code===lang)||docs[0],rest=docs.filter(d=>d!==main),A=d=>`href="${esc(d.url)}" target="_blank" rel="noopener" data-t="${esc(bk.title.en+' · '+d.label)}" onclick="track('download',this.dataset.t,'guide')"`;
     return `<div class="guide-feature"><a class="guide-cover" ${A(main)}><img src="${esc(bk.img)}" alt="${esc(T2(bk.alt))}"></a><div><h2 class="guide-title">${esc(T2(bk.title))}</h2><p class="body-text">${esc(T2(bk.body))}</p><a class="send-btn" ${A(main)}>📖 ${esc(T2(bk.cta))} · ${esc(main.label)} (PDF) ↗</a><p class="guide-more">${esc(T2(bk.more))}</p><div class="lang-chips">${rest.map(d=>`<a lang="${esc(d.code)}" ${A(d)}>${esc(d.label)} ↗</a>`).join('')}</div></div></div>`}
   if(bk.t==='tiles') return `<div class="icon-grid">${bk.items.map(i=>`<a class="icon-tile" href="${esc(i.url)}" target="_blank" rel="noopener" data-t="${esc(i.title.en)}" onclick="track('view',this.dataset.t,'guide')"><img src="assets/garden/${esc(i.img)}.webp" alt="" aria-hidden="true"><strong>${esc(T2(i.title))}</strong>${i.note?`<span>${esc(T2(i.note))}</span>`:''}</a>`).join('')}</div>`;
+  if(bk.t==='img') return `<figure class="art-fig"><img src="${esc(bk.src)}" alt="${esc(T2(bk.alt))}" loading="lazy">${bk.cap?`<figcaption>${esc(T2(bk.cap))}</figcaption>`:''}</figure>`;
+  if(bk.t==='tip') return `<p class="body-text art-tip"><strong>${esc(T2(bk.name))}:</strong> ${esc(bk[lang]||bk.en)}</p>`;
+  if(bk.t==='quote') return `<blockquote class="art-quote">${esc(bk[lang]||bk.en)}</blockquote>`;
+  if(bk.t==='drop') return `<details class="desc art-drop"><summary>${esc(T2(bk.title))}</summary><div class="desc-body">${bk.blocks.map(blockHtml).join('')}${faqLinks(bk.links)}</div></details>`;
+  if(bk.t==='bugs') return `<div class="bug-grid">${bk.items.map(b=>`<div class="bug-card"><img src="assets/articles/${esc(b.img)}.jpg" alt="${esc(b.name)}" loading="lazy"><div><strong>${esc(b.name)}</strong><div class="bug-col">${t('colour')}: ${esc(b.colour)}</div><h5>${t('signs')}</h5><ul>${b.signs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h5>${t('control')}</h5><ul>${b.control.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`).join('')}</div>`;
   if(bk.t==='faq') return bk.items.map(f=>`<details class="desc" style="margin:8px 0"><summary onclick="track('view','faq: '+${esc(JSON.stringify(f.q.en))},'faq')">${esc(T2(f.q))}</summary><div class="desc-body"><p>${esc(T2(f.a))}</p>${faqLinks(f.links)}</div></details>`).join('');
   return '';
 }
@@ -277,7 +288,7 @@ function render(){
   nav();
   const upc=HUB.workshops.filter(isUp).sort((a,b)=>a.date.localeCompare(b.date));
   const past=HUB.workshops.filter(w=>!isUp(w)).sort((a,b)=>b.date.localeCompare(a.date));
-  const art=HUB.articles[0], srcW=HUB.workshops.find(w=>w.id===SRC);
+  const ARTS=liveArts(), art=ARTS[0], srcW=HUB.workshops.find(w=>w.id===SRC);
   const now=new Date(),h=now.getHours(),loc=lang==='fr'?'fr-CA':'en-CA';
   document.getElementById('home').innerHTML=gardenHero()+gardenAlmanac()+
    `<div class="card"><span class="corner-tag blue">${t('quick')}</span><h3>${gIco('signpost')} ${t('quick')}</h3><div class="doc-grid">${['find','start','coordinators','guides'].map(k=>`<a class="doc-item" href="#" onclick="go('${k}');return false"><span class="d-ico">${gIco(k)}</span><div><strong>${esc(T2(PAGES[k].title))}</strong><span class="d-note">${esc(T2(PAGES[k].sub))}</span></div></a>`).join('')}<a class="doc-item" href="#" onclick="go('ws-upcoming');return false"><span class="d-ico">${gIco('ws-upcoming')}</span><div><strong>${t('g_ws')}</strong><span class="d-note">${t('ws_upcoming')} · ${t('ws_past')} · ${t('ws_slides')}</span></div></a><a class="doc-item" href="#" onclick="go('resources');return false"><span class="d-ico">${gIco('resources')}</span><div><strong>${t('resources')}</strong><span class="d-note">${t('res_sub')}</span></div></a></div></div>
@@ -291,7 +302,7 @@ function render(){
   const dg=document.getElementById('dayGreeting'); if(dg) dg.textContent=(h<12?'☀️ '+t('greet_m'):h<18?'🌤️ '+t('greet_a'):'🌙 '+t('greet_e'))+'! '+t('its')+' '+now.toLocaleDateString(loc,{weekday:'long',month:'long',day:'numeric'});
   Object.keys(PAGES).forEach(k=>{document.getElementById(k).innerHTML=pageHtml(k)});
   document.getElementById('incident').innerHTML=incidentHtml(); almanacFill();
-  document.getElementById('article').innerHTML=head(t('article'),t('art_sub'),'article')+(HUB.articles.length?HUB.articles.map((a,i)=>`${i==1?`<h3 class="page-sub" style="font-weight:800">${t('prev_art')}</h3>`:''}<div class="card">${artHtml(a)}</div>`).join(''):`<div class="card"><p class="body-text" style="font-style:italic">${t('noart')}</p></div>`);
+  document.getElementById('article').innerHTML=head(t('article'),t('art_sub'),'article')+(ARTS.length?`<div class="card article-card"><span class="corner-tag yellow">${t('aow')}</span>${artFull(ARTS[0])}</div>`+(ARTS.length>1?`<div class="card"><h3>${gIco('article')} ${t('prev_art')}</h3>${ARTS.slice(1).map(a=>`<details class="desc art-drop prev-art"><summary>${esc(L(a,'title'))}<span class="art-week small">${esc(artWeek(a))}</span></summary><div class="desc-body">${artFull(a)}</div></details>`).join('')}</div>`:''):`<div class="card"><p class="body-text" style="font-style:italic">${t('noart')}</p></div>`);
   document.getElementById('ws-upcoming').innerHTML=head(t('ws_upcoming'),'','ws-upcoming')+(upc.length?`<div class="card"><div class="poster-grid">${upc.map(wcard).join('')}</div></div>`:`<div class="card"><p class="body-text" style="font-style:italic">${t('noup')}</p></div>`);
   document.getElementById('ws-past').innerHTML=head(t('ws_past'),'','ws-past')+Object.keys(HUB.series).map(s=>{const l=past.filter(w=>w.series===s).sort((a,b)=>a.date.localeCompare(b.date));return l.length?`<div class="card"><span class="corner-tag yellow">${HUB.series[s][lang]}</span><h3>${gIco('ws-past')} ${HUB.series[s][lang]}</h3><div class="poster-grid">${l.map(wcard).join('')}</div></div>`:''}).join('');
   document.getElementById('ws-slides').innerHTML=head(t('ws_slides'),t('slides_sub'),'ws-slides')

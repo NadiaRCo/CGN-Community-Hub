@@ -45,7 +45,7 @@ The build keeps a one-time backup called `CGN_Community_Hub.prev.html` so you ca
 |---|---|---|
 | A workshop (slides, poster, description, date) | `content/hub.json` | `python3 source/build_comm.py` |
 | The calendar (events, deadlines) | `content/hub.json` (`events` list) | `python3 source/build_comm.py` |
-| Article of the Week | `content/hub.json` (`articles` list) | `python3 source/build_comm.py` |
+| Article of the Week | `content/hub.json` (`articles` list). Each article has a `week` (Monday's date, e.g. `2026-11-16`). It appears on that date by itself; the newest becomes this week's article, older ones move to "Earlier articles". Pictures go in `assets/articles/` | `python3 source/build_comm.py` |
 | A resource link, or page copy (About, Find a Garden…) | `source/comm_content.py` | `python3 source/comm_content.py && python3 source/build_comm.py` |
 
 ---

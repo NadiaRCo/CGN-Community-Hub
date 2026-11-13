@@ -135,7 +135,809 @@
       "fr": "Série de l’automne 2026"
     }
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "compost",
+      "week": "2026-11-09",
+      "title": "Composting! A great way to feed your soil and help your garden grow",
+      "title_fr": "Le compostage : une excellente façon de nourrir le sol et d’aider votre jardin à pousser",
+      "blurb": "What compost is, why your garden loves it, how to build a pile, and what can (and can’t) go in. Fall leaves make this the perfect week to start.",
+      "blurb_fr": "Ce qu’est le compost, pourquoi votre jardin l’adore, comment monter un tas et ce qu’on peut (ou non) y mettre. Avec les feuilles d’automne, c’est le moment idéal pour commencer.",
+      "source": "CGN Garden Guide (2015), pages 2–3",
+      "source_fr": "Guide du jardinier du RJC (2015), pages 2–3",
+      "url": "http://justfood.ca/wp-content/uploads/2015/03/CGN_Garden_Guide_2015.pdf",
+      "cover": "assets/articles/compost-do-dont.jpg",
+      "blocks": [
+        {
+          "t": "h",
+          "en": "What is compost?"
+        },
+        {
+          "t": "p",
+          "en": "Compost is the breakdown or decomposition of food and garden waste. It could be a mix of:"
+        },
+        {
+          "t": "ul",
+          "en": [
+            "Leaves",
+            "Fruit and vegetable scraps",
+            "Weeds",
+            "Other plant waste"
+          ]
+        },
+        {
+          "t": "p",
+          "en": "Tiny creatures such as bacteria, fungi, worms and small insects eat these materials and turn them into compost - this is called decomposition. When compost is ready to put on your garden it will be dark brown and crumbly and it will look like soil."
+        },
+        {
+          "t": "h",
+          "en": "Why should I put compost on the garden?"
+        },
+        {
+          "t": "p",
+          "en": "Compost is VERY GOOD for your garden. A 2 - 3 inch layer over your whole garden is very helpful. It will help your plants grow and keeps the soil moist. It also keeps weeds down longer. Helpful soil bugs like compost too. Compost is one of the best fertilizers you can feed your garden."
+        },
+        {
+          "t": "h",
+          "en": "How do I make compost?"
+        },
+        {
+          "t": "p",
+          "en": "Compost is easy to make. You need to save fruit and vegetable scraps from your kitchen. Store them in a closed container until you can bring them to the garden. Dump your scraps in the composter regularly, and be sure to wash out your bucket to prevent it from smelling bad. You should also add leaves and weeds that have not gone to seed from your garden."
+        },
+        {
+          "t": "p",
+          "en": "The three most important things to do when building a compost pile are:"
+        },
+        {
+          "t": "steps",
+          "items": [
+            {
+              "en": "Break all waste into SMALL PIECES to speed up decomposition."
+            },
+            {
+              "en": "Have a balance of WET WASTE – egg shells, vegetable and fruit scraps, fresh grass and weed clippings and DRY WASTE -- dry grass, dry leaves, corn cobs. It is best to have a mixture of about 1 part wet and 2 parts dry; if it is too dry, you can also water your pile."
+            },
+            {
+              "en": "Make sure your pile is not too wet and turn it regularly so that AIR gets to all parts of the pile. If you do not have time to turn the pile, it can sit without being turned. Not mixing the pile results in slower decomposition. The pile may smell bad if there is not enough air in it."
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "en": "What can I put in the compost?"
+        },
+        {
+          "t": "img",
+          "src": "assets/articles/compost-do-dont.jpg",
+          "alt": "Drawing from the Garden Guide: on the left, bread, vegetables, egg shells, tea and leaves (do add); on the right, cheese, milk, meat, oil and pet waste (don’t add)",
+          "cap": "Do add (left) and don’t add (right). Drawing from the CGN Garden Guide."
+        },
+        {
+          "t": "table",
+          "head": [
+            "DO ADD",
+            "DON’T ADD"
+          ],
+          "rows": [
+            [
+              "Bread, baked goods, plain noodles",
+              "Butter, cheese, milk"
+            ],
+            [
+              "Egg shells",
+              "Meat, bones"
+            ],
+            [
+              "Fruit and vegetable scraps",
+              "Oil, peanut butter, lard"
+            ],
+            [
+              "Tea bags and coffee grinds",
+              "Mayonnaise, salad dressing"
+            ],
+            [
+              "Weeds and leaves",
+              "Sour cream, yogurt"
+            ],
+            [
+              "Grass and Branches",
+              "Dog and cat waste"
+            ]
+          ]
+        },
+        {
+          "t": "h",
+          "en": "How do I use compost, and when do I put it on my garden?"
+        },
+        {
+          "t": "p",
+          "en": "Compost can be dug into the soil in the fall or in the spring before planting the garden, or used as a mulch."
+        },
+        {
+          "t": "p",
+          "en": "When planting in the spring, put compost in with the seeds."
+        },
+        {
+          "t": "p",
+          "en": "Once your plants are growing, spread some compost around the flower and vegetable plants."
+        }
+      ]
+    },
+    {
+      "id": "companion",
+      "week": "2026-11-02",
+      "title": "What is companion planting? Plus a sample garden layout and the Ottawa planting guide",
+      "title_fr": "Qu’est-ce que le compagnonnage? Plus un exemple de plan de jardin et le calendrier de plantation d’Ottawa",
+      "blurb": "Which plants help each other and keep pests away, how to lay out and rotate a garden, and when to start each vegetable in Ottawa. A good one to plan with over the winter.",
+      "blurb_fr": "Quelles plantes s’entraident et éloignent les ravageurs, comment organiser et faire la rotation d’un jardin, et quand démarrer chaque légume à Ottawa. Idéal pour planifier pendant l’hiver.",
+      "source": "CGN Garden Guide (2015), pages 5–8",
+      "source_fr": "Guide du jardinier du RJC (2015), pages 5–8",
+      "url": "http://justfood.ca/wp-content/uploads/2015/03/CGN_Garden_Guide_2015.pdf",
+      "cover": "assets/articles/sample-garden-layout.jpg",
+      "blocks": [
+        {
+          "t": "h",
+          "en": "What is companion planting?"
+        },
+        {
+          "t": "ul",
+          "en": [
+            "Companion planting is a way of growing plants in your garden that helps your plants stay healthy and keeps insects away. It is something that you may choose to practice, some people have found it helpful.",
+            "Some plants grow better when they are next to other ones- like carrots and tomatoes.",
+            "Some plants give off a smell from their flowers and leaves, or a chemical from their roots that insects don’t like, so they stay away.",
+            "Some plants are very good for the soil- like peas and beans. They add nutrients when they grow that help other plants to stay healthy and strong."
+          ]
+        },
+        {
+          "t": "h",
+          "en": "Companion plants for pest control"
+        },
+        {
+          "t": "table",
+          "head": [
+            "Plant",
+            "Keeps away",
+            "Plant near"
+          ],
+          "rows": [
+            [
+              "Basil",
+              "flies, mosquitoes",
+              "tomatoes, all plants"
+            ],
+            [
+              "Garlic",
+              "aphids, onion flies, spider mites, weevils",
+              "tomatoes, cabbage"
+            ],
+            [
+              "Horseradish",
+              "potato bugs",
+              "potatoes, eggplant"
+            ],
+            [
+              "Marigold",
+              "nematodes, Mexican bean beetle & many others",
+              "potatoes, tomatoes, strawberries, beans, all plants benefit"
+            ],
+            [
+              "Mint",
+              "cabbage moth, flea beetle",
+              "tomatoes, cabbage"
+            ],
+            [
+              "Nasturtium",
+              "white flies, aphids, squash bugs",
+              "beans, broccoli, cabbage, potatoes, squash, radishes, tomatoes"
+            ],
+            [
+              "Hot Pepper",
+              "aphids, caterpillars, rodents",
+              "as a powder or spray on the leaves or on the ground – all plants"
+            ],
+            [
+              "Rosemary",
+              "cabbage moth, bean beetles, carrot fly",
+              "cabbage, broccoli, carrots, beans, squash, tomatoes"
+            ],
+            [
+              "Sage",
+              "cabbage moth, carrot fly",
+              "cabbage, broccoli, carrots"
+            ],
+            [
+              "Tansy",
+              "flying insects, cucumber beetles, ants, squash bugs",
+              "fruits trees, berries, fruiting plants, squash, tomato, cucumber"
+            ],
+            [
+              "Thyme",
+              "cabbage worm",
+              "cabbage, broccoli"
+            ],
+            [
+              "Wormwood",
+              "Moths, cabbage worm, flea beetle, animals",
+              "plant outside the garden as a border"
+            ]
+          ]
+        },
+        {
+          "t": "h",
+          "en": "A sample garden layout"
+        },
+        {
+          "t": "p",
+          "en": "Here is an example of how you might plant a garden: when you plant your garden again next year, you can rotate the sections, so that the same plants are still growing together, but in a different part of the garden. This is called crop rotation. This helps to confuse the pests that like to eat certain plants. It also helps to keep the soil healthy, because some plants take a lot of nutrients out of the soil, while some plants add nutrients to the soil. By moving the plants, it stops one part of the garden from being starved of nutrients."
+        },
+        {
+          "t": "img",
+          "src": "assets/articles/sample-garden-layout.jpg",
+          "alt": "Hand-drawn plan of a vegetable garden: rows of cabbage, peppers and broccoli at the top, a large block of corn in the middle, potatoes, peas, beans and greens along the sides, cucumbers and squash at the bottom, and tomatoes along the south edge, with marigolds, nasturtiums and basil tucked between",
+          "cap": "Sample garden layout (north at the top). From the CGN Garden Guide."
+        },
+        {
+          "t": "p",
+          "en": "This is just an example. When you start your garden, you might find that some plants grow better in a certain spot in your garden. You might also find that some plants won’t grow well in your garden no matter how hard you try. Every garden is different. Experience is the best guide of all!"
+        },
+        {
+          "t": "p",
+          "en": "Follow the directions on the seed packet for proper spacing; not all plants need the same amount of space."
+        },
+        {
+          "t": "h",
+          "en": "Vegetable planting guide for the Ottawa area"
+        },
+        {
+          "t": "table",
+          "head": [
+            "When",
+            "What to do"
+          ],
+          "rows": [
+            [
+              "1st week of March",
+              "Start onions from seeds indoors · Place sweet potatoes in water to sprout indoors"
+            ],
+            [
+              "1st week of April",
+              "Start tomatoes, peppers and eggplant indoors · Start early brassicas and romaine lettuce indoors if you have a cold frame"
+            ],
+            [
+              "Middle of April",
+              "(or whenever soil can be worked) plant peas, radish, lettuce & a few onion sets for greens outdoors"
+            ],
+            [
+              "3rd week of April",
+              "Transplant brassicas and romaine lettuce to cold frame"
+            ],
+            [
+              "1st week of May",
+              "Start watermelon and cantaloupe indoors · Start one container of slicing cucumbers indoors · Plant beets and carrots for early harvest, spinach, Swiss chard and storage onions outdoors"
+            ],
+            [
+              "Middle of May",
+              "Start early corn outdoors (if soil reasonably warm) · Plant early potatoes"
+            ],
+            [
+              "Last week of May",
+              "Cut sweet potato vines into 7-8” pieces and place in 2-3” of water to root · Start mid-season corn, green beans, cucumbers and squash outdoors · Transplant tomatoes and peppers outdoors"
+            ],
+            [
+              "1st week of June",
+              "Plant lima beans and okra outdoors · Transplant sweet potatoes, watermelons, cantaloupes and slicing cucumber outdoors"
+            ],
+            [
+              "2nd week of June",
+              "Plant late corn outdoors · Plant winter storage carrots, beets, rutabagas and potatoes outdoors at end of week · Start late season brassicas (cabbage, cauliflower and broccoli) outdoors for later transplanting"
+            ],
+            [
+              "1st week of July",
+              "Plant Chinese vegetables/cabbage outdoors · Transplant late season brassicas"
+            ],
+            [
+              "Late August",
+              "Start fall garden of radish, lettuce and onion sets"
+            ],
+            [
+              "1st week of September",
+              "Start spinach and onion sets for spring harvest"
+            ]
+          ]
+        },
+        {
+          "t": "note",
+          "en": "Dates are from the 2015 guide. Always check the forecast and frost dates for your own garden.",
+          "fr": "Les dates viennent du guide de 2015. Vérifiez toujours la météo et les dates de gel pour votre jardin."
+        }
+      ]
+    },
+    {
+      "id": "pests",
+      "week": "2026-10-26",
+      "title": "Pest control tips: natural ways to protect your garden",
+      "title_fr": "Conseils contre les ravageurs : des moyens naturels de protéger votre jardin",
+      "blurb": "Healthy soil, helpful creatures, homemade sprays and a picture guide to the most common insect problems in Ottawa gardens. Fall clean-up is the first step.",
+      "blurb_fr": "Un sol en santé, des alliés du jardin, des vaporisateurs maison et un guide illustré des insectes nuisibles les plus courants à Ottawa. Le nettoyage d’automne est la première étape.",
+      "source": "CGN Garden Guide (2015), pages 9–15",
+      "source_fr": "Guide du jardinier du RJC (2015), pages 9–15",
+      "url": "http://justfood.ca/wp-content/uploads/2015/03/CGN_Garden_Guide_2015.pdf",
+      "cover": "assets/articles/colorado-potato-beetle.jpg",
+      "blocks": [
+        {
+          "t": "h",
+          "en": "Pest control tips"
+        },
+        {
+          "t": "tip",
+          "name": "Compost",
+          "en": "Add compost when you plant your seeds or small plants. It will keep your plants strong, healthy and able to better resist insects and disease."
+        },
+        {
+          "t": "tip",
+          "name": "Clean up",
+          "en": "Take rotting wood and plants away in the fall to stop bugs from laying eggs, and/or over wintering in this material."
+        },
+        {
+          "t": "tip",
+          "name": "Move plants",
+          "en": "Don’t plant the same vegetable, or family of vegetables, in the same place next year, as some pests stay in the same spot in your garden year after year."
+        },
+        {
+          "t": "tip",
+          "name": "Good plants",
+          "en": "Bugs will stay away from some plants because they don’t like the smell. Plant them between your vegetables or around the garden. Check the list of Companion Plants for Pest Control, to find out which plants would be best for your garden."
+        },
+        {
+          "t": "h",
+          "en": "Helpful creatures"
+        },
+        {
+          "t": "tip",
+          "name": "Lady bugs",
+          "en": "Lady bugs are great for your garden! They love to eat aphids."
+        },
+        {
+          "t": "tip",
+          "name": "Earthworms",
+          "en": "Worms create air spaces and make the soil better and better as they eat their way through it."
+        },
+        {
+          "t": "p",
+          "en": "Having lots of flowering plants will bring more good bugs to your garden. Dill and yarrow are great!"
+        },
+        {
+          "t": "h",
+          "en": "Recipes for homemade pest sprays"
+        },
+        {
+          "t": "p",
+          "en": "You can make safe, natural sprays at home that will discourage or kill some of your pests. Test the sprays you make on a few plant leaves first, wait a couple of days, and if there is no damage to the leaves, it should be OK to use it."
+        },
+        {
+          "t": "tip",
+          "name": "Soap spray",
+          "en": "Soapy water can be used to spray on plants to kill some pests. It can also keep eggs from hatching. Just mix a little dishwashing soap with water. Make sure to spray both the tops and bottoms of the leaves."
+        },
+        {
+          "t": "tip",
+          "name": "Garlic spray",
+          "en": "Puree 15 cloves of garlic with 2 cups of water in a blender. Or, mash the garlic or cut it up finely. Let it sit for one day. Then strain the liquid, so there are no garlic pieces left. The garlic repels some bad bugs, and can kill young ones."
+        },
+        {
+          "t": "tip",
+          "name": "Hot pepper spray",
+          "en": "Add 1/2 cup of finely chopped hot peppers to 2 cups of water. Or, put in a blender. Strain the mixture. Wear gloves. If the spray gets on your skin or in your eyes it will burn or sting. Large pests like ground hogs, raccoons and mice, don’t like hot peppers. If this is sprayed around the garden, it will help to keep them away."
+        },
+        {
+          "t": "tip",
+          "name": "Hair",
+          "en": "Scattering human hair clippings or dog hair around a garden area may help keep ground hogs away."
+        },
+        {
+          "t": "tip",
+          "name": "Twigs and branches",
+          "en": "Scatter twigs and branches over your planted rows to keep cats away. Make sure not to scatter too many twigs and branches before your plants germinate as the seeds that you have planted need sunlight to grow."
+        },
+        {
+          "t": "h",
+          "en": "Common insect problems"
+        },
+        {
+          "t": "bugs",
+          "items": [
+            {
+              "img": "aphids",
+              "name": "Aphids",
+              "colour": "varies but larvae are usually red or green",
+              "signs": [
+                "presence of ants",
+                "foliage curls",
+                "foliage turns yellow",
+                "aphids visible on underside of leaves and young stems"
+              ],
+              "control": [
+                "gently rub the back of leaves to squish aphids",
+                "spray leaves and stem with a soapy water solution. Rinse."
+              ]
+            },
+            {
+              "img": "cabbageworm",
+              "name": "Cabbageworms",
+              "colour": "green",
+              "signs": [
+                "holes in leaves",
+                "presence of black/dark green droppings on leaves"
+              ],
+              "control": [
+                "handpick worms"
+              ]
+            },
+            {
+              "img": "slug",
+              "name": "Slugs",
+              "colour": "brownish-red or grey, depending on type of slug",
+              "signs": [
+                "ragged holes in leaves",
+                "slimy trail",
+                "active 2 hours after sunset and 2 hours before sun rise"
+              ],
+              "control": [
+                "handpick after sunset with a flashlight",
+                "create a barrier around plants with crushed eggshells or wood ashes",
+                "place shallow dishes of beer or yeast/water mixture around garden as trap"
+              ]
+            },
+            {
+              "img": "wireworm",
+              "name": "Wireworms / Click beetles",
+              "colour": "worms are reddish brown",
+              "signs": [
+                "since worms eat the roots of plants, plants will wilt and then soon die"
+              ],
+              "control": [
+                "trap with potato peelings scattered around garden.",
+                "check every morning, then collect and destroy"
+              ]
+            },
+            {
+              "img": "colorado-potato-beetle",
+              "name": "Colorado Potato Beetle",
+              "colour": "orange and black striped; eggs, found on the underside of leaves, are bright orange",
+              "signs": [
+                "chew foliage of peppers, tomatoes, potatoes and eggplant",
+                "leave “skeletons” of leaves"
+              ],
+              "control": [
+                "handpick beetles and orange larvae",
+                "dust plants with cornmeal or bran meal",
+                "heavy mulch"
+              ]
+            },
+            {
+              "img": "cutworm",
+              "name": "Cutworm",
+              "colour": "adult: nocturnal moth; colour varies from black to grey to brown",
+              "signs": [
+                "in the morning, you’ll find your seedlings on the ground, nipped off at ground level",
+                "plants look chopped down, and are left to die"
+              ],
+              "control": [
+                "make collars of cardboard for all valuable seedlings",
+                "dig around the base of destroyed seedlings, and destroy any cutworms you find (they usually spend the day underground beside the plant they fed on the night before)"
+              ]
+            },
+            {
+              "img": "earwig",
+              "name": "Earwig",
+              "colour": "mainly black with red markings and pincers",
+              "signs": [
+                "earwigs are often a common sight everywhere around the garden"
+              ],
+              "control": [
+                "an inverted flowerpot filled with crumpled paper will attract them",
+                "in the morning, shake the flowerpot into a pail of water to drown the earwigs",
+                "plant your carrots (which earwigs love) early or late in the growing season to outwit them"
+              ]
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "en": "Vegetable garden pest management"
+        },
+        {
+          "t": "p",
+          "en": "The vast majority of insects in a vegetable garden do no harm; many are beneficial, while only a few are actually harmful. Moreover, the impact of these harmful ones can be minimized easily by practising a little prevention, tolerance and control."
+        },
+        {
+          "t": "drop",
+          "title": {
+            "en": "Healthy plants"
+          },
+          "blocks": [
+            {
+              "t": "p",
+              "en": "The best defence against insect pests is a good offence. Start by ensuring that your plants are healthy and growing vigorously. A healthy, vigorous plant can better tolerate or rebound from many types of insect damage. Locate your garden in a sunny location, provide a loose, well-drained soil, and add plenty of compost. If soil drainage is a problem, use raised beds. While the pH of a rich, organic soil is usually satisfactory, some acidic sandy soils may need some supplemental lime. As Thomas Jefferson, the 3rd President of the USA, once wrote:"
+            },
+            {
+              "t": "quote",
+              "en": "“I suspect that the insects which have harassed you have been encouraged by the feebleness of your plants; and that has been produced by the lean state of your soil.”"
+            }
+          ]
+        },
+        {
+          "t": "drop",
+          "title": {
+            "en": "Crop rotation"
+          },
+          "blocks": [
+            {
+              "t": "p",
+              "en": "If you rotate your vegetables or families of related vegetables each year, you may break the reproductive cycle of some insects, particularly those relatively immobile species that over-winter in the ground or in specific host plants. Crop rotation is especially effective at discouraging several soil-borne diseases, including bean root rot, club root, bacterial diseases of tomatoes and various potato afflictions, all of which can weaken your plants and make them more susceptible to insect attack. In general, rotate the following plant families together: brassicas (cabbage, cauliflower, broccoli, Brussels sprouts, turnips, radish); solanaceous plants (tomato, pepper, eggplant, potato); roots (carrots, beets, parsnips); greens (lettuce, endive, spinach); legumes (beans, peas); and cucurbits (cucumbers, melons, squashes). Garden sanitation is important, so remove vegetable waste from the garden and compost it to reduce the over wintering success of some insects."
+            }
+          ]
+        },
+        {
+          "t": "drop",
+          "title": {
+            "en": "Bio-diversity and interplanting"
+          },
+          "blocks": [
+            {
+              "t": "p",
+              "en": "Increase bio-diversity by planting only small quantities of the same vegetable in any one place (usually this is the norm in a home vegetable garden). Try not to interplant cultivars from the same family grouping (as noted above). For example, it is much better to mix cabbages and carrots than cabbages and cauliflower. A diversified mixture of plants, with differing colours, shapes and odours can sometimes help reduce insect attack. Books and guides dealing with companion planting recommend specific combination of plants that are said to repel certain insects. For example, some claim that nasturtiums repel striped cucumber beetles, marigolds discourage the imported cabbageworm butterfly, and catnip foils flea beetles."
+            }
+          ]
+        },
+        {
+          "t": "drop",
+          "title": {
+            "en": "Predator insects"
+          },
+          "blocks": [
+            {
+              "t": "p",
+              "en": "Encourage predatory and parasitic insects. Members of the umbelliferae family, such as dill, are especially good at attracting parasitic wasps, which have three main groupings – chalcids, braconids and ichneumonids. They come in many shapes and sizes, from pinhead small chalcids to ichneumonids a few centimetres in length. They appear to have a stinger in the rear, but it is only an ovipositor. All lay eggs in other insects or their larvae, including tomato hornworms and aphids."
+            },
+            {
+              "t": "tip",
+              "name": "Tachinid flies",
+              "en": "Tachinid flies are rarely noticed in the gardens as these bristly brown or gray insects resemble the somewhat larger housefly. They are most active on warm, sunny days and are parasites of corn borers, tent caterpillars, cutworms and other larvae."
+            },
+            {
+              "t": "tip",
+              "name": "Yellow jackets and hornets",
+              "en": "Yellow jackets and hornets are not welcomed by most gardeners, but they do collect caterpillars, insects and larvae for themselves and their young – in addition to animal matter, pollen and honey."
+            },
+            {
+              "t": "tip",
+              "name": "Ground beetles",
+              "en": "Ground beetles are black or dark brown, but can appear bright metallic green or blue in sunlight. They usually hide under rocks, barks or other debris during the day and feed at night, eating all kinds of insects, larvae, cutworms, and snails and slug eggs, to mention only a few of their favourites."
+            },
+            {
+              "t": "tip",
+              "name": "Rove beetles",
+              "en": "Rove beetles are sometimes confused with earwigs, although they lack pincers. Black or dark brown in colour, they are mainly scavengers, often found in decaying matter. However, they do parasitize cabbage root maggots and other small larvae during their reproductive cycle."
+            },
+            {
+              "t": "tip",
+              "name": "Assassin bugs",
+              "en": "Assassin bugs are black or dark brown, as well, about one-half inch long, and somewhat like a miniature praying mantis in appearance. They usually feed on the juices of other insects and larvae, including Japanese beetles and leafhoppers."
+            },
+            {
+              "t": "tip",
+              "name": "Damsel bugs",
+              "en": "Damsel bugs should not be confused with damselflies, which look like small dragonflies. Small-flattened bugs, they prey on aphids, leafhoppers and caterpillars."
+            },
+            {
+              "t": "tip",
+              "name": "Spiders",
+              "en": "Spiders should not be forgotten as they have a voracious appetite for many kinds of insects. The Chinese still construct and use spider houses in their plots and fields. Made of bamboo, these small pyramid-shaped containers provide a perfect living place for many kinds of spiders. When an outbreak of harmful pests occurs, the small houses are picked up by a handle, and moved to the area of need."
+            },
+            {
+              "t": "tip",
+              "name": "Lady beetles",
+              "en": "Lady beetles must not be overlooked, as they are the best-known insect predator of all. While there are reportedly 3,000 species of lady beetles, the convergent species is the most common. It has a black head, thorax and undercarriage, with a red-orange back showing a few black spots. Both the adults and the immatures, which look a little like tiny alligators, eat soft-bodied pests such as mealy bugs, scale and aphids."
+            },
+            {
+              "t": "p",
+              "en": "Other predatory insects exist in our gardens, as well, with intriguing names like syrphid fly, lacewing, soldier bug, tiger beetle, pirate bug, hover fly, big-eyed bug and robber fly. Become familiar with all of these insects that eat eggs, larvae and even other adults. Moreover, never kill an insect unless you know it is or could become a pest as you might mistakenly kill a beneficial."
+            }
+          ]
+        },
+        {
+          "t": "drop",
+          "title": {
+            "en": "Birds, toads and frogs"
+          },
+          "blocks": [
+            {
+              "t": "p",
+              "en": "While many birds resort to eating seeds and dried berries in the winter and early spring, they soon return to a high protein diet of insects and larvae when these food sources reappear. And they rarely eat vegetables in our gardens, although some do like a few cherries or berries (netting can protect vulnerable crops). Attract nature’s insect eaters with water in the form of an attractive birdbath, and provide housing for your favourite species. In spring and summer, insects form 90% of the diet of chickadees: moths, caterpillars, flies, beetles, true bugs, plant lice, scale, leafhoppers, and more… Wrens can be attracted by nesting boxes, and because they often raise more than one brood each year, they must collect large quantities of insects. They will even forage in the evening, and are reputed to catch earwigs, which become active at this time of the day. Swallows and purple martins are legendary insect eaters, making flying pests 99% of their diet (build a martin or swallow house to attract these gardening allies). Even starlings can be appreciated as they are reputed to be one of the few birds that will eat tent caterpillars."
+            },
+            {
+              "t": "p",
+              "en": "Toads can consume large quantities of insects in the garden. Provide some water, a few cool hiding places, and be careful when tilling and digging – toads often burrow into the soil during the daytime. If your garden is near a pond or you have installed one in your garden, you will benefit from the insect appetite of frogs as well."
+            }
+          ]
+        },
+        {
+          "t": "drop",
+          "title": {
+            "en": "Other controls"
+          },
+          "blocks": [
+            {
+              "t": "p",
+              "en": "When the direct control of a specific pest is needed, handpick (potato beetles), utilize pheromones (Japanese beetles), set out traps (crumpled newspaper for earwigs), use barriers (floating row covers such as Reemay fabric for onion maggots), apply natural repellent solutions (garlic and water) or use Bt sparingly in certain cases (for cabbageworms). Never use broad-spectrum insecticides, even if from a natural source (e.g. rotenone), as such substances kill beneficial insects as well as the pests. Time your plantings to miss the first and usually most destructive generation of a pest if it is particularly bothersome in your area. Keep a vigilant eye out for insect plant leaves for signs of damage or disease. Always remove wilted plants and look for insects or larvae among their roots. And finally, practice tolerance. Vegetables and fruit from a home garden need not look perfect – discard some produce, cut away insect damage, and enjoy the flavour and nutrition of produce grown naturally in your own garden."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucket",
+      "week": "2026-10-19",
+      "title": "Bucket gardening: grow food on a balcony or patio",
+      "title_fr": "Le jardinage en seau : cultiver des aliments sur un balcon ou une terrasse",
+      "blurb": "No yard? No problem. Which containers to use, how deep the soil should be, the best vegetables for sunny and shady balconies, and how to care for them.",
+      "blurb_fr": "Pas de cour? Aucun problème. Quels contenants utiliser, quelle profondeur de terre prévoir, les meilleurs légumes pour un balcon ensoleillé ou ombragé, et comment en prendre soin.",
+      "source": "CGN Garden Guide (2015), pages 16–18",
+      "source_fr": "Guide du jardinier du RJC (2015), pages 16–18",
+      "url": "http://justfood.ca/wp-content/uploads/2015/03/CGN_Garden_Guide_2015.pdf",
+      "blocks": [
+        {
+          "t": "p",
+          "en": "Even if you live in an apartment or in a house with a small yard, you can still grow vegetables and other plants in containers on your balcony or patio. With a small bucket garden, you can avoid many of the problems of a large garden – like weeds – and still enjoy fresh vegetables that you have grown yourself."
+        },
+        {
+          "t": "h",
+          "en": "Types of containers"
+        },
+        {
+          "t": "p",
+          "en": "You can use milk cartons, big tin cans, plastic or metal buckets, garbage cans, peach baskets, or anything else that you can find that could hold soil."
+        },
+        {
+          "t": "p",
+          "en": "Put holes in the bottom of your bucket to let water out. You can use a nail to make the holes."
+        },
+        {
+          "t": "p",
+          "en": "The soil needs to be deep enough for your plants’ roots."
+        },
+        {
+          "t": "table",
+          "head": [
+            "Soil depth",
+            "Plants"
+          ],
+          "rows": [
+            [
+              "6 to 9 inches deep",
+              "beans, lettuce, spring onions, carrots, radishes, and spinach"
+            ],
+            [
+              "1 foot (12\") deep",
+              "tomatoes, squash, peppers, long carrots"
+            ]
+          ]
+        },
+        {
+          "t": "p",
+          "en": "The bigger the container for your plants, the better yield you can expect!"
+        },
+        {
+          "t": "h",
+          "en": "Good bucket plants: sunny balcony"
+        },
+        {
+          "t": "p",
+          "en": "Sunny Balcony: need more than 6 hours of direct sun a day"
+        },
+        {
+          "t": "tip",
+          "name": "Beans",
+          "en": "bush beans are best. Plant 3 in an 8\" wide pot."
+        },
+        {
+          "t": "tip",
+          "name": "Tomatoes",
+          "en": "cherry tomatoes are best, they need a 6\" pot. For bigger tomatoes, they need a 12\" pot. Tomatoes need lots of sun and need to be tied up to a stick."
+        },
+        {
+          "t": "tip",
+          "name": "Peppers",
+          "en": "need lots of sun. Tie to a stick to hold them up. Plant one in a 12\" pot"
+        },
+        {
+          "t": "tip",
+          "name": "Radishes",
+          "en": "plant 2 inches apart, or three in a 6\" pot. Ready to eat in a month."
+        },
+        {
+          "t": "tip",
+          "name": "Summer squash, zucchini",
+          "en": "need 2 foot (24\") deep and 2 foot (24\") wide pot (note: buy varieties designed for growing in containers)"
+        },
+        {
+          "t": "tip",
+          "name": "Cucumbers",
+          "en": "varieties designed for pot gardening."
+        },
+        {
+          "t": "h",
+          "en": "Good bucket plants: shady balcony"
+        },
+        {
+          "t": "tip",
+          "name": "Beets",
+          "en": "plant 3\" apart, use when leaves 5 to 8\" tall, or after two months"
+        },
+        {
+          "t": "tip",
+          "name": "Carrots",
+          "en": "plant 2\" apart. Ready to eat in two to three months"
+        },
+        {
+          "t": "tip",
+          "name": "Chives, and onions",
+          "en": "need 6\" wide pot"
+        },
+        {
+          "t": "tip",
+          "name": "Garlic",
+          "en": "plant garlic cloves 6\" apart, pick when the plant top dies"
+        },
+        {
+          "t": "tip",
+          "name": "Herbs",
+          "en": "all kinds grow well in pots, bring indoors in winter"
+        },
+        {
+          "t": "tip",
+          "name": "Lettuce",
+          "en": "plant leafy lettuce, 4\" apart"
+        },
+        {
+          "t": "tip",
+          "name": "Spinach",
+          "en": "needs to be kept cool and wet, plant 6\" apart"
+        },
+        {
+          "t": "h",
+          "en": "Care of plants"
+        },
+        {
+          "t": "tip",
+          "name": "Water",
+          "en": "Water before soil dries out or plant wilts, (more often in July and August). It can be very windy on balconies which dries out your plants, so keep them watered. You can also use mulch on the soil to keep it moist. Mulch can be straw, leaves, compost, newspaper, aluminum foil, or black plastic."
+        },
+        {
+          "t": "tip",
+          "name": "Sun",
+          "en": "If your balcony is dark and shady, put tin foil on the soil to reflect sun onto your plants."
+        },
+        {
+          "t": "tip",
+          "name": "Compost",
+          "en": "Add compost to your buckets to give your plants extra food. Mix lots of compost with the soil before you plant (half and half is best)."
+        },
+        {
+          "t": "tip",
+          "name": "Insects",
+          "en": "Because there are less insects on high balconies, you might need to pollinate the flowers on the plants to get fruits and vegetables. You can use a paintbrush to spread the pollen around. Most pest insects can be killed by using a mixture of soap and water sprayed on the leaves (see tips on pest control)."
+        },
+        {
+          "t": "tip",
+          "name": "Extending the growing season",
+          "en": "If you plant late, and your vegetables are not ready by the fall, you can bring most plants inside to sit by a sunny window."
+        }
+      ]
+    }
+  ],
   "events": [
     {
       "date": "2026-11-14",
