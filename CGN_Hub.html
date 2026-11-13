@@ -1067,7 +1067,7 @@ function farmCard(){
     </ul>
     <div class="wk-btns" style="margin-top:12px">
       <a class="send-btn" href="https://justfood.ca/just-food-farm/farmrules/" target="_blank" onclick="track('view','farm rules','farmcard')">${fr?'Planifier votre visite ↗':'Plan your visit ↗'}</a>
-      <span class="send-btn btn-off" title="${fr?'Lien du kiosque de la ferme à confirmer':'Farm Stand ordering link not yet verified'}">🥕 ${fr?'Commander au kiosque de la ferme &mdash; lien à confirmer (TODO Nadia)':'Order from the Just Food Farm Stand &mdash; link TODO (Nadia)'}</span>
+      <a class="send-btn" href="https://justfoodfarmstand.com/" target="_blank" rel="noopener" onclick="track('view','farm stand','farmcard')">\uD83E\uDD55 ${fr?'Commander au kiosque de la ferme \u2197':'Order from the Just Food Farm Stand \u2197'}</a>
     </div>
   </div>`;
 }
