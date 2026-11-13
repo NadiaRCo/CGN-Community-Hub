@@ -301,3 +301,8 @@ a.doc-item:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--wood-dark)
 
 /* leaf bullet in link lists */
 .info-block li>.g-ico, #rl p>.g-ico, li>.g-ico{width:19px; height:19px; vertical-align:-4px; margin-right:3px}
+
+/* painted vignette companions (e.g. the shed in its own garden) */
+.page-critter.scene{height:150px; max-width:200px; right:12px; bottom:-58px}
+.page-head.has-art:has(.scene){padding-right:210px}
+@media (max-width:780px){ .page-critter.scene{height:96px; max-width:124px; bottom:-40px} .page-head.has-art:has(.scene){padding-right:120px} }

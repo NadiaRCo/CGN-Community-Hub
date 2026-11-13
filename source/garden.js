@@ -1,7 +1,7 @@
 /* ── Cozy secret-garden layer (injected by build_comm.py at GARDEN_JS) ──
    Welcome banner, page companions, garden almanac (live Ottawa forecast from
    Open-Meteo; monthly jobs from content/hub.json → "almanac"), incident form. */
-const G_ART={about:'bluebird',article:'armchair',find:'rabbit',start:'watering-can',coordinators:'hedgehog',guides:'carrots',faq:'snail','ws-upcoming':'chair-tools','ws-past':'greenhouse','ws-slides':'dragonfly',resources:'shed',contact:'door',incident:'lighthouse'};
+const G_ART={about:'bluebird',article:'armchair',find:'rabbit',start:'watering-can',coordinators:'hedgehog',guides:'carrots',faq:'snail','ws-upcoming':'chair-tools','ws-past':'greenhouse','ws-slides':'dragonfly',resources:'shed-scene',contact:'door',incident:'lighthouse'};
 /* Hand-drawn icon set in CGN colours (brick bowl, leaf green, straw, wood). Used in the sidebar, page titles and home tiles. */
 const G_ICO={
  home:`<path d="M4 15 16 5l12 10z" fill="#F38DB5"/><path d="M7 15v12h18V15" fill="#E9C592"/><path d="M13.5 27v-7.5h5V27" fill="#8A5A30"/><circle cx="22" cy="19.5" r="1.9" fill="#CFE6F7"/>`,
@@ -24,7 +24,7 @@ const G_ICO={
 };
 const gIco=k=>G_ICO[k]?`<svg class="g-ico" viewBox="0 0 32 32" fill="none" stroke="#4A3426" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${G_ICO[k]}</svg>`:'';
 const gImg=(n,c)=>`<img class="${c}" src="assets/garden/${n}.webp" alt="" aria-hidden="true">`;
-function head(title,sub,key){const a=G_ART[key];return `<div class="page-head${a?' has-art':''}"><h1 class="page-title">${gIco(key)}${title}</h1>${sub?`<p class="page-sub">${sub}</p>`:''}${a?gImg(a,'page-critter'):''}</div><div class="tulips" aria-hidden="true"></div>`}
+function head(title,sub,key){const a=G_ART[key];return `<div class="page-head${a?' has-art':''}"><h1 class="page-title">${gIco(key)}${title}</h1>${sub?`<p class="page-sub">${sub}</p>`:''}${a?gImg(a,a.endsWith('-scene')?'page-critter scene':'page-critter'):''}</div><div class="tulips" aria-hidden="true"></div>`}
 function gardenSideArt(){return `<div class="sidebar-art">${gImg('shed','side-shed')}</div>`}
 function gardenHero(){
   return `<div class="hero">${gImg('wisteria','hero-wisteria')}${gImg('wisteria','hero-wisteria r')}
